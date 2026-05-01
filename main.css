@@ -1,0 +1,225 @@
+/* ═══════════════════════════════════════
+   DolanJogja — Design System v2
+   Primary: #000055 (Deep Navy)
+   Font: Byker (Google Fonts)
+   ═══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Biker&display=swap');
+
+:root {
+  /* ── Primary Palette ── */
+  --dj-primary:       #000055;   /* Deep Navy */
+  --dj-primary-hover: #000077;
+  --dj-primary-light: #E8E8F5;
+  --dj-primary-soft:  #F0F0FA;
+
+  /* ── Secondary: Warm Gold (contrast & CTA accent) ── */
+  --dj-secondary:     #C8922A;
+  --dj-secondary-light:#FFF4DC;
+
+  /* ── Tertiary: Coral (alerts, hot badges) ── */
+  --dj-accent:        #E84855;
+  --dj-accent-light:  #FFF0F1;
+
+  /* ── Success: Sage Green ── */
+  --dj-green:         #2D7A4F;
+  --dj-green-light:   #EBF7F0;
+
+  /* ── Neutral Scale ── */
+  --dj-dark:          #0D0D2B;
+  --dj-ink:           #1C1C3A;
+  --dj-muted:         #6B6B8A;
+  --dj-border:        #DCDCEC;
+  --dj-bg:            #F4F4FA;
+  --dj-surface:       #FFFFFF;
+
+  /* ── Semantic ── */
+  --dj-amber:         #C8922A;
+  --dj-red:           #E84855;
+  --dj-purple:        #6B4BC8;
+  --dj-purple-light:  #F0ECFF;
+
+  /* ── Spacing & Shape ── */
+  --dj-radius:        16px;
+  --dj-radius-sm:     10px;
+  --dj-radius-xs:     8px;
+  --dj-nav-h:         68px;
+
+  /* ── Font ── */
+  --font-main:        'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-display:     'Biker', 'Plus Jakarta Sans', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  height: 100%; width: 100%;
+  background: #C8C8DD;
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── App Shell ─────────────────────────── */
+#app-shell {
+  max-width: 430px;
+  margin: 0 auto;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--dj-bg);
+  box-shadow: 0 0 60px rgba(0,0,85,.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Content Frame ─────────────────────── */
+#page-frame { flex: 1; overflow: hidden; position: relative; }
+#content-frame { width: 100%; height: 100%; border: none; display: block; }
+
+/* ── Bottom Navigation ─────────────────── */
+.bottom-nav {
+  height: var(--dj-nav-h);
+  background: var(--dj-surface);
+  border-top: 1px solid var(--dj-border);
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  z-index: 999;
+}
+
+.nav-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--dj-muted);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .2s;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: var(--font-main);
+}
+
+.nav-tab i { font-size: 20px; line-height: 1; }
+.nav-tab.active { color: var(--dj-primary); }
+.nav-tab.active i { transform: scale(1.1); }
+
+/* ── Shared Page Components ────────────── */
+.dj-page-header {
+  background: var(--dj-primary);
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dj-page-header h5 { margin: 0; font-weight: 700; font-size: 16px; }
+
+.dj-card {
+  background: var(--dj-surface);
+  border-radius: var(--dj-radius);
+  box-shadow: 0 1px 8px rgba(0,0,85,.07);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.dj-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ── CTA Buttons ───────────────────────── */
+.dj-cta-group { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.dj-cta-group .btn { font-size: 11px; padding: 4px 10px; border-radius: 999px; }
+
+/* ── Timeline ──────────────────────────── */
+.dj-timeline {
+  border-left: 2px solid var(--dj-primary);
+  margin-left: 12px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.dj-timeline-item { position: relative; padding: 0 0 16px 20px; }
+
+.dj-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -7px; top: 4px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--dj-primary);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--dj-primary);
+}
+
+.dj-timeline-item.kuliner::before { background: var(--dj-green); box-shadow: 0 0 0 1px var(--dj-green); }
+.dj-timeline-item.transit::before { background: var(--dj-purple); box-shadow: 0 0 0 1px var(--dj-purple); }
+
+/* ── Pill Tabs ─────────────────────────── */
+.dj-pill-tabs {
+  display: flex;
+  background: var(--dj-primary-soft);
+  border-radius: 999px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.dj-pill-tabs .pill-tab {
+  flex: 1;
+  text-align: center;
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dj-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all .2s;
+  font-family: var(--font-main);
+}
+
+.dj-pill-tabs .pill-tab.active {
+  background: var(--dj-surface);
+  color: var(--dj-primary);
+  box-shadow: 0 1px 4px rgba(0,0,85,.15);
+}
+
+/* ── Scrollable page body ──────────────── */
+.dj-scroll { height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+/* ── Toast ─────────────────────────────── */
+.dj-toast {
+  position: fixed;
+  bottom: 90px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--dj-dark);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .3s;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.dj-toast.show { opacity: 1; }

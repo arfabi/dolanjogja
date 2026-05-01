@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Inspirasi — DolanJogja</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Biker&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dj-primary:         #000055;
+      --dj-primary-hover:   #000077;
+      --dj-primary-light:   #E8E8F5;
+      --dj-primary-soft:    #F0F0FA;
+      --dj-secondary:       #C8922A;
+      --dj-secondary-light: #FFF4DC;
+      --dj-accent:          #E84855;
+      --dj-accent-light:    #FFF0F1;
+      --dj-green:           #2D7A4F;
+      --dj-green-light:     #EBF7F0;
+      --dj-purple:          #6B4BC8;
+      --dj-purple-light:    #F0ECFF;
+      --dj-muted:           #6B6B8A;
+      --dj-border:          #DCDCEC;
+      --dj-bg:              #F4F4FA;
+      --dj-surface:         #FFFFFF;
+      --dj-ink:             #1C1C3A;
+      --font-main:          'Plus Jakarta Sans', sans-serif;
+      --font-display:       'Biker', 'Plus Jakarta Sans', sans-serif;
+      --radius:             16px;
+      --radius-sm:          10px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: var(--dj-bg);
+      font-family: var(--font-main);
+      margin: 0; padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sticky Header ── */
+    .insp-header {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--dj-primary);
+      padding: 14px 16px 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 16px rgba(0,0,85,.25);
+    }
+    .insp-logo {
+      font-family: var(--font-display);
+      font-size: 22px; color: #fff;
+      letter-spacing: .5px;
+    }
+    .insp-logo span { color: var(--dj-secondary); }
+
+    .insp-trending-badge {
+      display: flex; align-items: center; gap: 5px;
+      background: var(--dj-accent);
+      color: #fff; font-size: 11px; font-weight: 700;
+      padding: 5px 12px; border-radius: 999px;
+    }
+
+    /* ── Category Pills ── */
+    .insp-cats {
+      background: var(--dj-surface);
+      border-bottom: 1px solid var(--dj-border);
+      position: sticky; top: 54px; z-index: 199;
+      display: flex; gap: 8px; overflow-x: auto;
+      padding: 10px 16px;
+      scrollbar-width: none;
+    }
+    .insp-cats::-webkit-scrollbar { display: none; }
+    .insp-cat {
+      flex-shrink: 0; padding: 6px 15px; border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+      border: 1.5px solid var(--dj-border);
+      color: var(--dj-muted);
+      background: var(--dj-surface);
+      cursor: pointer; transition: all .2s;
+      white-space: nowrap;
+      font-family: var(--font-main);
+    }
+    .insp-cat.active {
+      background: var(--dj-primary);
+      color: #fff;
+      border-color: var(--dj-primary);
+    }
+
+    /* ── Page Feed ── */
+    .insp-feed { padding: 16px 14px 28px; }
+
+    /* ── Section Title ── */
+    .insp-section-title {
+      font-family: var(--font-display);
+      font-size: 16px; font-weight: 400; color: var(--dj-ink);
+      margin: 20px 0 10px;
+      display: flex; align-items: center; gap: 7px;
+      letter-spacing: .3px;
+    }
+    .insp-section-title:first-child { margin-top: 0; }
+    .badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--dj-accent); display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.4); opacity: .6; }
+    }
+
+    /* ── Hero Card ── */
+    .insp-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--dj-surface);
+      box-shadow: 0 2px 16px rgba(0,0,85,.10);
+      border: 1px solid var(--dj-border);
+      margin-bottom: 4px;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .insp-hero:active { transform: scale(.99); box-shadow: 0 1px 8px rgba(0,0,85,.07); }
+
+    .insp-hero-thumb {
+      width: 100%; height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 80px;
+      position: relative;
+    }
+
+    .insp-hero-body { padding: 14px 16px 16px; }
+
+    .insp-badge-row {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 8px; flex-wrap: wrap;
+    }
+
+    .insp-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 10.5px; font-weight: 700;
+    }
+    .insp-badge-hot    { background: var(--dj-accent-light); color: var(--dj-accent); }
+    .insp-badge-rec    { background: var(--dj-green-light);  color: var(--dj-green); }
+    .insp-badge-navy   { background: var(--dj-primary-light); color: var(--dj-primary); }
+    .insp-badge-gold   { background: var(--dj-secondary-light); color: var(--dj-secondary); }
+    .insp-badge-purple { background: var(--dj-purple-light); color: var(--dj-purple); }
+
+    .insp-hero-title {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 400; color: var(--dj-ink);
+      margin: 0 0 4px; line-height: 1.2;
+      letter-spacing: .3px;
+    }
+
+    .insp-hero-loc {
+      font-size: 12px; color: var(--dj-muted);
+      display: flex; align-items: center; gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .insp-hero-stats {
+      display: flex; gap: 14px; margin-bottom: 14px;
+      padding: 10px 12px;
+      background: var(--dj-primary-soft);
+      border-radius: var(--radius-sm);
+    }
+    .insp-stat {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--dj-ink); font-weight: 600;
+    }
+    .insp-stat i { color: var(--dj-primary); font-size: 11px; }
+
+    .insp-stars { color: var(--dj-secondary); font-size: 11px; }
+
+    .insp-hero-cta { display: flex; gap: 8px; }
+
+    .insp-btn-primary {
+      flex: 1;
+      background: var(--dj-primary);
+      color: #fff; border: none;
+      border-radius: var(--radius-sm); padding: 11px 14px;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      cursor: pointer; transition: background .18s;
+      font-family: var(--font-main);
+    }
+    .insp-btn-primary:hover { background: var(--dj-primary-hover); }
+    .insp-btn-primary.green { background: var(--dj-green); }
+    .insp-btn-primary.green:hover { background: #1f5c39; }
+
+    .insp-btn-like {
+      width: 46px; height: 46px;
+      background: var(--dj-accent-light);
+      border: 1.5px solid rgba(232,72,85,.25);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .18s;
+      color: var(--dj-accent); font-size: 16px; flex-shrink: 0;
+    }
+    .insp-btn-like.liked { background: var(--dj-accent); color: #fff; border-color: var(--dj-accent); }
+
+    /* ── 2-Col Grid Cards ── */
+    .insp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .insp-grid-card {
+      background: var(--dj-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--dj-border);
+      box-shadow: 0 1px 8px rgba(0,0,85,.06);
+      overflow: hidden; cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .insp-grid-card:active { transform: scale(.97); }
+
+    .insp-grid-thumb {
+      width: 100%; height: 130px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 52px;
+    }
+
+    .insp-grid-body { padding: 10px 11px 11px; }
+
+    .insp-grid-title {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 400; color: var(--dj-ink);
+      margin: 0 0 2px; line-height: 1.2;
+    }
+    .insp-grid-sub { font-size: 10.5px; color: var(--dj-muted); margin: 0 0 8px; }
+
+    .insp-grid-add {
+      background: var(--dj-primary-light);
+      border: none; border-radius: 7px;
+      color: var(--dj-primary); font-size: 10px; font-weight: 700;
+      padding: 6px 8px;
+      display: flex; align-items: center; gap: 4px;
+      cursor: pointer; width: 100%; justify-content: center;
+      font-family: var(--font-main);
+      transition: background .15s, color .15s;
+    }
+    .insp-grid-add:hover { background: var(--dj-primary); color: #fff; }
+
+    /* ── Event Horizontal Scroll ── */
+    .insp-hscroll {
+      display: flex; gap: 10px; overflow-x: auto;
+      margin: 0 -14px; padding: 0 14px 6px;
+      scrollbar-width: none;
+    }
+    .insp-hscroll::-webkit-scrollbar { display: none; }
+
+    /* Event Card */
+    .insp-event-card {
+      flex-shrink: 0; width: 210px;
+      background: var(--dj-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--dj-border);
+      box-shadow: 0 1px 8px rgba(0,0,85,.06);
+      overflow: hidden; cursor: pointer;
+      transition: transform .15s;
+    }
+    .insp-event-card:active { transform: scale(.97); }
+
+    .insp-event-thumb {
+      height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+    }
+
+    .insp-event-body { padding: 10px 11px 11px; }
+
+    .insp-event-date {
+      font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 999px;
+      display: inline-block; margin-bottom: 5px;
+    }
+    .insp-event-name {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 400; color: var(--dj-ink); margin: 0 0 3px; line-height: 1.3;
+    }
+    .insp-event-loc { font-size: 10.5px; color: var(--dj-muted); margin: 0 0 8px; }
+    .insp-event-add {
+      background: var(--dj-primary-light);
+      border: none; border-radius: 7px;
+      color: var(--dj-primary); font-size: 10px; font-weight: 700;
+      padding: 6px; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      cursor: pointer; font-family: var(--font-main);
+      transition: background .15s, color .15s;
+    }
+    .insp-event-add:hover { background: var(--dj-primary); color: #fff; }
+
+    /* Kuliner Card */
+    .insp-kuliner-card {
+      flex-shrink: 0; width: 152px;
+      background: var(--dj-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--dj-border);
+      box-shadow: 0 1px 8px rgba(0,0,85,.06);
+      overflow: hidden; cursor: pointer;
+      transition: transform .15s;
+    }
+    .insp-kuliner-card:active { transform: scale(.97); }
+    .insp-kuliner-thumb {
+      height: 88px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px;
+    }
+    .insp-kuliner-body { padding: 9px 10px 10px; }
+    .insp-kuliner-name {
+      font-family: var(--font-display);
+      font-size: 12px; color: var(--dj-ink); margin: 0 0 2px;
+    }
+    .insp-kuliner-sub { font-size: 10px; color: var(--dj-muted); margin: 0 0 7px; }
+    .insp-kuliner-add {
+      background: var(--dj-green-light);
+      border: none; border-radius: 6px;
+      color: var(--dj-green); font-size: 10px; font-weight: 700;
+      padding: 5px; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 3px;
+      cursor: pointer; font-family: var(--font-main);
+      transition: background .15s, color .15s;
+    }
+    .insp-kuliner-add:hover { background: var(--dj-green); color: #fff; }
+
+    /* ── Divider ── */
+    .insp-divider {
+      height: 1px; background: var(--dj-border);
+      margin: 8px 0 4px;
+    }
+
+    /* ── Toast ── */
+    #inspirasi_toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--dj-ink); color: #fff;
+      padding: 10px 20px; border-radius: 999px;
+      font-size: 13px; font-weight: 600;
+      border: 1px solid rgba(200,146,42,.3);
+      z-index: 9999; opacity: 0; pointer-events: none;
+      transition: opacity .3s; white-space: nowrap;
+      max-width: 90%; text-align: center;
+    }
+    #inspirasi_toast.show { opacity: 1; }
+
+
+     /* Header */
+    .jelajah_header {
+      background: var(--dj-primary);
+      color: #fff; padding: 16px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .jelajah_header_title { font-size: 17px; font-weight: 800; margin: 0; }
+    .jelajah_header_sub { font-size: 11px; opacity: .7; margin: 2px 0 0; }
+
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="jelajah_header">
+  <div class="d-flex align-items-center gap-2">
+    <i class="fa-solid fa-fire-flame-curved fa-lg"></i>
+    <div>
+      <p class="jelajah_header_title">Inspirasi</p>
+      <p class="jelajah_header_sub">Temukan wisata & event yang Lagi Viral</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── CATEGORY PILLS ── -->
+<div class="insp-cats" id="inspirasi_cat_bar">
+  <button class="insp-cat active" onclick="filterCat(this)">🌟 Semua</button>
+  <button class="insp-cat" onclick="filterCat(this)">🏯 Wisata</button>
+  <button class="insp-cat" onclick="filterCat(this)">🍜 Kuliner</button>
+  <button class="insp-cat" onclick="filterCat(this)">🎭 Event</button>
+  <button class="insp-cat" onclick="filterCat(this)">🌿 Alam</button>
+</div>
+
+<!-- ── FEED ── -->
+<div class="insp-feed">
+
+  <!-- ═══ HERO: #1 Trending ═══ -->
+  <div class="insp-section-title">
+    <span class="badge-dot"></span> #1 Viral Minggu Ini
+  </div>
+
+  <div class="insp-hero" onclick="addToItinerary('Candi Prambanan')">
+    <div class="insp-hero-thumb" style="background: linear-gradient(135deg, var(--dj-primary-light) 0%, #D0D0F0 100%);">🏯</div>
+    <div class="insp-hero-body">
+      <div class="insp-badge-row">
+        <span class="insp-badge insp-badge-hot"><i class="fa-solid fa-fire fa-2xs"></i> #1 Trending</span>
+        <span class="insp-badge insp-badge-navy"><i class="fa-solid fa-location-dot fa-2xs"></i> Sleman</span>
+      </div>
+      <h3 class="insp-hero-title">Candi Prambanan</h3>
+      <div class="insp-hero-loc"><i class="fa-solid fa-location-dot fa-2xs"></i> Sleman, Yogyakarta</div>
+      <div class="insp-hero-stats">
+        <span class="insp-stat"><span class="insp-stars">★★★★★</span>&nbsp;4.8</span>
+        <span class="insp-stat"><i class="fa-solid fa-eye"></i> 12.4K</span>
+        <span class="insp-stat"><i class="fa-solid fa-heart" style="color:var(--dj-accent);"></i> 8.2K</span>
+      </div>
+      <div class="insp-hero-cta">
+        <button class="insp-btn-primary" onclick="event.stopPropagation(); addToItinerary('Candi Prambanan')">
+          <i class="fa-solid fa-plus fa-xs"></i> Tambah ke Itinerary
+        </button>
+        <button class="insp-btn-like" id="like_prambanan" onclick="event.stopPropagation(); toggleLike('like_prambanan')">
+          <i class="fa-solid fa-heart"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GRID: Wisata Ngehits ═══ -->
+  <div class="insp-section-title">
+    <i class="fa-solid fa-compass" style="color:var(--dj-secondary);"></i> Wisata Lagi Ngehits
+  </div>
+
+  <div class="insp-grid">
+
+    <div class="insp-grid-card" onclick="addToItinerary('Tebing Breksi')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #EDE8F8, #D8D0F0);">🪨</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Tebing Breksi</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Sleman · <span class="insp-stars">★</span> 4.6</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Tebing Breksi')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-grid-card" onclick="addToItinerary('Kebun Teh Nglinggo')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #E8F4EC, #C8E8D4);">🌿</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Kebun Teh Nglinggo</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Kulon Progo · <span class="insp-stars">★</span> 4.7</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Kebun Teh Nglinggo')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-grid-card" onclick="addToItinerary('Pantai Parangtritis')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #FFF4DC, #FFE8A8);">🌅</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Pantai Parangtritis</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Bantul · <span class="insp-stars">★</span> 4.5</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Pantai Parangtritis')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-grid-card" onclick="addToItinerary('Hutan Pinus Mangunan')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #EBF7F0, #C8E8D4);">🌲</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Hutan Pinus Mangunan</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Bantul · <span class="insp-stars">★</span> 4.5</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Hutan Pinus Mangunan')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ EVENT TRENDING ═══ -->
+  <div class="insp-section-title" style="margin-top:24px;">
+    <i class="fa-solid fa-calendar-star" style="color:var(--dj-purple);"></i> Event Tidak Boleh Terlewat
+  </div>
+
+  <div class="insp-hscroll">
+
+    <div class="insp-event-card" onclick="addToItinerary('Ramayana Ballet Prambanan')">
+      <div class="insp-event-thumb" style="background: linear-gradient(135deg, var(--dj-secondary-light), #FFE0A0);">🎭</div>
+      <div class="insp-event-body">
+        <span class="insp-event-date" style="background:var(--dj-secondary-light);color:var(--dj-secondary);">20 MEI 2026</span>
+        <div class="insp-event-name">Ramayana Ballet Prambanan</div>
+        <div class="insp-event-loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Candi Prambanan, Sleman</div>
+        <button class="insp-event-add" onclick="event.stopPropagation(); addToItinerary('Ramayana Ballet Prambanan')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Tambah ke Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-event-card" onclick="addToItinerary('Sekaten 2026')">
+      <div class="insp-event-thumb" style="background: linear-gradient(135deg, var(--dj-purple-light), #DDD0FF);">🎪</div>
+      <div class="insp-event-body">
+        <span class="insp-event-date" style="background:var(--dj-purple-light);color:var(--dj-purple);">15 MEI 2026</span>
+        <div class="insp-event-name">Sekaten 2026</div>
+        <div class="insp-event-loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Alun-Alun Utara, Kota</div>
+        <button class="insp-event-add" onclick="event.stopPropagation(); addToItinerary('Sekaten 2026')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Tambah ke Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-event-card" onclick="addToItinerary('Jazz Mben Senen')">
+      <div class="insp-event-thumb" style="background: linear-gradient(135deg, var(--dj-primary-light), #C8C8F0);">🎵</div>
+      <div class="insp-event-body">
+        <span class="insp-event-date" style="background:var(--dj-primary-light);color:var(--dj-primary);">12 MEI 2026</span>
+        <div class="insp-event-name">Jazz Mben Senen</div>
+        <div class="insp-event-loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Benteng Vredeburg, Kota</div>
+        <button class="insp-event-add" onclick="event.stopPropagation(); addToItinerary('Jazz Mben Senen')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Tambah ke Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-event-card" onclick="addToItinerary('Festival Kebudayaan Yogyakarta')">
+      <div class="insp-event-thumb" style="background: linear-gradient(135deg, var(--dj-accent-light), #FFD0D4);">🌺</div>
+      <div class="insp-event-body">
+        <span class="insp-event-date" style="background:var(--dj-accent-light);color:var(--dj-accent);">1 JUN 2026</span>
+        <div class="insp-event-name">Festival Kebudayaan Yogyakarta</div>
+        <div class="insp-event-loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Berbagai Lokasi, DIY</div>
+        <button class="insp-event-add" onclick="event.stopPropagation(); addToItinerary('Festival Kebudayaan Yogyakarta')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Tambah ke Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-event-card" onclick="addToItinerary('Wayang Kulit Semalam Suntuk')">
+      <div class="insp-event-thumb" style="background: linear-gradient(135deg, #E0F4FF, #B8E4FF);">🎑</div>
+      <div class="insp-event-body">
+        <span class="insp-event-date" style="background:#E0F4FF;color:#0077AA;">24 MEI 2026</span>
+        <div class="insp-event-name">Wayang Kulit Semalam Suntuk</div>
+        <div class="insp-event-loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Gedung Wayang Orang</div>
+        <button class="insp-event-add" onclick="event.stopPropagation(); addToItinerary('Wayang Kulit Semalam Suntuk')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Tambah ke Itinerary
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ KULINER ═══ -->
+  <div class="insp-section-title">
+    <i class="fa-solid fa-bowl-food" style="color:var(--dj-green);"></i> Kuliner Wajib Coba
+  </div>
+
+  <div class="insp-hscroll">
+
+    <div class="insp-kuliner-card" onclick="addToItinerary('Sate Klathak Pak Pong')">
+      <div class="insp-kuliner-thumb" style="background: linear-gradient(135deg, #FFF0E8, #FFD8C0);">🍢</div>
+      <div class="insp-kuliner-body">
+        <div class="insp-kuliner-name">Sate Klathak Pak Pong</div>
+        <div class="insp-kuliner-sub">Bantul · Rp 50.000</div>
+        <button class="insp-kuliner-add" onclick="event.stopPropagation(); addToItinerary('Sate Klathak Pak Pong')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-kuliner-card" onclick="addToItinerary('Gudeg Yu Djum')">
+      <div class="insp-kuliner-thumb" style="background: linear-gradient(135deg, #FFF4DC, #FFE4A0);">🍛</div>
+      <div class="insp-kuliner-body">
+        <div class="insp-kuliner-name">Gudeg Yu Djum</div>
+        <div class="insp-kuliner-sub">Kota · Rp 25.000</div>
+        <button class="insp-kuliner-add" onclick="event.stopPropagation(); addToItinerary('Gudeg Yu Djum')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-kuliner-card" onclick="addToItinerary('Bakpia Pathok 25')">
+      <div class="insp-kuliner-thumb" style="background: linear-gradient(135deg, var(--dj-primary-light), #D0D0F0);">🥮</div>
+      <div class="insp-kuliner-body">
+        <div class="insp-kuliner-name">Bakpia Pathok 25</div>
+        <div class="insp-kuliner-sub">Kota · Rp 30.000/dos</div>
+        <button class="insp-kuliner-add" onclick="event.stopPropagation(); addToItinerary('Bakpia Pathok 25')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-kuliner-card" onclick="addToItinerary('Oseng Mercon Bu Narti')">
+      <div class="insp-kuliner-thumb" style="background: linear-gradient(135deg, var(--dj-accent-light), #FFD0D4);">🌶️</div>
+      <div class="insp-kuliner-body">
+        <div class="insp-kuliner-name">Oseng Mercon Bu Narti</div>
+        <div class="insp-kuliner-sub">Kota · Rp 35.000</div>
+        <button class="insp-kuliner-add" onclick="event.stopPropagation(); addToItinerary('Oseng Mercon Bu Narti')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-kuliner-card" onclick="addToItinerary('Angkringan Lik Man')">
+      <div class="insp-kuliner-thumb" style="background: linear-gradient(135deg, #EBF7F0, #C8E8D4);">☕</div>
+      <div class="insp-kuliner-body">
+        <div class="insp-kuliner-name">Angkringan Lik Man</div>
+        <div class="insp-kuliner-sub">Kota · Rp 10.000</div>
+        <button class="insp-kuliner-add" onclick="event.stopPropagation(); addToItinerary('Angkringan Lik Man')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ HERO #2: Alam ═══ -->
+  <div class="insp-section-title">
+    <i class="fa-solid fa-mountain-sun" style="color:var(--dj-green);"></i> Destinasi Alam Pilihan
+  </div>
+
+  <div class="insp-hero" onclick="addToItinerary('Bukit Panguk Kediwung')">
+    <div class="insp-hero-thumb" style="background: linear-gradient(135deg, #EBF7F0, #C8E8D4);">🌄</div>
+    <div class="insp-hero-body">
+      <div class="insp-badge-row">
+        <span class="insp-badge insp-badge-rec"><i class="fa-solid fa-star fa-2xs"></i> Rekomendasi Editor</span>
+        <span class="insp-badge insp-badge-gold"><i class="fa-solid fa-camera fa-2xs"></i> Photo Spot</span>
+      </div>
+      <h3 class="insp-hero-title">Bukit Panguk Kediwung</h3>
+      <div class="insp-hero-loc"><i class="fa-solid fa-location-dot fa-2xs"></i> Bantul, Yogyakarta · Sunrise terbaik DIY</div>
+      <div class="insp-hero-stats">
+        <span class="insp-stat"><span class="insp-stars">★★★★★</span>&nbsp;4.9</span>
+        <span class="insp-stat"><i class="fa-solid fa-eye"></i> 8.7K</span>
+        <span class="insp-stat"><i class="fa-solid fa-heart" style="color:var(--dj-accent);"></i> 6.1K</span>
+      </div>
+      <div class="insp-hero-cta">
+        <button class="insp-btn-primary green" onclick="event.stopPropagation(); addToItinerary('Bukit Panguk Kediwung')">
+          <i class="fa-solid fa-plus fa-xs"></i> Tambah ke Itinerary
+        </button>
+        <button class="insp-btn-like" id="like_panguk" onclick="event.stopPropagation(); toggleLike('like_panguk')">
+          <i class="fa-solid fa-heart"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HIDDEN GEMS ═══ -->
+  <div class="insp-section-title">
+    <i class="fa-solid fa-gem" style="color:var(--dj-purple);"></i> Hidden Gems Jogja
+  </div>
+
+  <div class="insp-grid">
+
+    <div class="insp-grid-card" onclick="addToItinerary('Goa Jomblang')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #F0F0E0, #E0E0C0);">🕳️</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Goa Jomblang</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Gunung Kidul · <span class="insp-stars">★</span> 4.8</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Goa Jomblang')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-grid-card" onclick="addToItinerary('Kalibiru Kulon Progo')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #E8F4FF, #C0DCFF);">🌊</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Kalibiru Kulon Progo</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Kulon Progo · <span class="insp-stars">★</span> 4.6</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Kalibiru Kulon Progo')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-grid-card" onclick="addToItinerary('Museum Ullen Sentalu')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #F8F0FF, #EDD8FF);">🏺</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Museum Ullen Sentalu</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Sleman · <span class="insp-stars">★</span> 4.7</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Museum Ullen Sentalu')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+    <div class="insp-grid-card" onclick="addToItinerary('Keraton Ratu Boko')">
+      <div class="insp-grid-thumb" style="background: linear-gradient(135deg, #FFF4DC, #FFE8A0);">🌙</div>
+      <div class="insp-grid-body">
+        <div class="insp-grid-title">Keraton Ratu Boko</div>
+        <div class="insp-grid-sub"><i class="fa-solid fa-location-dot fa-2xs"></i> Sleman · <span class="insp-stars">★</span> 4.6</div>
+        <button class="insp-grid-add" onclick="event.stopPropagation(); addToItinerary('Keraton Ratu Boko')">
+          <i class="fa-solid fa-plus fa-2xs"></i> Itinerary
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height:20px;"></div>
+
+</div>
+
+<div id="inspirasi_toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function addToItinerary(name) {
+    const msgs = [
+      `✅ "${name}" ditambahkan ke itinerary!`,
+      `🎯 "${name}" masuk ke Trip Saya!`,
+      `🗺️ "${name}" siap dijelajahi!`,
+    ];
+    showToast(msgs[Math.floor(Math.random() * msgs.length)]);
+  }
+
+  function toggleLike(id) {
+    const btn = document.getElementById(id);
+    btn.classList.toggle('liked');
+    showToast(btn.classList.contains('liked') ? '❤️ Disimpan ke favorit!' : '🤍 Dihapus dari favorit');
+  }
+
+  function filterCat(el) {
+    document.querySelectorAll('.insp-cat').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    showToast('Menampilkan: ' + el.textContent.trim());
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('inspirasi_toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+</script>
+</body>
+</html>

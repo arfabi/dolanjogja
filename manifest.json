@@ -1,0 +1,24 @@
+{
+  "name": "DolanJogja — Jogja Smart Travel Companion",
+  "short_name": "DolanJogja",
+  "description": "AI Smart Travel Companion untuk Wisata Yogyakarta",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["travel", "lifestyle"],
+  "lang": "id"
+}

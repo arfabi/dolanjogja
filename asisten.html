@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Asisten — DolanJogja</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dj-primary:       #000055;
+      --dj-primary-hover: #000077;
+      --dj-primary-light: #E8E8F5;
+      --dj-primary-soft:  #F0F0FA;
+      --dj-secondary:     #C8922A;
+      --dj-secondary-light:#FFF4DC;
+      --dj-accent:        #E84855;
+      --dj-green:         #2D7A4F;
+      --dj-green-light:   #EBF7F0;
+      --dj-dark:          #0D0D2B;
+      --dj-ink:           #1C1C3A;
+      --dj-muted:         #6B6B8A;
+      --dj-border:        #DCDCEC;
+      --dj-bg:            #F4F4FA;
+      --dj-surface:       #FFFFFF;
+      --dj-amber:         #C8922A;
+      --dj-red:           #E84855;
+      --dj-purple:        #6B4BC8;
+      --dj-purple-light:  #F0ECFF;
+      --dj-radius:        16px;
+      --font-main:        'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { background: var(--dj-bg); font-family: var(--font-main); margin: 0; padding: 0; min-height: 100vh; }
+
+    /* Header */
+    .asisten_header {
+      background: var(--dj-primary);
+      color: #fff;
+      padding: 16px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .asisten_header_title { font-size: 17px; font-weight: 800; margin: 0; letter-spacing: -.3px; }
+    .asisten_header_sub { font-size: 11px; opacity: .7; margin: 2px 0 0; }
+
+    /* Mode Tabs */
+    .asisten_mode_wrap {
+      background: var(--dj-surface);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--dj-border);
+      position: sticky; top: 62px; z-index: 99;
+    }
+    .asisten_mode_tabs {
+      display: flex;
+      background: var(--dj-primary-soft);
+      border-radius: 999px;
+      padding: 4px; gap: 4px;
+    }
+    .asisten_mode_tab {
+      flex: 1; text-align: center;
+      padding: 8px; border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+      cursor: pointer; border: none;
+      background: none; color: var(--dj-muted);
+      transition: all .2s;
+      font-family: var(--font-main);
+    }
+    .asisten_mode_tab.active {
+      background: var(--dj-primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,85,.3);
+    }
+
+    /* Form */
+    .asisten_body { padding: 16px; }
+    .asisten_form_section {
+      background: var(--dj-surface);
+      border-radius: var(--dj-radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,85,.06);
+      border: 1px solid var(--dj-border);
+    }
+    .asisten_form_label {
+      font-size: 12px; font-weight: 700;
+      color: var(--dj-ink); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .asisten_form_label i { color: var(--dj-primary); }
+
+    .asisten_input {
+      border: 1.5px solid var(--dj-border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      width: 100%;
+      color: var(--dj-ink);
+      background: var(--dj-bg);
+      outline: none;
+      transition: border-color .2s;
+      font-family: var(--font-main);
+    }
+    .asisten_input:focus { border-color: var(--dj-primary); background: #fff; }
+
+    .asisten_textarea {
+      border: 1.5px solid var(--dj-border);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 13px;
+      width: 100%;
+      color: var(--dj-ink);
+      background: var(--dj-bg);
+      outline: none;
+      transition: border-color .2s;
+      font-family: var(--font-main);
+      resize: none;
+      line-height: 1.6;
+      min-height: 90px;
+    }
+    .asisten_textarea:focus { border-color: var(--dj-primary); background: #fff; }
+    .asisten_textarea::placeholder { color: #9999BB; }
+
+    /* Chips */
+    .asisten_chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .asisten_chip_input { display: none; }
+    .asisten_chip_label {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; border-radius: 999px;
+      border: 1.5px solid var(--dj-border);
+      font-size: 12px; font-weight: 600;
+      color: var(--dj-muted); cursor: pointer;
+      transition: all .18s; background: var(--dj-surface);
+      user-select: none;
+    }
+    .asisten_chip_input:checked + .asisten_chip_label {
+      background: var(--dj-primary-light);
+      border-color: var(--dj-primary);
+      color: var(--dj-primary);
+    }
+
+    /* Anti-Zigzag Checkbox */
+    .asisten_zigzag_row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--dj-surface);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      border: 1.5px solid var(--dj-border);
+      box-shadow: 0 1px 4px rgba(0,0,85,.05);
+    }
+    .asisten_zigzag_cb {
+      width: 18px; height: 18px; accent-color: var(--dj-primary);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .asisten_zigzag_label {
+      font-size: 12px; font-weight: 700; color: var(--dj-ink);
+      flex: 1; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .asisten_zigzag_info {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--dj-primary-light);
+      color: var(--dj-primary);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; flex-shrink: 0;
+      transition: background .15s;
+    }
+    .asisten_zigzag_info:hover { background: var(--dj-primary); color: #fff; }
+
+    /* Wisata Grid */
+    .asisten_wisata_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .asisten_wisata_item {
+      border: 1.5px solid var(--dj-border);
+      border-radius: 12px; padding: 10px;
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; transition: all .18s; background: var(--dj-surface);
+    }
+    .asisten_wisata_item.selected { border-color: var(--dj-primary); background: var(--dj-primary-light); }
+    .asisten_wisata_thumb { width: 40px; height: 40px; border-radius: 8px; background: var(--dj-bg); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .asisten_wisata_name { font-size: 11px; font-weight: 600; color: var(--dj-ink); line-height: 1.3; }
+    .asisten_wisata_check { margin-left: auto; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--dj-border); display: flex; align-items: center; justify-content: center; font-size: 10px; color: transparent; flex-shrink: 0; }
+    .asisten_wisata_item.selected .asisten_wisata_check { background: var(--dj-primary); border-color: var(--dj-primary); color: #fff; }
+
+    /* Transport */
+    .asisten_transport_grid { display: flex; flex-direction: column; gap: 8px; }
+    .asisten_transport_item { border: 1.5px solid var(--dj-border); border-radius: 12px; padding: 12px; cursor: pointer; transition: all .18s; background: var(--dj-surface); }
+    .asisten_transport_item.selected { border-color: var(--dj-primary); background: var(--dj-primary-light); }
+    .asisten_transport_header { display: flex; align-items: center; gap: 10px; }
+    .asisten_transport_icon { width: 36px; height: 36px; border-radius: 10px; background: var(--dj-primary-light); color: var(--dj-primary); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .asisten_transport_title { font-size: 13px; font-weight: 700; color: var(--dj-ink); }
+    .asisten_transport_sub { font-size: 11px; color: var(--dj-muted); }
+    .asisten_transport_sub_options { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .asisten_sub_opt { padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--dj-border); font-size: 11px; font-weight: 600; color: var(--dj-muted); cursor: pointer; background: var(--dj-surface); transition: all .15s; }
+    .asisten_sub_opt.active { border-color: var(--dj-primary); color: var(--dj-primary); background: var(--dj-primary-light); }
+
+    /* Generate Button */
+    .asisten_generate_btn {
+      background: var(--dj-primary);
+      color: #fff; border: none; border-radius: 999px;
+      padding: 14px; font-size: 14px; font-weight: 700;
+      width: 100%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,85,.35);
+      transition: all .2s; margin-bottom: 24px;
+      font-family: var(--font-main);
+    }
+    .asisten_generate_btn:active { transform: scale(.97); }
+    .asisten_generate_btn:disabled { opacity: .7; }
+
+    /* Result */
+    .asisten_result { display: none; }
+    .asisten_result.show { display: block; }
+
+    /* Budget Card */
+    .asisten_budget_card {
+      background: var(--dj-primary);
+      border-radius: 14px; padding: 14px; color: #fff; margin-bottom: 16px;
+    }
+    .asisten_budget_title { font-size: 11px; opacity: .7; margin-bottom: 4px; }
+    .asisten_budget_amount { font-size: 22px; font-weight: 800; }
+    .asisten_budget_detail { font-size: 11px; opacity: .7; margin-top: 2px; }
+    .asisten_budget_pills { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .asisten_budget_pill { background: rgba(255,255,255,.15); border-radius: 999px; padding: 3px 10px; font-size: 10px; font-weight: 600; }
+
+    /* Day Tabs */
+    .asisten_day_tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px; scrollbar-width: none; }
+    .asisten_day_tabs::-webkit-scrollbar { display: none; }
+    .asisten_day_tab { flex-shrink: 0; padding: 6px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; border: 1.5px solid var(--dj-border); color: var(--dj-muted); cursor: pointer; background: var(--dj-surface); transition: all .18s; font-family: var(--font-main); }
+    .asisten_day_tab.active { background: var(--dj-primary); border-color: var(--dj-primary); color: #fff; }
+
+    /* Timeline */
+    .asisten_timeline { margin-left: 8px; position: relative; }
+    .asisten_timeline_line { position: absolute; left: 0; top: 8px; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--dj-primary), var(--dj-primary-light)); }
+    .asisten_tl_item { display: flex; gap: 12px; padding-bottom: 16px; padding-left: 16px; position: relative; }
+    .asisten_tl_dot { position: absolute; left: -5px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--dj-primary); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--dj-primary); flex-shrink: 0; }
+    .asisten_tl_dot.kuliner { background: var(--dj-green); box-shadow: 0 0 0 2px var(--dj-green); }
+    .asisten_tl_dot.transit { background: var(--dj-purple); box-shadow: 0 0 0 2px var(--dj-purple); }
+    .asisten_tl_dot.hotel { background: var(--dj-amber); box-shadow: 0 0 0 2px var(--dj-amber); }
+
+    .asisten_tl_card { background: var(--dj-surface); border-radius: 12px; padding: 12px; box-shadow: 0 1px 6px rgba(0,0,85,.07); width: 100%; border: 1px solid var(--dj-border); }
+    .asisten_tl_time { font-size: 11px; font-weight: 700; color: var(--dj-primary); margin-bottom: 3px; }
+    .asisten_tl_name { font-size: 13px; font-weight: 700; color: var(--dj-ink); margin-bottom: 4px; }
+    .asisten_tl_desc { font-size: 11px; color: var(--dj-muted); margin-bottom: 0; line-height: 1.5; }
+
+    /* CTA Group in timeline items */
+    .asisten_cta_group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .asisten_cta_btn { display: inline-flex; align-items: center; gap: 4px; padding: 5px 11px; border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1.5px solid; text-decoration: none; transition: all .15s; }
+
+    /* NEW: Place action buttons */
+    .asisten_place_actions { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+    .asisten_place_btn { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1.5px solid; transition: all .15s; background: var(--dj-surface); }
+    .asisten_place_btn.detail { color: var(--dj-primary); border-color: var(--dj-primary-light); background: var(--dj-primary-light); }
+    .asisten_place_btn.maps { color: var(--dj-green); border-color: var(--dj-green-light); background: var(--dj-green-light); }
+    .asisten_place_btn.cctv { color: var(--dj-accent); border-color: #FFE0E2; background: #FFF0F1; }
+
+    .asisten_cta_tiket { color: #075985; border-color: #BAE6FD; background: #F0F9FF; }
+    .asisten_cta_ojek { color: var(--dj-green); border-color: var(--dj-green-light); background: var(--dj-green-light); }
+    .asisten_cta_transjog { color: var(--dj-purple); border-color: var(--dj-purple-light); background: var(--dj-purple-light); }
+
+    /* Tips Box */
+    .asisten_tips_box { background: var(--dj-secondary-light); border: 1.5px solid #F0D080; border-radius: 12px; padding: 12px; margin-top: 4px; }
+    .asisten_tips_title { font-size: 12px; font-weight: 700; color: #6B4A00; display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+    .asisten_tips_text { font-size: 11px; color: #7A5500; line-height: 1.5; margin: 0; }
+
+    /* Action Row */
+    .asisten_action_row { display: flex; gap: 8px; margin-bottom: 12px; }
+    .asisten_action_btn { flex: 1; padding: 11px; border-radius: 12px; font-size: 12px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all .15s; font-family: var(--font-main); }
+    .asisten_action_save { background: var(--dj-primary); color: #fff; }
+    .asisten_action_share { background: var(--dj-bg); color: var(--dj-ink); border: 1.5px solid var(--dj-border); }
+    .asisten_action_tanya { background: var(--dj-secondary-light); color: #6B4A00; border: 1.5px solid #F0D080; }
+    .asisten_action_regen { background: var(--dj-bg); color: var(--dj-muted); border: 1.5px solid var(--dj-border); width: 100%; margin-bottom: 24px; }
+
+    /* Loading */
+    .asisten_loading { display: none; text-align: center; padding: 32px 16px; }
+    .asisten_loading.show { display: block; }
+    .asisten_ai_dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
+    .asisten_ai_dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dj-primary); animation: djbounce .8s infinite ease-in-out; }
+    .asisten_ai_dot:nth-child(2) { animation-delay: .2s; }
+    .asisten_ai_dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes djbounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-10px); } }
+    .asisten_loading_text { font-size: 13px; font-weight: 600; color: var(--dj-muted); }
+    .asisten_loading_sub { font-size: 11px; color: #9999BB; margin-top: 4px; }
+
+    /* Pane */
+    .asisten_pane { display: none; }
+    .asisten_pane.active { display: block; }
+
+    /* Select */
+    .asisten_select { border: 1.5px solid var(--dj-border); border-radius: 10px; padding: 10px 12px; font-size: 13px; width: 100%; color: var(--dj-ink); background: var(--dj-bg); outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; transition: border-color .2s; font-family: var(--font-main); }
+    .asisten_select:focus { border-color: var(--dj-primary); }
+    .asisten_row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .asisten_section_title { font-size: 14px; font-weight: 700; color: var(--dj-ink); margin: 0 0 12px; display: flex; align-items: center; gap: 6px; }
+    .asisten_section_title i { color: var(--dj-primary); font-size: 14px; }
+
+    /* ── MODALS ── */
+    .dj_modal_overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,30,.55);
+      z-index: 9000;
+      display: flex; align-items: flex-end;
+      padding: 0;
+      backdrop-filter: blur(2px);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .dj_modal_overlay.show { opacity: 1; pointer-events: all; }
+    .dj_modal_sheet {
+      width: 100%; background: var(--dj-surface);
+      border-radius: 24px 24px 0 0;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform .3s cubic-bezier(.34,.01,.23,1);
+      max-height: 85vh; overflow-y: auto;
+    }
+    .dj_modal_overlay.show .dj_modal_sheet { transform: translateY(0); }
+    .dj_modal_handle { width: 40px; height: 4px; background: var(--dj-border); border-radius: 2px; margin: 0 auto 16px; }
+    .dj_modal_title { font-size: 16px; font-weight: 800; color: var(--dj-ink); margin-bottom: 8px; }
+    .dj_modal_body { font-size: 13px; color: var(--dj-muted); line-height: 1.6; }
+    .dj_modal_close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--dj-bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--dj-muted); font-size: 14px; }
+
+    /* Detail modal gallery */
+    .dj_gallery { display: flex; gap: 8px; overflow-x: auto; margin: 12px 0; scrollbar-width: none; }
+    .dj_gallery::-webkit-scrollbar { display: none; }
+    .dj_gallery_item { flex-shrink: 0; width: 130px; height: 90px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+
+    /* CCTV Embed */
+    .dj_cctv_frame { background: #000; border-radius: 12px; overflow: hidden; margin: 12px 0; position: relative; }
+    .dj_cctv_screen { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #000020, #000050); flex-direction: column; gap: 8px; }
+    .dj_cctv_badge { position: absolute; top: 8px; left: 8px; background: #E84855; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: .5px; animation: blink 1.2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.4} }
+
+    /* Tanya AI chat */
+    .dj_chat_wrap { display: flex; flex-direction: column; height: 100%; }
+    .dj_chat_messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .dj_chat_msg { max-width: 85%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5; }
+    .dj_chat_msg.ai { background: var(--dj-primary-light); color: var(--dj-ink); border-bottom-left-radius: 4px; }
+    .dj_chat_msg.user { background: var(--dj-primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .dj_chat_input_row { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--dj-border); background: var(--dj-surface); }
+    .dj_chat_input { flex: 1; border: 1.5px solid var(--dj-border); border-radius: 999px; padding: 10px 14px; font-size: 13px; outline: none; font-family: var(--font-main); color: var(--dj-ink); background: var(--dj-bg); }
+    .dj_chat_input:focus { border-color: var(--dj-primary); }
+    .dj_chat_send { width: 40px; height: 40px; border-radius: 50%; background: var(--dj-primary); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .dj_chat_typing { display: flex; gap: 4px; padding: 8px 12px; }
+    .dj_chat_typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--dj-muted); animation: djbounce .8s infinite ease-in-out; }
+    .dj_chat_typing span:nth-child(2){animation-delay:.2s}
+    .dj_chat_typing span:nth-child(3){animation-delay:.4s}
+
+    /* Maps embed placeholder */
+    .dj_maps_frame { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; background: #E8E8F5; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; margin: 12px 0; }
+
+    /* Review stars */
+    .dj_stars { color: #C8922A; font-size: 14px; }
+    .dj_review_item { padding: 10px 0; border-bottom: 1px solid var(--dj-border); }
+    .dj_review_item:last-child { border-bottom: none; }
+    .dj_review_name { font-size: 12px; font-weight: 700; color: var(--dj-ink); }
+    .dj_review_text { font-size: 12px; color: var(--dj-muted); margin-top: 3px; line-height: 1.5; }
+
+    /* Section label */
+    .asisten_sublabel { font-size: 11px; color: var(--dj-muted); margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="asisten_header">
+  <div class="d-flex align-items-center gap-2">
+    <i class="fa-solid fa-wand-magic-sparkles fa-lg"></i>
+    <div>
+      <p class="asisten_header_title">AI Asisten Perjalanan</p>
+      <p class="asisten_header_sub">Buat itinerary Jogja dalam hitungan detik</p>
+    </div>
+  </div>
+</div>
+
+<!-- Mode Tabs -->
+<div class="asisten_mode_wrap">
+  <div class="asisten_mode_tabs">
+    <button class="asisten_mode_tab active" onclick="switchMode('cepat', this)">
+      <i class="fa-solid fa-bolt me-1"></i> Mode Cepat
+    </button>
+    <button class="asisten_mode_tab" onclick="switchMode('kustom', this)">
+      <i class="fa-solid fa-sliders me-1"></i> Mode Kustom
+    </button>
+  </div>
+</div>
+
+<!-- Body -->
+<div class="asisten_body">
+
+  <!-- ═══ MODE CEPAT ═══ -->
+  <div class="asisten_pane active" id="pane-cepat">
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-calendar-days"></i> Tanggal Perjalanan</p>
+      <div class="asisten_row2">
+        <div>
+          <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Tiba</label>
+          <input type="date" class="asisten_input" id="cepat_tiba" value="2026-05-10">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Pulang</label>
+          <input type="date" class="asisten_input" id="cepat_pulang" value="2026-05-12">
+        </div>
+      </div>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-face-smile"></i> Vibe Liburan</p>
+      <div class="asisten_chips">
+        <input type="radio" class="asisten_chip_input" name="vibe" id="v_alam" checked>
+        <label class="asisten_chip_label" for="v_alam">🌿 Alam</label>
+        <input type="radio" class="asisten_chip_input" name="vibe" id="v_budaya">
+        <label class="asisten_chip_label" for="v_budaya">🏛️ Budaya</label>
+        <input type="radio" class="asisten_chip_input" name="vibe" id="v_kuliner">
+        <label class="asisten_chip_label" for="v_kuliner">🍜 Kuliner</label>
+        <input type="radio" class="asisten_chip_input" name="vibe" id="v_rekreasi">
+        <label class="asisten_chip_label" for="v_rekreasi">🎡 Rekreasi</label>
+        <input type="radio" class="asisten_chip_input" name="vibe" id="v_sejarah">
+        <label class="asisten_chip_label" for="v_sejarah">🗿 Sejarah</label>
+        <input type="radio" class="asisten_chip_input" name="vibe" id="v_belanja">
+        <label class="asisten_chip_label" for="v_belanja">🛍️ Belanja</label>
+      </div>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-pencil"></i> Ceritakan Keinginan Liburanmu</p>
+      <p class="asisten_sublabel">Tulis bebas — mau ngapain aja di Jogja, bersama siapa, atau hal khusus yang diinginkan</p>
+      <textarea class="asisten_textarea" id="cepat_cerita" placeholder="Contoh: Aku mau liburan sama keluarga 4 orang, ada anak kecil umur 5 tahun. Pengen yang santai, banyak foto-foto, dan makannya enak-enak. Kalau bisa ada spot matahari terbenam..."></textarea>
+    </div>
+
+    <!-- Anti Zig-zag -->
+    <div class="asisten_zigzag_row">
+      <input type="checkbox" class="asisten_zigzag_cb" id="cepat_zigzag" checked>
+      <label class="asisten_zigzag_label" for="cepat_zigzag">
+        <i class="fa-solid fa-route" style="color:var(--dj-primary);"></i>
+        Anti Zig-zag Mode
+      </label>
+      <button class="asisten_zigzag_info" onclick="showZigzagInfo()" type="button">
+        <i class="fa-solid fa-circle-info"></i>
+      </button>
+    </div>
+
+    <button class="asisten_generate_btn" id="btn_cepat" onclick="generateItinerary()">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Buat Itinerary Sekarang
+    </button>
+  </div>
+
+  <!-- ═══ MODE KUSTOM ═══ -->
+  <div class="asisten_pane" id="pane-kustom">
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-pencil"></i> Ceritakan Keinginan Liburanmu</p>
+      <p class="asisten_sublabel">Tulis bebas — semakin detail, itinerary semakin personal!</p>
+      <textarea class="asisten_textarea" id="kustom_cerita" placeholder="Contoh: Kami berlima, ada yang vegetarian. Suka sejarah dan museum tapi bosan ke tempat yang terlalu ramai. Budget sekitar 300 ribu per hari. Nginap di daerah Prawirotaman..."></textarea>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-plane-arrival"></i> Kedatangan</p>
+      <div class="asisten_row2" style="margin-bottom:8px;">
+        <div>
+          <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Tanggal Tiba</label>
+          <input type="date" class="asisten_input" value="2026-05-10">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Jam Tiba</label>
+          <input type="time" class="asisten_input" value="09:00">
+        </div>
+      </div>
+      <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Lokasi Tiba</label>
+      <select class="asisten_select">
+        <option>✈️ Bandara YIA (Kulon Progo)</option>
+        <option>🚂 Stasiun Tugu</option>
+        <option>🚂 Stasiun Lempuyangan</option>
+        <option>🚌 Terminal Giwangan</option>
+      </select>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-car"></i> Transportasi Utama</p>
+      <div class="asisten_transport_grid" id="transport_options">
+        <div class="asisten_transport_item selected" onclick="selectTransport(this)">
+          <div class="asisten_transport_header">
+            <div class="asisten_transport_icon"><i class="fa-solid fa-bus"></i></div>
+            <div>
+              <div class="asisten_transport_title">Transportasi Umum</div>
+              <div class="asisten_transport_sub">Trans Jogja, KRL, Ojek Online</div>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_transport_item" onclick="selectTransport(this)">
+          <div class="asisten_transport_header">
+            <div class="asisten_transport_icon"><i class="fa-solid fa-motorcycle"></i></div>
+            <div>
+              <div class="asisten_transport_title">Motor</div>
+              <div class="asisten_transport_sub">Lebih fleksibel, akses gang kecil</div>
+            </div>
+          </div>
+          <div class="asisten_transport_sub_options">
+            <span class="asisten_sub_opt active" onclick="toggleSubOpt(event, this)">Rental</span>
+            <span class="asisten_sub_opt" onclick="toggleSubOpt(event, this)">Pribadi</span>
+          </div>
+        </div>
+        <div class="asisten_transport_item" onclick="selectTransport(this)">
+          <div class="asisten_transport_header">
+            <div class="asisten_transport_icon"><i class="fa-solid fa-car-side"></i></div>
+            <div>
+              <div class="asisten_transport_title">Mobil</div>
+              <div class="asisten_transport_sub">Nyaman untuk keluarga / grup</div>
+            </div>
+          </div>
+          <div class="asisten_transport_sub_options">
+            <span class="asisten_sub_opt active" onclick="toggleSubOpt(event, this)">Rental</span>
+            <span class="asisten_sub_opt" onclick="toggleSubOpt(event, this)">Pribadi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-mountain-sun"></i> Preferensi Wisata</p>
+      <div class="asisten_chips">
+        <input type="checkbox" class="asisten_chip_input" id="pw_alam" checked>
+        <label class="asisten_chip_label" for="pw_alam">🌿 Alam</label>
+        <input type="checkbox" class="asisten_chip_input" id="pw_sejarah" checked>
+        <label class="asisten_chip_label" for="pw_sejarah">🗿 Sejarah</label>
+        <input type="checkbox" class="asisten_chip_input" id="pw_rekreasi">
+        <label class="asisten_chip_label" for="pw_rekreasi">🎡 Rekreasi</label>
+        <input type="checkbox" class="asisten_chip_input" id="pw_belanja">
+        <label class="asisten_chip_label" for="pw_belanja">🛍️ Belanja</label>
+        <input type="checkbox" class="asisten_chip_input" id="pw_kuliner" checked>
+        <label class="asisten_chip_label" for="pw_kuliner">🍜 Kuliner</label>
+      </div>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-star"></i> Wisata Wajib (Opsional)</p>
+      <p style="font-size:11px;color:var(--dj-muted);margin-bottom:10px;">Pilih destinasi yang tidak boleh terlewat</p>
+      <div class="asisten_wisata_grid">
+        <div class="asisten_wisata_item" onclick="toggleWisata(this)">
+          <div class="asisten_wisata_thumb">🌄</div>
+          <div class="asisten_wisata_name">On The Rock</div>
+          <div class="asisten_wisata_check"><i class="fa-solid fa-check fa-2xs"></i></div>
+        </div>
+        <div class="asisten_wisata_item" onclick="toggleWisata(this)">
+          <div class="asisten_wisata_thumb">🌊</div>
+          <div class="asisten_wisata_name">Obelix Sea View</div>
+          <div class="asisten_wisata_check"><i class="fa-solid fa-check fa-2xs"></i></div>
+        </div>
+        <div class="asisten_wisata_item" onclick="toggleWisata(this)">
+          <div class="asisten_wisata_thumb">🏛️</div>
+          <div class="asisten_wisata_name">Museum Ullen Sentalu</div>
+          <div class="asisten_wisata_check"><i class="fa-solid fa-check fa-2xs"></i></div>
+        </div>
+        <div class="asisten_wisata_item selected" onclick="toggleWisata(this)">
+          <div class="asisten_wisata_thumb">🛍️</div>
+          <div class="asisten_wisata_name">Belanja Malioboro</div>
+          <div class="asisten_wisata_check"><i class="fa-solid fa-check fa-2xs"></i></div>
+        </div>
+        <div class="asisten_wisata_item selected" onclick="toggleWisata(this)">
+          <div class="asisten_wisata_thumb">🕌</div>
+          <div class="asisten_wisata_name">Candi Prambanan</div>
+          <div class="asisten_wisata_check"><i class="fa-solid fa-check fa-2xs"></i></div>
+        </div>
+        <div class="asisten_wisata_item" onclick="toggleWisata(this)">
+          <div class="asisten_wisata_thumb">🐟</div>
+          <div class="asisten_wisata_name">Jungwok Blue Ocean</div>
+          <div class="asisten_wisata_check"><i class="fa-solid fa-check fa-2xs"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asisten_form_section">
+      <p class="asisten_form_label"><i class="fa-solid fa-plane-departure"></i> Kepulangan</p>
+      <div class="asisten_row2">
+        <div>
+          <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Tanggal Pulang</label>
+          <input type="date" class="asisten_input" value="2026-05-13">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--dj-muted);margin-bottom:4px;display:block;">Jam Pulang</label>
+          <input type="time" class="asisten_input" value="14:00">
+        </div>
+      </div>
+    </div>
+
+    <!-- Anti Zig-zag -->
+    <div class="asisten_zigzag_row">
+      <input type="checkbox" class="asisten_zigzag_cb" id="kustom_zigzag" checked>
+      <label class="asisten_zigzag_label" for="kustom_zigzag">
+        <i class="fa-solid fa-route" style="color:var(--dj-primary);"></i>
+        Anti Zig-zag Mode
+      </label>
+      <button class="asisten_zigzag_info" onclick="showZigzagInfo()" type="button">
+        <i class="fa-solid fa-circle-info"></i>
+      </button>
+    </div>
+
+    <button class="asisten_generate_btn" id="btn_kustom" onclick="generateItinerary()">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Buat Itinerary Kustom
+    </button>
+  </div>
+
+  <!-- ═══ LOADING ═══ -->
+  <div class="asisten_loading" id="asisten_loading">
+    <div class="asisten_ai_dots">
+      <div class="asisten_ai_dot"></div>
+      <div class="asisten_ai_dot"></div>
+      <div class="asisten_ai_dot"></div>
+    </div>
+    <p class="asisten_loading_text">AI sedang menyusun itinerary...</p>
+    <p class="asisten_loading_sub" id="loading_step">Menganalisis 200+ destinasi Jogja</p>
+  </div>
+
+  <!-- ═══ RESULT ═══ -->
+  <div class="asisten_result" id="asisten_result">
+
+    <div class="asisten_budget_card">
+      <p class="asisten_budget_title">Estimasi Total Perjalanan (3 Hari)</p>
+      <p class="asisten_budget_amount">Rp 485.000</p>
+      <p class="asisten_budget_detail">Sudah termasuk transport, tiket, & kuliner</p>
+      <div class="asisten_budget_pills">
+        <span class="asisten_budget_pill">🚌 Transport Rp 85.000</span>
+        <span class="asisten_budget_pill">🎟️ Tiket Rp 125.000</span>
+        <span class="asisten_budget_pill">🍜 Kuliner Rp 275.000</span>
+      </div>
+    </div>
+
+    <div class="asisten_day_tabs">
+      <button class="asisten_day_tab active" onclick="switchDay(0, this)">Hari 1</button>
+      <button class="asisten_day_tab" onclick="switchDay(1, this)">Hari 2</button>
+      <button class="asisten_day_tab" onclick="switchDay(2, this)">Hari 3</button>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="asisten_day_content" id="day_0">
+      <div style="font-size:12px;font-weight:700;color:var(--dj-muted);margin-bottom:12px;">
+        <i class="fa-solid fa-location-dot me-1" style="color:var(--dj-primary)"></i>
+        Klaster: Pusat Kota Yogyakarta
+      </div>
+      <div class="asisten_timeline">
+        <div class="asisten_timeline_line"></div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot kuliner"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">07.30 – 08.30</p>
+            <p class="asisten_tl_name">Sarapan — Gudeg Yu Djum</p>
+            <p class="asisten_tl_desc">Sarapan gudeg legendaris di Wijilan. Buka sejak 06.00, selalu ramai wisatawan. Est. Rp 25.000/orang.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Gudeg Yu Djum','kuliner')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Gudeg Yu Djum')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+            </div>
+            <div class="asisten_cta_group">
+              <a class="asisten_cta_btn asisten_cta_ojek" href="#" onclick="ctaClick(event,'Ojek Online')">
+                <i class="fa-solid fa-motorcycle fa-xs"></i> Pesan Ojek Online
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">09.00 – 12.00</p>
+            <p class="asisten_tl_name">Keraton Yogyakarta + Taman Sari</p>
+            <p class="asisten_tl_desc">Wisata sejarah ikonik. Keraton: Rp 15.000, Taman Sari: Rp 15.000. Jalan kaki 5 menit dari Gudeg Yu Djum.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Keraton Yogyakarta','wisata')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Keraton Yogyakarta')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+              <button class="asisten_place_btn cctv" onclick="showCCTV('Keraton Yogyakarta')"><i class="fa-solid fa-video fa-xs"></i> CCTV Live</button>
+            </div>
+            <div class="asisten_cta_group">
+              <a class="asisten_cta_btn asisten_cta_tiket" href="https://traveloka.com" target="_blank"><i class="fa-solid fa-ticket fa-xs"></i> Beli Tiket</a>
+              <a class="asisten_cta_btn asisten_cta_transjog" href="#" onclick="ctaClick(event,'Trans Jogja')"><i class="fa-solid fa-bus fa-xs"></i> Trans Jogja</a>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot kuliner"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">12.30 – 13.30</p>
+            <p class="asisten_tl_name">Makan Siang — Soto Bathok Mbah Katro</p>
+            <p class="asisten_tl_desc">Soto unik disajikan dalam bathok kelapa. Di dekat Prambanan. Est. Rp 20.000/orang.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Soto Bathok Mbah Katro','kuliner')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Soto Bathok Mbah Katro')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">14.00 – 17.00</p>
+            <p class="asisten_tl_name">Candi Prambanan</p>
+            <p class="asisten_tl_desc">Candi Hindu terbesar di Indonesia. Tiket Rp 50.000. Klaster Timur — tidak zig-zag dari lokasi makan siang.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Candi Prambanan','wisata')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Candi Prambanan')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+              <button class="asisten_place_btn cctv" onclick="showCCTV('Candi Prambanan')"><i class="fa-solid fa-video fa-xs"></i> CCTV Live</button>
+            </div>
+            <div class="asisten_cta_group">
+              <a class="asisten_cta_btn asisten_cta_tiket" href="https://traveloka.com" target="_blank"><i class="fa-solid fa-ticket fa-xs"></i> Beli Tiket</a>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot kuliner"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">18.00 – 19.30</p>
+            <p class="asisten_tl_name">Makan Malam — Angkringan Lik Man</p>
+            <p class="asisten_tl_desc">Angkringan legendaris dekat Stasiun Tugu. Kopi joss & nasi kucing. Est. Rp 30.000.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Angkringan Lik Man','kuliner')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Angkringan Lik Man')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot hotel"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">20.00</p>
+            <p class="asisten_tl_name">Check-in Hotel / Penginapan</p>
+            <p class="asisten_tl_desc">Rekomendasi: area Prawirotaman atau Malioboro — strategis untuk besok.</p>
+            <div class="asisten_cta_group">
+              <a class="asisten_cta_btn asisten_cta_tiket" href="https://traveloka.com" target="_blank"><i class="fa-solid fa-bed fa-xs"></i> Cari Hotel Traveloka</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="asisten_tips_box">
+        <p class="asisten_tips_title"><i class="fa-solid fa-lightbulb"></i> Tips Hari Ini</p>
+        <p class="asisten_tips_text">Kawasan Malioboro terpantau padat sore hari. Sebaiknya hindari rute Malioboro antara jam 16.00–18.00. Gunakan Trans Jogja agar tidak perlu parkir.</p>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="asisten_day_content" id="day_1" style="display:none;">
+      <div style="font-size:12px;font-weight:700;color:var(--dj-muted);margin-bottom:12px;">
+        <i class="fa-solid fa-location-dot me-1" style="color:var(--dj-primary)"></i>
+        Klaster: Utara — Sleman & Kaliurang
+      </div>
+      <div class="asisten_timeline">
+        <div class="asisten_timeline_line"></div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot kuliner"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">07.00 – 08.00</p>
+            <p class="asisten_tl_name">Sarapan — Kopi Klotok</p>
+            <p class="asisten_tl_desc">Sarapan legendaris di tepi sawah Kaliurang. Sangat recommended. Est. Rp 40.000.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Kopi Klotok','kuliner')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Kopi Klotok')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">09.00 – 12.00</p>
+            <p class="asisten_tl_name">Museum Ullen Sentalu</p>
+            <p class="asisten_tl_desc">Museum budaya Jawa terbaik di Indonesia. Indoor — aman jika hujan. Tiket Rp 50.000.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Museum Ullen Sentalu','wisata')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Museum Ullen Sentalu')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+            </div>
+            <div class="asisten_cta_group">
+              <a class="asisten_cta_btn asisten_cta_tiket" href="https://traveloka.com" target="_blank"><i class="fa-solid fa-ticket fa-xs"></i> Beli Tiket</a>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">13.00 – 16.30</p>
+            <p class="asisten_tl_name">Tebing Breksi</p>
+            <p class="asisten_tl_desc">Spot foto epic eks tambang batu. Tiket Rp 10.000. Sunset di sini sangat indah.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Tebing Breksi','wisata')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Tebing Breksi')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+              <button class="asisten_place_btn cctv" onclick="showCCTV('Tebing Breksi')"><i class="fa-solid fa-video fa-xs"></i> CCTV Live</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="asisten_tips_box">
+        <p class="asisten_tips_title"><i class="fa-solid fa-lightbulb"></i> Tips Hari Ini</p>
+        <p class="asisten_tips_text">Seluruh destinasi hari ini di klaster Utara-Timur. Tidak ada zig-zag. Jika cuaca hujan sore, Museum Ullen Sentalu bisa dijadwalkan ulang ke sore.</p>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="asisten_day_content" id="day_2" style="display:none;">
+      <div style="font-size:12px;font-weight:700;color:var(--dj-muted);margin-bottom:12px;">
+        <i class="fa-solid fa-location-dot me-1" style="color:var(--dj-primary)"></i>
+        Klaster: Pusat — Malioboro & Belanja
+      </div>
+      <div class="asisten_timeline">
+        <div class="asisten_timeline_line"></div>
+        <div class="asisten_tl_item">
+          <div class="asisten_tl_dot"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">09.00 – 13.00</p>
+            <p class="asisten_tl_name">Belanja Malioboro</p>
+            <p class="asisten_tl_desc">Surga oleh-oleh. Batik, kerajinan, wayang. Tips: datang pagi sebelum ramai.</p>
+            <div class="asisten_place_actions">
+              <button class="asisten_place_btn detail" onclick="showDetail('Malioboro','wisata')"><i class="fa-solid fa-circle-info fa-xs"></i> Detail</button>
+              <button class="asisten_place_btn maps" onclick="showMaps('Malioboro')"><i class="fa-solid fa-map-location-dot fa-xs"></i> Maps</button>
+              <button class="asisten_place_btn cctv" onclick="showCCTV('Malioboro')"><i class="fa-solid fa-video fa-xs"></i> CCTV Live</button>
+            </div>
+          </div>
+        </div>
+        <div class="asisten_tl_item transit">
+          <div class="asisten_tl_dot transit"></div>
+          <div class="asisten_tl_card">
+            <p class="asisten_tl_time">15.00</p>
+            <p class="asisten_tl_name">🚉 Menuju Bandara / Stasiun</p>
+            <p class="asisten_tl_desc">Estimasi waktu ke Bandara YIA: 60–90 menit. Ke Stasiun Tugu: 10 menit.</p>
+            <div class="asisten_cta_group">
+              <a class="asisten_cta_btn asisten_cta_ojek" href="#" onclick="ctaClick(event,'Ojek Online')"><i class="fa-solid fa-car fa-xs"></i> Pesan Gocar / Grab</a>
+              <a class="asisten_cta_btn asisten_cta_transjog" href="#" onclick="ctaClick(event,'Trans Jogja')"><i class="fa-solid fa-bus fa-xs"></i> Damri ke YIA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="asisten_tips_box">
+        <p class="asisten_tips_title"><i class="fa-solid fa-lightbulb"></i> Tips Hari Ini</p>
+        <p class="asisten_tips_text">Jangan lupa beli oleh-oleh Bakpia di Jalan KS Tubun sebelum pulang — lebih murah dan segar dibanding di bandara.</p>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="asisten_action_row" style="margin-top:16px;">
+      <button class="asisten_action_btn asisten_action_save" onclick="saveTrip()">
+        <i class="fa-solid fa-bookmark fa-sm"></i> Simpan Trip
+      </button>
+      <button class="asisten_action_btn asisten_action_share" onclick="shareTrip()">
+        <i class="fa-brands fa-whatsapp fa-sm"></i> Bagikan
+      </button>
+    </div>
+    <div class="asisten_action_row">
+      <button class="asisten_action_btn asisten_action_tanya" style="flex:1;" onclick="openTanyaAI()">
+        <i class="fa-solid fa-comments fa-sm"></i> Tanya AI tentang Itinerary
+      </button>
+    </div>
+    <button class="asisten_action_btn asisten_action_regen" onclick="regenItinerary()">
+      <i class="fa-solid fa-rotate fa-sm"></i> Generate Ulang Itinerary
+    </button>
+
+  </div>
+  <!-- END RESULT -->
+
+</div>
+<!-- END BODY -->
+
+<!-- ═══ MODAL: Anti Zig-zag Info ═══ -->
+<div class="dj_modal_overlay" id="modal_zigzag" onclick="closeModal('modal_zigzag')">
+  <div class="dj_modal_sheet" onclick="event.stopPropagation()" style="position:relative;">
+    <div class="dj_modal_handle"></div>
+    <button class="dj_modal_close" onclick="closeModal('modal_zigzag')"><i class="fa-solid fa-xmark"></i></button>
+    <div style="font-size:32px;margin-bottom:10px;">🛣️</div>
+    <div class="dj_modal_title">Anti Zig-zag Mode</div>
+    <div class="dj_modal_body">
+      <p>AI kami akan <strong>menyusun rute perjalanan yang berurutan dan searah</strong> — tidak bolak-balik antarlokasi. Bayangkan seperti naik kereta yang berhenti di setiap stasiun secara berurutan.</p>
+      <br>
+      <p><strong>Manfaatnya:</strong></p>
+      <ul style="padding-left:16px;line-height:2;">
+        <li>⛽ Hemat bahan bakar hingga 40%</li>
+        <li>🚦 Terhindar dari kemacetan berulang di rute yang sama</li>
+        <li>😌 Tidak kelelahan di jalan karena perjalanan lebih efisien</li>
+        <li>⏱️ Waktu wisata lebih banyak, waktu transit lebih sedikit</li>
+        <li>💰 Biaya transportasi jauh lebih hemat</li>
+      </ul>
+    </div>
+    <button style="width:100%;padding:12px;background:var(--dj-primary);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;margin-top:16px;font-family:var(--font-main);" onclick="closeModal('modal_zigzag')">
+      Mengerti!
+    </button>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Detail Tempat ═══ -->
+<div class="dj_modal_overlay" id="modal_detail" onclick="closeModal('modal_detail')">
+  <div class="dj_modal_sheet" onclick="event.stopPropagation()" style="position:relative;">
+    <div class="dj_modal_handle"></div>
+    <button class="dj_modal_close" onclick="closeModal('modal_detail')"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modal_detail_content"></div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Maps ═══ -->
+<div class="dj_modal_overlay" id="modal_maps" onclick="closeModal('modal_maps')">
+  <div class="dj_modal_sheet" onclick="event.stopPropagation()" style="position:relative;">
+    <div class="dj_modal_handle"></div>
+    <button class="dj_modal_close" onclick="closeModal('modal_maps')"><i class="fa-solid fa-xmark"></i></button>
+    <div class="dj_modal_title" id="maps_title">Lokasi di Peta</div>
+    <div class="dj_maps_frame">
+      <i class="fa-solid fa-map-location-dot" style="font-size:40px;color:var(--dj-primary);opacity:.4;"></i>
+      <div style="font-size:13px;font-weight:600;color:var(--dj-muted);" id="maps_name_label">Memuat peta...</div>
+      <div style="font-size:11px;color:#9999BB;">Integrasi Google Maps</div>
+    </div>
+    <a href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:var(--dj-green);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;margin-top:4px;" id="maps_link" target="_blank">
+      <i class="fa-solid fa-diamond-turn-right"></i> Buka di Google Maps
+    </a>
+  </div>
+</div>
+
+<!-- ═══ MODAL: CCTV ═══ -->
+<div class="dj_modal_overlay" id="modal_cctv" onclick="closeModal('modal_cctv')">
+  <div class="dj_modal_sheet" onclick="event.stopPropagation()" style="position:relative;">
+    <div class="dj_modal_handle"></div>
+    <button class="dj_modal_close" onclick="closeModal('modal_cctv')"><i class="fa-solid fa-xmark"></i></button>
+    <div class="dj_modal_title" id="cctv_title">CCTV Live</div>
+    <div class="dj_cctv_frame">
+      <div class="dj_cctv_badge">● LIVE</div>
+      <div class="dj_cctv_screen">
+        <i class="fa-solid fa-video" style="font-size:36px;color:rgba(255,255,255,.3);"></i>
+        <div style="color:rgba(255,255,255,.6);font-size:12px;" id="cctv_loc_label">Memuat feed CCTV...</div>
+        <div style="color:rgba(255,255,255,.4);font-size:10px;">Sumber: CCTV Publik Kota Jogja</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--dj-muted);text-align:center;margin-top:8px;">
+      <i class="fa-solid fa-circle-info fa-xs me-1"></i>CCTV publik tersedia untuk destinasi wisata utama Yogyakarta
+    </div>
+    <div style="margin-top:12px;">
+      <div style="font-size:12px;font-weight:700;color:var(--dj-ink);margin-bottom:8px;">Kondisi Terkini</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="cctv_status">
+        <span style="background:var(--dj-green-light);color:var(--dj-green);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;">🟢 Buka</span>
+        <span style="background:var(--dj-secondary-light);color:#6B4A00;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;">🧍 Kepadatan: Sedang</span>
+        <span style="background:var(--dj-primary-light);color:var(--dj-primary);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600;">☀️ Cuaca: Cerah</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL: Tanya AI ═══ -->
+<div class="dj_modal_overlay" id="modal_tanya" onclick="closeModal('modal_tanya')" style="align-items:stretch;">
+  <div class="dj_modal_sheet" onclick="event.stopPropagation()" style="position:relative;border-radius:24px 24px 0 0;height:85vh;display:flex;flex-direction:column;padding:0;">
+    <div style="padding:16px 20px 0;flex-shrink:0;">
+      <div class="dj_modal_handle"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div>
+          <div class="dj_modal_title" style="margin:0;">💬 Tanya AI</div>
+          <div style="font-size:11px;color:var(--dj-muted);margin-top:2px;">Tanyakan apa saja tentang itinerary-mu</div>
+        </div>
+        <button class="dj_modal_close" onclick="closeModal('modal_tanya')" style="position:relative;top:0;right:0;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="dj_chat_messages" id="chat_messages">
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--dj-primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-wand-magic-sparkles" style="color:#fff;font-size:11px;"></i>
+        </div>
+        <div class="dj_chat_msg ai">
+          Halo! Aku siap membantu menjawab pertanyaanmu seputar itinerary Jogja yang sudah dibuat. Mau tanya soal destinasi, tips perjalanan, estimasi biaya, atau hal lainnya? 😊
+        </div>
+      </div>
+    </div>
+    <div class="dj_chat_input_row">
+      <input class="dj_chat_input" type="text" id="chat_input" placeholder="Tulis pertanyaanmu..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="dj_chat_send" onclick="sendChat()">
+        <i class="fa-solid fa-paper-plane fa-sm"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function switchMode(mode, el) {
+    document.querySelectorAll('.asisten_mode_tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.asisten_pane').forEach(p => p.classList.remove('active'));
+    document.getElementById('pane-' + mode).classList.add('active');
+    document.getElementById('asisten_result').classList.remove('show');
+    document.getElementById('asisten_loading').classList.remove('show');
+  }
+
+  function selectTransport(el) {
+    document.querySelectorAll('.asisten_transport_item').forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function toggleSubOpt(e, el) {
+    e.stopPropagation();
+    el.closest('.asisten_transport_item').querySelectorAll('.asisten_sub_opt').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+    el.closest('.asisten_transport_item').classList.add('selected');
+    document.querySelectorAll('.asisten_transport_item').forEach(t => {
+      if (t !== el.closest('.asisten_transport_item')) t.classList.remove('selected');
+    });
+  }
+
+  function toggleWisata(el) { el.classList.toggle('selected'); }
+
+  const loadingSteps = [
+    'Membaca preferensi perjalananmu...',
+    'Menganalisis 200+ destinasi Jogja...',
+    'Menyusun rute anti zig-zag...',
+    'Menghitung estimasi biaya...',
+    'Mengecek kondisi cuaca & kepadatan...',
+    'Itinerary siap! ✨'
+  ];
+
+  function generateItinerary() {
+    document.querySelectorAll('.asisten_pane').forEach(p => p.classList.remove('active'));
+    document.getElementById('asisten_result').classList.remove('show');
+    const loading = document.getElementById('asisten_loading');
+    loading.classList.add('show');
+    window.scrollTo(0, 0);
+    let step = 0;
+    const stepEl = document.getElementById('loading_step');
+    const interval = setInterval(() => {
+      if (step < loadingSteps.length) { stepEl.textContent = loadingSteps[step++]; }
+      else {
+        clearInterval(interval);
+        loading.classList.remove('show');
+        document.getElementById('asisten_result').classList.add('show');
+        document.getElementById('asisten_result').scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 600);
+  }
+
+  function switchDay(idx, el) {
+    document.querySelectorAll('.asisten_day_tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.asisten_day_content').forEach(d => d.style.display = 'none');
+    document.getElementById('day_' + idx).style.display = 'block';
+  }
+
+  function ctaClick(e, type) {
+    e.preventDefault();
+    const msgs = { 'Trans Jogja': '🚌 Menampilkan rute Trans Jogja...', 'Ojek Online': '🛵 Membuka aplikasi ojek online...' };
+    showToast(msgs[type] || 'Membuka...');
+  }
+
+  function saveTrip() { showToast('✅ Trip disimpan ke Trip Saya!'); }
+  function shareTrip() { showToast('📤 Link itinerary siap dibagikan!'); }
+  function regenItinerary() {
+    document.getElementById('asisten_result').classList.remove('show');
+    generateItinerary();
+  }
+
+  // ── Modal helpers ──
+  function openModal(id) {
+    document.getElementById(id).classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function showZigzagInfo() { openModal('modal_zigzag'); }
+
+  // ── Detail Modal ──
+  const detailData = {
+    kuliner: {
+      emoji: '🍽️',
+      harga: 'Rp 15.000 – 45.000 per orang',
+      jenis: 'Kuliner Tradisional',
+      colors: ['#FEF3C7','#FFFBEB','#FDE68A','#FCD34D'],
+      menu: ['Nasi Gudeg', 'Oseng Tempe', 'Teh Poci', 'Kopi Joss'],
+      reviews: [
+        { name: 'Budi S.', rating: 5, text: 'Otentik banget! Sudah ke sini berkali-kali dan selalu enaknya sama.' },
+        { name: 'Rina A.', rating: 5, text: 'Wajib dicoba kalau ke Jogja. Harganya juga masih wajar.' }
+      ]
+    },
+    wisata: {
+      emoji: '🏛️',
+      harga: 'Rp 10.000 – 75.000 per orang',
+      jenis: 'Destinasi Wisata',
+      colors: ['#E0F2FE','#DBEAFE','#EDE9FE','#D1FAE5'],
+      menu: null,
+      reviews: [
+        { name: 'Dian P.', rating: 5, text: 'Luar biasa! Spot foto bagus dan lokasinya terawat. Recommended!' },
+        { name: 'Yusuf M.', rating: 4, text: 'Bagus, cuma agak ramai akhir pekan. Mending datang pagi.' }
+      ]
+    }
+  };
+
+  function showDetail(name, type) {
+    const d = detailData[type] || detailData.wisata;
+    const stars = n => '⭐'.repeat(n);
+    const menuHTML = d.menu ? `
+      <div style="font-size:12px;font-weight:700;color:var(--dj-ink);margin-bottom:8px;">Menu Unggulan</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
+        ${d.menu.map(m=>`<span style="background:var(--dj-secondary-light);color:#6B4A00;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:600;">${m}</span>`).join('')}
+      </div>` : '';
+
+    document.getElementById('modal_detail_content').innerHTML = `
+      <div style="font-size:36px;margin-bottom:6px;">${d.emoji}</div>
+      <div class="dj_modal_title">${name}</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <span class="dj_stars">⭐⭐⭐⭐⭐</span>
+        <span style="font-size:12px;font-weight:600;color:var(--dj-muted);">4.8 · ${d.jenis}</span>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--dj-ink);margin-bottom:6px;">📸 Galeri Foto</div>
+      <div class="dj_gallery">
+        ${d.colors.map((c,i)=>`<div class="dj_gallery_item" style="background:${c};">${['🏛️','📸','🌟','✨'][i]}</div>`).join('')}
+      </div>
+      <div style="display:flex;justify-content:space-between;background:var(--dj-bg);border-radius:12px;padding:10px 14px;margin-bottom:14px;">
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--dj-muted);margin-bottom:2px;">Harga</div>
+          <div style="font-size:11px;font-weight:700;color:var(--dj-ink);">${d.harga}</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--dj-muted);margin-bottom:2px;">Buka</div>
+          <div style="font-size:11px;font-weight:700;color:var(--dj-green);">08.00 – 21.00</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:10px;color:var(--dj-muted);margin-bottom:2px;">Kepadatan</div>
+          <div style="font-size:11px;font-weight:700;color:var(--dj-amber);">Sedang</div>
+        </div>
+      </div>
+      ${menuHTML}
+      <div style="font-size:12px;font-weight:700;color:var(--dj-ink);margin-bottom:8px;">Ulasan Terbaru</div>
+      ${d.reviews.map(r=>`
+        <div class="dj_review_item">
+          <div class="dj_review_name">${r.name} <span class="dj_stars" style="font-size:11px;">${stars(r.rating)}</span></div>
+          <div class="dj_review_text">${r.text}</div>
+        </div>`).join('')}
+    `;
+    openModal('modal_detail');
+  }
+
+  function showMaps(name) {
+    document.getElementById('maps_title').textContent = name;
+    document.getElementById('maps_name_label').textContent = name + ', Yogyakarta';
+    const q = encodeURIComponent(name + ' Yogyakarta');
+    document.getElementById('maps_link').href = `https://www.google.com/maps/search/${q}`;
+    openModal('modal_maps');
+  }
+
+  function showCCTV(name) {
+    document.getElementById('cctv_title').textContent = '📹 CCTV Live — ' + name;
+    document.getElementById('cctv_loc_label').textContent = name + ', Yogyakarta';
+    openModal('modal_cctv');
+  }
+
+  // ── Tanya AI Chat ──
+  function openTanyaAI() { openModal('modal_tanya'); }
+
+  const aiResponses = [
+    'Tentu! Untuk destinasi tersebut, waktu terbaik berkunjung adalah pagi hari sebelum jam 10.00 agar terhindar dari keramaian dan mendapat cahaya foto terbaik. 📸',
+    'Dari segi biaya, estimasi sudah termasuk tiket masuk dan transportasi. Untuk kuliner, kamu bisa tambah budget sekitar Rp 20.000–30.000 per orang jika ingin mencoba hidangan premium. 💰',
+    'Rute yang disarankan sudah menggunakan mode Anti Zig-zag, jadi perjalanan antar destinasi hanya sekitar 10–20 menit. Tidak perlu khawatir soal kemacetan! 🛣️',
+    'Untuk transportasi, Trans Jogja adalah pilihan paling hemat dengan tarif flat Rp 4.500 per perjalanan. Untuk rute yang tidak terlayani Trans Jogja, ojek online lebih praktis. 🚌',
+    'Kalau cuaca tidak mendukung, destinasi indoor seperti Museum Ullen Sentalu atau Keraton bisa jadi pilihan backup yang sangat bagus! 🌧️'
+  ];
+  let aiIdx = 0;
+
+  function sendChat() {
+    const input = document.getElementById('chat_input');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const container = document.getElementById('chat_messages');
+
+    // User message
+    container.innerHTML += `
+      <div style="display:flex;justify-content:flex-end;">
+        <div class="dj_chat_msg user">${msg}</div>
+      </div>`;
+    input.value = '';
+
+    // Typing indicator
+    const typingId = 'typing_' + Date.now();
+    container.innerHTML += `
+      <div id="${typingId}" style="display:flex;gap:8px;align-items:flex-start;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--dj-primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-wand-magic-sparkles" style="color:#fff;font-size:11px;"></i>
+        </div>
+        <div class="dj_chat_msg ai"><div class="dj_chat_typing"><span></span><span></span><span></span></div></div>
+      </div>`;
+    container.scrollTop = container.scrollHeight;
+
+    setTimeout(() => {
+      const typingEl = document.getElementById(typingId);
+      if (typingEl) typingEl.remove();
+      const resp = aiResponses[aiIdx % aiResponses.length]; aiIdx++;
+      container.innerHTML += `
+        <div style="display:flex;gap:8px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--dj-primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <i class="fa-solid fa-wand-magic-sparkles" style="color:#fff;font-size:11px;"></i>
+          </div>
+          <div class="dj_chat_msg ai">${resp}</div>
+        </div>`;
+      container.scrollTop = container.scrollHeight;
+    }, 1400);
+
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function showToast(msg) {
+    let t = document.getElementById('local-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'local-toast';
+      t.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0D0D2B;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none;max-width:90%;text-align:center;';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.opacity = '1';
+    setTimeout(() => t.style.opacity = '0', 2200);
+  }
+</script>
+</body>
+</html>
