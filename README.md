@@ -14,6 +14,47 @@
 
 ---
 
+## 📱 Tampilan Aplikasi
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/f5f54ec9-74a8-4955-8417-b5b2f047affa" width="280" alt="Form Input Perjalanan"/>
+      <br/><sub><b>Form Input Preferensi Perjalanan</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/dd20be90-3331-4331-bfda-67a09a0a1ff0" width="280" alt="Hasil Itinerary AI"/>
+      <br/><sub><b>Hasil Itinerary AI — Bebas Zig-zag</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/f8e5d553-dd80-4e01-ba9c-af0d1db17f44" width="280" alt="Virtual Tour Guide Chatbot"/>
+      <br/><sub><b>Menu Jelajah Destinasi & Hidden Gems</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/8c0c0630-ed5d-47f5-886f-9730a9cfcde3" width="280" alt="Menu Jelajah Destinasi"/>
+      <br/><sub><b>Menu Event — Budaya & Hiburan Jogja</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/4fe5cfc3-572c-438c-b9a7-e0b11b9eb676" width="280" alt="Menu Event Jogja"/>
+      <br/><sub><b>Menu Trip Saya — Riwayat Itinerary</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/23302977-d657-415d-ac48-399adf55ecb8" width="280" alt="Menu Trip Saya"/>
+      <br/><sub><b>Menu Trip Saya — Bantuan</b></sub>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+---
+
 ## 📖 Latar Belakang
 
 Yogyakarta menerima **40,5 juta perjalanan wisatawan** sepanjang 2025 — meningkat 6,74% dari tahun sebelumnya (BPS DIY, 2026). Namun lebih dari **62% kunjungan terkonsentrasi** hanya di Sleman dan Kota Yogyakarta, sementara Kulon Progo, Gunungkidul, dan ratusan *hidden gems* lokal nyaris tidak tersentuh.
