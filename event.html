@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Inspirasi — DolanJogja</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Biker&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dj-primary:         #000055;
+      --dj-primary-hover:   #000077;
+      --dj-primary-light:   #E8E8F5;
+      --dj-primary-soft:    #F0F0FA;
+      --dj-secondary:       #C8922A;
+      --dj-secondary-light: #FFF4DC;
+      --dj-accent:          #E84855;
+      --dj-accent-light:    #FFF0F1;
+      --dj-green:           #2D7A4F;
+      --dj-green-light:     #EBF7F0;
+      --dj-purple:          #6B4BC8;
+      --dj-purple-light:    #F0ECFF;
+      --dj-muted:           #6B6B8A;
+      --dj-border:          #DCDCEC;
+      --dj-bg:              #F4F4FA;
+      --dj-surface:         #FFFFFF;
+      --dj-ink:             #1C1C3A;
+      --dj-dark:            #0D0D2B;
+      --dj-amber:           #C8922A;
+      --font-main:          'Plus Jakarta Sans', sans-serif;
+      --font-display:       'Biker', 'Plus Jakarta Sans', sans-serif;
+      --radius:             16px;
+      --radius-sm:          10px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: var(--dj-bg);
+      font-family: var(--font-main);
+      margin: 0; padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ HEADER ══ */
+    .insp-header {
+      background: var(--dj-primary);
+      color: #fff; padding: 14px 16px;
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 16px rgba(0,0,85,.25);
+    }
+    .insp-header-title { font-size: 17px; font-weight: 800; margin: 0; }
+    .insp-header-sub   { font-size: 11px; opacity: .7; margin: 2px 0 0; }
+    .insp-header-count { font-size: 11px; opacity: .7; }
+
+    /* ══ SEARCH ══ */
+    .insp-search-wrap {
+      background: var(--dj-surface);
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--dj-border);
+      position: sticky; top: 58px; z-index: 199;
+    }
+    .insp-search-inner { position: relative; }
+    .insp-search {
+      background: var(--dj-bg);
+      border: 1.5px solid var(--dj-border);
+      border-radius: 12px;
+      padding: 10px 14px 10px 38px;
+      font-size: 13px; width: 100%;
+      outline: none; color: var(--dj-ink);
+      font-family: var(--font-main);
+      transition: border-color .2s;
+    }
+    .insp-search:focus { border-color: var(--dj-primary); }
+    .insp-search-icon {
+      position: absolute; left: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--dj-muted); font-size: 14px;
+    }
+
+    /* ══ CATEGORY CHIPS ══ */
+    .insp-cats {
+      background: var(--dj-surface);
+      border-bottom: 1px solid var(--dj-border);
+      position: sticky; top: 108px; z-index: 198;
+      display: flex; gap: 8px; overflow-x: auto;
+      padding: 10px 16px;
+      scrollbar-width: none;
+    }
+    .insp-cats::-webkit-scrollbar { display: none; }
+    .insp-cat {
+      flex-shrink: 0; padding: 6px 15px; border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+      border: 1.5px solid var(--dj-border);
+      color: var(--dj-muted); background: var(--dj-surface);
+      cursor: pointer; transition: all .2s; white-space: nowrap;
+      font-family: var(--font-main);
+    }
+    .insp-cat.active { background: var(--dj-primary); color: #fff; border-color: var(--dj-primary); }
+    .insp-cat.gratis-chip.active { background: var(--dj-green); border-color: var(--dj-green); }
+
+    /* ══ FEED ══ */
+    .insp-feed { padding: 16px 14px 100px; }
+
+    /* ══ SECTION TITLE ══ */
+    .insp-section-title {
+      font-family: var(--font-display);
+      font-size: 16px; color: var(--dj-ink);
+      margin: 20px 0 12px;
+      display: flex; align-items: center; gap: 7px;
+      letter-spacing: .3px;
+    }
+    .insp-section-title:first-child { margin-top: 0; }
+    .badge-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--dj-accent); display: inline-block;
+      animation: pulse 1.5s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:.6} }
+
+    /* ══ FEATURED EVENT HERO CARD ══ */
+    .feat-scroll {
+      display: flex; gap: 12px; overflow-x: auto;
+      margin: 0 -14px; padding: 0 14px 6px;
+      scrollbar-width: none;
+    }
+    .feat-scroll::-webkit-scrollbar { display: none; }
+    .feat-card {
+      flex-shrink: 0; width: 280px;
+      background: var(--dj-surface);
+      border-radius: 20px;
+      border: 1px solid var(--dj-border);
+      box-shadow: 0 2px 16px rgba(0,0,85,.10);
+      overflow: hidden; cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .feat-card:active { transform: scale(.98); }
+    .feat-img {
+      width: 100%; height: 160px; object-fit: cover;
+      display: block; background: var(--dj-bg);
+    }
+    .feat-img-placeholder {
+      width: 100%; height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+    }
+    /* Override for lazy-wrap context */
+    .feat-card .lazy-wrap { width: 100%; height: 160px; display: block; }
+    .feat-card .lazy-wrap .lazy-img { height: 160px; }
+    .feat-card .lazy-wrap .lazy-ph  { font-size: 56px; }
+    .feat-body { padding: 12px 14px 14px; }
+    .feat-badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .feat-badge {
+      font-size: 10.5px; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .feat-badge-date { background: var(--dj-secondary-light); color: var(--dj-secondary); }
+    .feat-badge-kat  { background: var(--dj-primary-light); color: var(--dj-primary); }
+    .feat-badge-gratis { background: var(--dj-green-light); color: var(--dj-green); }
+    .feat-badge-bayar  { background: var(--dj-accent-light); color: var(--dj-accent); }
+    .feat-badge-past   { background: #F0F0F0; color: var(--dj-muted); }
+    .feat-title {
+      font-family: var(--font-display);
+      font-size: 17px; color: var(--dj-ink);
+      margin: 0 0 4px; line-height: 1.2;
+    }
+    .feat-loc { font-size: 11px; color: var(--dj-muted); display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+    .feat-stats { display: flex; gap: 12px; margin-bottom: 12px; padding: 8px 10px; background: var(--dj-primary-soft); border-radius: var(--radius-sm); }
+    .feat-stat { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--dj-ink); font-weight: 600; }
+    .feat-stat i { color: var(--dj-primary); font-size: 10px; }
+    .feat-cta { display: flex; gap: 8px; }
+    .feat-btn-add {
+      flex: 1; background: var(--dj-primary); color: #fff; border: none;
+      border-radius: var(--radius-sm); padding: 10px 12px;
+      font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      cursor: pointer; font-family: var(--font-main);
+    }
+    .feat-btn-like {
+      width: 42px; height: 42px;
+      background: var(--dj-accent-light);
+      border: 1.5px solid rgba(232,72,85,.25);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--dj-accent); font-size: 16px; flex-shrink: 0;
+    }
+
+    /* ══ EVENT GRID ══ */
+    .insp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .ev-card {
+      background: var(--dj-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--dj-border);
+      box-shadow: 0 1px 8px rgba(0,0,85,.06);
+      overflow: hidden; cursor: pointer;
+      transition: transform .15s;
+    }
+    .ev-card:active { transform: scale(.97); }
+    .ev-thumb {
+      width: 100%; height: 100px; object-fit: cover; display: block;
+      background: var(--dj-bg);
+    }
+    .ev-thumb-ph {
+      width: 100%; height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+    }
+    /* Override for lazy-wrap context */
+    .ev-card .lazy-wrap { width: 100%; height: 100px; display: block; }
+    .ev-card .lazy-wrap .lazy-img { height: 100px; }
+    .ev-card .lazy-wrap .lazy-ph  { font-size: 40px; }
+    .ev-body { padding: 9px 10px 11px; }
+    .ev-date-badge {
+      font-size: 9.5px; font-weight: 700;
+      padding: 2px 8px; border-radius: 999px;
+      display: inline-block; margin-bottom: 5px;
+    }
+    .ev-name {
+      font-family: var(--font-display);
+      font-size: 12.5px; color: var(--dj-ink);
+      margin: 0 0 2px; line-height: 1.25;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .ev-sub { font-size: 10px; color: var(--dj-muted); margin: 0 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ev-footer { display: flex; align-items: center; justify-content: space-between; }
+    .ev-harga { font-size: 10px; font-weight: 700; }
+    .ev-harga.gratis { color: var(--dj-green); }
+    .ev-harga.bayar  { color: var(--dj-accent); }
+    .ev-kat-chip { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 6px; background: var(--dj-primary-light); color: var(--dj-primary); }
+
+    /* ══ LOAD MORE ══ */
+    #loadMoreWrap { text-align: center; margin-top: 16px; display: none; }
+    #btnLoadMore {
+      background: var(--dj-primary-light); color: var(--dj-primary);
+      border: 1.5px solid var(--dj-primary); border-radius: 12px;
+      padding: 10px 28px; font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: var(--font-main);
+    }
+
+    /* ══ SKELETON ══ */
+    .skeleton {
+      background: linear-gradient(90deg, #e8e8f5 25%, #f4f4fa 50%, #e8e8f5 75%);
+      background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 10px;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .sk-feat { width: 280px; height: 280px; flex-shrink: 0; border-radius: 20px; }
+    .sk-grid { height: 190px; }
+
+    /* ══ EMPTY STATE ══ */
+    .ev-empty {
+      grid-column: 1/-1; text-align: center;
+      padding: 36px 16px; color: var(--dj-muted); font-size: 13px;
+    }
+    .ev-empty-icon { font-size: 40px; margin-bottom: 10px; display: block; }
+
+    /* ══════════════════════════════════════════════
+       MODAL DETAIL EVENT (bottom sheet)
+    ══════════════════════════════════════════════ */
+    .detail-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,30,.55);
+      z-index: 300; display: none; align-items: flex-end;
+    }
+    .detail-overlay.show { display: flex; }
+    .detail-sheet {
+      width: 100%; max-height: 92vh;
+      background: var(--dj-surface);
+      border-radius: 24px 24px 0 0;
+      overflow-y: auto;
+      animation: slideUp .3s ease;
+      position: relative;
+    }
+    @keyframes slideUp { from{transform:translateY(60px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+    /* Header image (foto utama) */
+    .detail-hero { position: relative; }
+    .detail-hero-img {
+      width: 100%; height: 230px; object-fit: cover;
+      display: block; background: var(--dj-bg);
+    }
+    .detail-hero-ph {
+      width: 100%; height: 230px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px;
+    }
+    .detail-hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(transparent, rgba(0,0,20,.45));
+    }
+    .detail-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(0,0,0,.45); color: #fff; border: none;
+      font-size: 15px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10;
+    }
+    .detail-past-ribbon {
+      position: absolute; top: 14px; left: 14px;
+      background: rgba(0,0,0,.55); color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 4px 10px; border-radius: 999px;
+    }
+
+    /* Content */
+    .detail-content { padding: 18px 16px 120px; }
+    .detail-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .detail-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+    .detail-badge.kat    { background: var(--dj-primary-light); color: var(--dj-primary); }
+    .detail-badge.gratis { background: var(--dj-green-light); color: var(--dj-green); }
+    .detail-badge.bayar  { background: var(--dj-accent-light); color: var(--dj-accent); }
+    .detail-badge.feat   { background: var(--dj-secondary-light); color: var(--dj-secondary); }
+
+    .detail-name { font-family: var(--font-display); font-size: 22px; color: var(--dj-ink); margin: 0 0 14px; line-height: 1.15; }
+
+    /* Date highlight block */
+    .detail-date-block {
+      background: var(--dj-primary); border-radius: 14px;
+      padding: 12px 16px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .detail-date-icon { font-size: 28px; flex-shrink: 0; }
+    .detail-date-info {}
+    .detail-date-label { font-size: 13px; font-weight: 800; color: #fff; margin: 0; }
+    .detail-date-sub   { font-size: 11px; color: rgba(255,255,255,.75); margin: 2px 0 0; }
+
+    /* Info row */
+    .detail-info-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .detail-info-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--dj-ink);
+      background: var(--dj-bg); padding: 7px 12px; border-radius: 10px;
+    }
+    .detail-info-item i { color: var(--dj-primary); font-size: 12px; }
+
+    /* Section labels & content */
+    .detail-section-label { font-size: 13px; font-weight: 700; color: var(--dj-ink); margin: 16px 0 8px; }
+    .detail-desc { font-size: 13px; color: var(--dj-muted); line-height: 1.65; }
+    .detail-desc.collapsed { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .detail-readmore { font-size: 12px; font-weight: 700; color: var(--dj-primary); background: none; border: none; padding: 4px 0; cursor: pointer; display: block; margin-top: 4px; }
+
+    .detail-lokasi { display: flex; align-items: flex-start; gap: 8px; background: var(--dj-bg); border-radius: 12px; padding: 12px; }
+    .detail-lokasi i { color: var(--dj-accent); font-size: 16px; margin-top: 1px; }
+    .detail-lokasi-text { font-size: 12px; color: var(--dj-muted); line-height: 1.5; flex: 1; }
+
+    /* Stats */
+    .detail-stats-row { display: flex; gap: 16px; padding: 10px 12px; background: var(--dj-primary-soft); border-radius: 12px; margin-bottom: 4px; }
+    .detail-stat-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dj-ink); font-weight: 600; }
+    .detail-stat-item i { font-size: 12px; }
+
+    /* ══ ACTION BUTTONS (fixed bottom) ══ */
+    .detail-actions {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--dj-surface);
+      border-top: 1px solid var(--dj-border);
+      padding: 10px 14px; display: none; gap: 8px; z-index: 400;
+    }
+    .detail-actions.show { display: flex; }
+    .btn-action-add {
+      flex: 1; background: var(--dj-primary); color: #fff;
+      border: none; border-radius: 12px; padding: 11px 8px;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      font-family: var(--font-main);
+    }
+    .btn-action-tiket {
+      flex: 1; background: var(--dj-green); color: #fff;
+      border: none; border-radius: 12px; padding: 11px 8px;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      font-family: var(--font-main);
+    }
+    .btn-action-maps {
+      width: 46px; height: 46px;
+      background: var(--dj-primary-light); color: var(--dj-primary);
+      border: 1.5px solid var(--dj-primary); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; cursor: pointer; flex-shrink: 0;
+    }
+    .btn-action-wa {
+      width: 46px; height: 46px; background: #25D366; color: #fff;
+      border: none; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; cursor: pointer; flex-shrink: 0;
+    }
+    .btn-action-ai {
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, #6B4BC8, #000055); color: #fff;
+      border: none; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; cursor: pointer; flex-shrink: 0; position: relative;
+    }
+    .btn-action-ai::after { content: 'AI'; position: absolute; bottom: 5px; font-size: 8px; font-weight: 800; }
+
+    /* ══════════════════════════════════════════════
+       MODAL AI CHAT
+    ══════════════════════════════════════════════ */
+    .ai-overlay { position: fixed; inset: 0; background: rgba(0,0,30,.6); z-index: 500; display: none; align-items: flex-end; }
+    .ai-overlay.show { display: flex; }
+    .ai-sheet { width: 100%; height: 75vh; background: var(--dj-surface); border-radius: 24px 24px 0 0; display: flex; flex-direction: column; animation: slideUp .3s ease; }
+    .ai-header { display: flex; align-items: center; gap: 10px; padding: 16px 16px 12px; border-bottom: 1px solid var(--dj-border); }
+    .ai-header-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #6B4BC8, #000055); display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; flex-shrink: 0; }
+    .ai-header-info h4 { font-size: 14px; font-weight: 800; color: var(--dj-ink); margin: 0; }
+    .ai-header-info p  { font-size: 11px; color: var(--dj-muted); margin: 0; }
+    .ai-close { margin-left: auto; width: 32px; height: 32px; border-radius: 50%; background: var(--dj-bg); border: none; color: var(--dj-muted); font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .ai-context-chip { margin: 8px 16px; background: var(--dj-primary-soft); border-radius: 10px; padding: 8px 12px; font-size: 11px; color: var(--dj-primary); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .ai-messages { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 12px; }
+    .ai-messages::-webkit-scrollbar { width: 3px; }
+    .ai-messages::-webkit-scrollbar-thumb { background: var(--dj-border); border-radius: 3px; }
+    .ai-msg { display: flex; gap: 8px; align-items: flex-start; animation: fadeUp .25s ease; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .ai-msg.user { flex-direction: row-reverse; }
+    .ai-msg-av { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+    .ai-msg.ai   .ai-msg-av { background: linear-gradient(135deg, #6B4BC8, #000055); color: #fff; }
+    .ai-msg.user .ai-msg-av { background: var(--dj-bg); border: 1px solid var(--dj-border); }
+    .ai-bubble { max-width: 80%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
+    .ai-msg.ai   .ai-bubble { background: var(--dj-bg); border: 1px solid var(--dj-border); border-top-left-radius: 4px; color: var(--dj-ink); }
+    .ai-msg.user .ai-bubble { background: var(--dj-primary); color: #fff; border-top-right-radius: 4px; }
+    .ai-typing { display: flex; gap: 4px; align-items: center; padding: 2px 0; }
+    .ai-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--dj-muted); animation: dot 1.2s infinite ease-in-out; opacity: .4; }
+    .ai-typing span:nth-child(2) { animation-delay: .2s; }
+    .ai-typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes dot { 0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.3);opacity:1} }
+    .ai-quick { display: flex; gap: 6px; overflow-x: auto; padding: 0 16px 8px; scrollbar-width: none; }
+    .ai-quick::-webkit-scrollbar { display: none; }
+    .ai-quick-btn { flex-shrink: 0; font-size: 11px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--dj-bg); border: 1px solid var(--dj-border); color: var(--dj-ink); cursor: pointer; white-space: nowrap; font-family: var(--font-main); }
+    .ai-input-row { display: flex; gap: 8px; padding: 10px 16px 16px; border-top: 1px solid var(--dj-border); }
+    .ai-input { flex: 1; background: var(--dj-bg); border: 1.5px solid var(--dj-border); border-radius: 12px; padding: 10px 12px; font-size: 13px; font-family: var(--font-main); outline: none; color: var(--dj-ink); resize: none; max-height: 80px; }
+    .ai-input:focus { border-color: var(--dj-primary); }
+    .ai-send { width: 42px; height: 42px; border-radius: 12px; background: var(--dj-primary); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .ai-send:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ══ TOAST ══ */
+    .dj-toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--dj-dark); color: #fff; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 999; animation: fadeUp .3s ease; white-space: nowrap; max-width: 90%; text-align: center; }
+
+    /* ══ LAZY LOAD IMAGE ══ */
+    .lazy-wrap {
+      position: relative; overflow: hidden;
+      background: linear-gradient(90deg, #e8e8f5 25%, #f4f4fa 50%, #e8e8f5 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    .lazy-wrap.loaded { animation: none; background: var(--dj-bg); }
+    .lazy-img {
+      opacity: 0; transition: opacity .35s ease;
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .lazy-img.visible { opacity: 1; position: static; }
+    .lazy-ph {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .25s ease;
+    }
+    .lazy-ph.hidden { opacity: 0; pointer-events: none; }
+
+    /* ══ DETAIL HERO LAZY ══ */
+    .detail-hero-wrap {
+      position: relative; width: 100%; height: 230px; overflow: hidden;
+      background: linear-gradient(90deg, #e8e8f5 25%, #f4f4fa 50%, #e8e8f5 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    .detail-hero-wrap.loaded { animation: none; background: var(--dj-bg); }
+    .detail-hero-wrap .detail-hero-img {
+      opacity: 0; transition: opacity .4s ease;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .detail-hero-wrap .detail-hero-img.loaded { opacity: 1; }
+    .detail-hero-wrap .detail-hero-ph {
+      position: absolute; inset: 0; width: 100%; height: 230px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px; transition: opacity .25s ease;
+    }
+    .detail-hero-wrap .detail-hero-ph.hidden { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="insp-header">
+  <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-2">
+      <i class="fa-solid fa-calendar fa-lg"></i>
+      <div>
+        <p class="insp-header-title">Event</p>
+        <p class="insp-header-sub">Event seru &amp; budaya di Yogyakarta</p>
+      </div>
+    </div>
+    <span class="insp-header-count" id="totalCount"></span>
+  </div>
+</div>
+
+<!-- ══ SEARCH ══ -->
+<div class="insp-search-wrap">
+  <div class="insp-search-inner">
+    <i class="fa fa-search insp-search-icon"></i>
+    <input type="text" class="insp-search" id="searchInput" placeholder="Cari event, lokasi, penyelenggara...">
+  </div>
+</div>
+
+<!-- ══ CATEGORY CHIPS ══ -->
+<div class="insp-cats" id="kategoriChips">
+  <button class="insp-cat active" data-kat="">🌟 Semua</button>
+  <button class="insp-cat" data-kat="Konser">🎵 Konser</button>
+  <button class="insp-cat" data-kat="Budaya">🎭 Budaya</button>
+  <button class="insp-cat" data-kat="Festival">🎪 Festival</button>
+  <button class="insp-cat" data-kat="Pameran">🖼️ Pameran</button>
+  <button class="insp-cat" data-kat="Olahraga">⚽ Olahraga</button>
+  <button class="insp-cat" data-kat="Kuliner">🍜 Kuliner</button>
+  <button class="insp-cat" data-kat="Tradisi">🏮 Tradisi</button>
+  <button class="insp-cat" data-kat="Lainnya">✨ Lainnya</button>
+  <button class="insp-cat gratis-chip" data-jenis="Gratis">🆓 Gratis</button>
+</div>
+
+<!-- ══ FEED ══ -->
+<div class="insp-feed">
+
+  <!-- Featured Events -->
+  <div id="sectionFeatured">
+    <div class="insp-section-title">
+      <span class="badge-dot"></span> Event Unggulan
+    </div>
+    <div class="feat-scroll" id="listFeatured">
+      <div class="skeleton sk-feat"></div>
+      <div class="skeleton sk-feat"></div>
+    </div>
+  </div>
+
+  <!-- All Events Grid -->
+  <div style="margin-top:24px">
+    <div class="insp-section-title">
+      <i class="fa-solid fa-calendar-days" style="color:var(--dj-purple)"></i>
+      <span id="gridTitle">Semua Event Mendatang</span>
+    </div>
+    <div class="insp-grid" id="gridEvent">
+      <div class="skeleton sk-grid"></div>
+      <div class="skeleton sk-grid"></div>
+      <div class="skeleton sk-grid"></div>
+      <div class="skeleton sk-grid"></div>
+    </div>
+    <div id="loadMoreWrap">
+      <button id="btnLoadMore" onclick="loadMore()">Muat Lebih Banyak</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL DETAIL EVENT
+══════════════════════════════════════ -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-sheet" id="detailSheet">
+    <button class="detail-close" onclick="closeDetailBtn()"><i class="fa fa-times"></i></button>
+    <div id="detailPastRibbon" class="detail-past-ribbon" style="display:none">⏪ Event telah selesai</div>
+
+    <!-- Header Image -->
+    <div class="detail-hero" id="detailHero">
+      <!-- rendered by JS -->
+    </div>
+
+    <!-- Content -->
+    <div class="detail-content">
+      <div class="detail-badges" id="detailBadges"></div>
+      <h2 class="detail-name" id="detailName">—</h2>
+
+      <!-- Date highlight -->
+      <div class="detail-date-block" id="detailDateBlock">
+        <div class="detail-date-icon">📅</div>
+        <div class="detail-date-info">
+          <p class="detail-date-label" id="detailDateLabel"></p>
+          <p class="detail-date-sub" id="detailJamLabel"></p>
+        </div>
+      </div>
+
+      <!-- Info row -->
+      <div class="detail-info-row" id="detailInfoRow"></div>
+
+      <!-- Description -->
+      <div class="detail-section-label">Tentang Event Ini</div>
+      <div class="detail-desc collapsed" id="detailDesc"></div>
+      <button class="detail-readmore" id="btnReadMore" onclick="toggleReadMore()">Baca selengkapnya ▾</button>
+
+      <!-- Lokasi -->
+      <div class="detail-section-label">Lokasi Event</div>
+      <div class="detail-lokasi">
+        <i class="fa fa-map-marker-alt"></i>
+        <span class="detail-lokasi-text" id="detailLokasiText"></span>
+      </div>
+
+      <!-- Stats -->
+      <div style="margin-top:16px">
+        <div class="detail-stats-row" id="detailStats"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Action Buttons (fixed bottom) -->
+<div class="detail-actions" id="detailActions">
+  <button class="btn-action-add" onclick="tambahItinerary()">
+    <i class="fa fa-plus"></i> Tambah Itinerary
+  </button>
+  <div id="tiketBtnWrap" style="display:none;flex:1">
+    <button class="btn-action-tiket" style="width:100%" onclick="beliTiket()">
+      <i class="fa fa-ticket-alt"></i> Beli Tiket
+    </button>
+  </div>
+  <button class="btn-action-maps" id="btnMaps" onclick="bukaGmaps()" title="Lihat di Maps">
+    <i class="fa fa-map-marker-alt"></i>
+  </button>
+  <button class="btn-action-wa" onclick="shareWA()" title="Share ke WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </button>
+  <button class="btn-action-ai" onclick="bukaAI()" title="Tanya AI">
+    <i class="fa fa-robot" style="margin-bottom:10px"></i>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL AI CHAT
+══════════════════════════════════════ -->
+<div class="ai-overlay" id="aiOverlay" onclick="closeAI(event)">
+  <div class="ai-sheet" onclick="event.stopPropagation()">
+    <div class="ai-header">
+      <div class="ai-header-avatar">🤖</div>
+      <div class="ai-header-info">
+        <h4>DolanJogja AI</h4>
+        <p>Tanya apa saja tentang event ini</p>
+      </div>
+      <button class="ai-close" onclick="closeAIBtn()"><i class="fa fa-times"></i></button>
+    </div>
+
+    <div class="ai-context-chip">
+      <i class="fa fa-calendar-check"></i>
+      <span id="aiContextName">—</span>
+    </div>
+
+    <div class="ai-messages" id="aiMessages">
+      <div class="ai-msg ai">
+        <div class="ai-msg-av">🤖</div>
+        <div class="ai-bubble">Halo! Saya siap bantu kamu tentang event ini 😊 Mau tanya apa?</div>
+      </div>
+    </div>
+
+    <div class="ai-quick">
+      <button class="ai-quick-btn" onclick="quickAsk('Bagaimana cara menuju ke lokasi event ini?')">🚗 Cara menuju</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Apa saja yang perlu dipersiapkan sebelum hadir?')">🎒 Persiapan</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Berapa estimasi biaya total untuk hadir?')">💰 Estimasi biaya</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Apakah event ini cocok untuk keluarga dan anak-anak?')">👨‍👩‍👧 Cocok untuk keluarga?</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Rekomendasikan event serupa lainnya di Jogja')">📅 Event serupa</button>
+    </div>
+
+    <div class="ai-input-row">
+      <textarea class="ai-input" id="aiInput" placeholder="Ketik pertanyaan tentang event..." rows="1"
+        onkeydown="aiHandleKey(event)" oninput="aiAutoResize(this)"></textarea>
+      <button class="ai-send" id="aiSendBtn" onclick="kirimAI()">
+        <i class="fa fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+// ======================================================
+// LAZY LOAD ENGINE (IntersectionObserver)
+// ======================================================
+const lazyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const wrap = entry.target;
+    const img  = wrap.querySelector('.lazy-img[data-src]');
+    if (!img) return;
+
+    const src = img.dataset.src;
+    img.onload = () => {
+      img.classList.add('visible');
+      wrap.classList.add('loaded');
+      const ph = wrap.querySelector('.lazy-ph');
+      if (ph) ph.classList.add('hidden');
+    };
+    img.onerror = () => {
+      wrap.classList.add('loaded');
+      // placeholder tetap tampil
+    };
+    img.src = src;
+    delete img.dataset.src;
+    lazyObserver.unobserve(wrap);
+  });
+}, { rootMargin: '120px' });
+
+function observeLazyImages() {
+  document.querySelectorAll('.lazy-wrap').forEach(wrap => {
+    if (wrap.querySelector('.lazy-img[data-src]')) {
+      lazyObserver.observe(wrap);
+    }
+  });
+}
+
+// ======================================================
+// STATE
+// ======================================================
+let currentKategori = '';
+let currentJenis    = '';      // '' | 'Gratis' | 'Berbayar'
+let currentSearch   = '';
+let currentOffset   = 0;
+const LIMIT         = 20;
+let totalEvent      = 0;
+let activeEvent     = null;
+let aiHistory       = [];
+let isAILoading     = false;
+let descExpanded    = false;
+
+const API_URL = 'api_event.php';
+const AI_URL  = 'ai_event.php';
+
+// ======================================================
+// CATEGORY COLOR MAP
+// ======================================================
+const katColor = {
+  Konser:   { bg:'#F0ECFF', text:'#6B4BC8' },
+  Budaya:   { bg:'#FFF4DC', text:'#C8922A' },
+  Festival: { bg:'#FFF0F1', text:'#E84855' },
+  Pameran:  { bg:'#EBF7F0', text:'#2D7A4F' },
+  Olahraga: { bg:'#E8E8F5', text:'#000055' },
+  Kuliner:  { bg:'#FFF4DC', text:'#C8922A' },
+  Tradisi:  { bg:'#E8E8F5', text:'#000055' },
+  Lainnya:  { bg:'#F0F0F0', text:'#6B6B8A' },
+};
+const katEmoji = {
+  Konser:'🎵', Budaya:'🎭', Festival:'🎪', Pameran:'🖼️',
+  Olahraga:'⚽', Kuliner:'🍜', Tradisi:'🏮', Lainnya:'✨'
+};
+
+// ======================================================
+// INIT
+// ======================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadFeatured();
+  loadGrid(true);
+  initSearch();
+  initFilters();
+});
+
+// ======================================================
+// LOAD FEATURED EVENTS
+// ======================================================
+async function loadFeatured() {
+  const container = document.getElementById('listFeatured');
+  try {
+    const res  = await fetch(`${API_URL}?action=list&featured=1&upcoming=1&limit=6`);
+    const json = await res.json();
+    if (!json.success || !json.data.length) {
+      document.getElementById('sectionFeatured').style.display = 'none';
+      return;
+    }
+    container.innerHTML = json.data.map(ev => renderFeatCard(ev)).join('');
+    observeLazyImages();
+  } catch (e) {
+    document.getElementById('sectionFeatured').style.display = 'none';
+  }
+}
+
+function renderFeatCard(ev) {
+  const col  = katColor[ev.kategori] || katColor['Lainnya'];
+  const emo  = katEmoji[ev.kategori] || '📅';
+  const imgBlock = ev.foto_utama
+    ? `<div class="lazy-wrap" style="height:160px">
+         <img class="lazy-img" data-src="assets/img/event/${escHtml(ev.foto_utama)}" alt="${escHtml(ev.nama_event)}">
+         <div class="lazy-ph" style="background:${col.bg}">${emo}</div>
+       </div>`
+    : `<div style="width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:56px;background:${col.bg}">${emo}</div>`;
+
+  return `
+  <div class="feat-card" onclick="bukaDetail(${ev.id_event})">
+    ${imgBlock}
+    <div class="feat-body">
+      <div class="feat-badge-row">
+        <span class="feat-badge feat-badge-date"><i class="fa fa-calendar fa-xs"></i> ${escHtml(ev.tanggal_label)}</span>
+        <span class="feat-badge ${ev.jenis_event==='Gratis'?'feat-badge-gratis':'feat-badge-bayar'}">${ev.harga_label}</span>
+      </div>
+      <div class="feat-title">${escHtml(ev.nama_event)}</div>
+      <div class="feat-loc"><i class="fa fa-map-pin" style="font-size:9px"></i>${escHtml(ev.lokasi)}</div>
+      <div class="feat-stats">
+        <span class="feat-stat"><i class="fa fa-eye"></i>${formatNum(ev.stat_view)}</span>
+        <span class="feat-stat"><i class="fa fa-heart" style="color:var(--dj-accent)"></i>${formatNum(ev.stat_like)}</span>
+        <span class="feat-stat" style="color:${col.text}">${emo} ${escHtml(ev.kategori)}</span>
+      </div>
+      <div class="feat-cta">
+        <button class="feat-btn-add" onclick="event.stopPropagation();tambahItineraryCard(${ev.id_event},'${escHtml(ev.nama_event).replace(/'/g,"\\'")}')">
+          <i class="fa fa-plus fa-xs"></i> Tambah Itinerary
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ======================================================
+// LOAD GRID EVENT
+// ======================================================
+async function loadGrid(reset = false) {
+  if (reset) {
+    currentOffset = 0;
+    document.getElementById('gridEvent').innerHTML =
+      '<div class="skeleton sk-grid"></div><div class="skeleton sk-grid"></div><div class="skeleton sk-grid"></div><div class="skeleton sk-grid"></div>';
+    document.getElementById('loadMoreWrap').style.display = 'none';
+  }
+
+  const params = new URLSearchParams({
+    action:   'list',
+    upcoming: '1',
+    limit:    LIMIT,
+    offset:   currentOffset,
+  });
+  if (currentKategori) params.append('kategori', currentKategori);
+  if (currentJenis)    params.append('jenis',    currentJenis);
+  if (currentSearch)   params.append('search',   currentSearch);
+
+  try {
+    const res  = await fetch(`${API_URL}?${params}`);
+    const json = await res.json();
+    if (!json.success) return;
+
+    totalEvent = json.total;
+    document.getElementById('totalCount').textContent = totalEvent + ' event';
+    document.getElementById('gridTitle').textContent =
+      currentSearch   ? `Hasil: "${currentSearch}"` :
+      (currentKategori || currentJenis) ? 'Event Tersaring' : 'Semua Event Mendatang';
+
+    const grid = document.getElementById('gridEvent');
+    if (reset) {
+      grid.innerHTML = json.data.length
+        ? json.data.map(ev => renderGridCard(ev)).join('')
+        : `<div class="ev-empty"><span class="ev-empty-icon">📭</span>Tidak ada event yang cocok</div>`;
+    } else {
+      grid.insertAdjacentHTML('beforeend', json.data.map(ev => renderGridCard(ev)).join(''));
+    }
+    observeLazyImages();
+
+    currentOffset += json.data.length;
+    document.getElementById('loadMoreWrap').style.display =
+      currentOffset < totalEvent ? 'block' : 'none';
+
+  } catch (e) {
+    document.getElementById('gridEvent').innerHTML =
+      '<div class="ev-empty"><span class="ev-empty-icon">⚠️</span>Gagal memuat data event</div>';
+  }
+}
+
+function loadMore() { loadGrid(false); }
+
+function renderGridCard(ev) {
+  const col = katColor[ev.kategori] || katColor['Lainnya'];
+  const emo = katEmoji[ev.kategori] || '📅';
+  const imgBlock = ev.foto_utama
+    ? `<div class="lazy-wrap" style="height:100px">
+         <img class="lazy-img" data-src="assets/img/event/${escHtml(ev.foto_utama)}" alt="${escHtml(ev.nama_event)}">
+         <div class="lazy-ph" style="background:${col.bg}">${emo}</div>
+       </div>`
+    : `<div style="width:100%;height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;background:${col.bg}">${emo}</div>`;
+
+  return `
+  <div class="ev-card" onclick="bukaDetail(${ev.id_event})">
+    ${imgBlock}
+    <div class="ev-body">
+      <span class="ev-date-badge" style="background:${col.bg};color:${col.text}">${escHtml(ev.tanggal_label)}</span>
+      <div class="ev-name">${escHtml(ev.nama_event)}</div>
+      <div class="ev-sub"><i class="fa fa-map-pin fa-xs me-1"></i>${escHtml(ev.lokasi)}</div>
+      <div class="ev-footer">
+        <span class="ev-harga ${ev.jenis_event==='Gratis'?'gratis':'bayar'}">${ev.jenis_event==='Gratis'?'🆓 Gratis':'💳 '+ev.harga_label}</span>
+        <span class="ev-kat-chip" style="background:${col.bg};color:${col.text}">${emo}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ======================================================
+// BUKA DETAIL EVENT
+// ======================================================
+async function bukaDetail(id) {
+  // Show sheet loading state
+  document.getElementById('detailOverlay').classList.add('show');
+  document.getElementById('detailActions').classList.add('show');
+  document.getElementById('detailHero').innerHTML = '<div class="detail-hero-wrap" style="animation:shimmer 1.4s infinite"></div>';
+  document.getElementById('detailName').textContent = '';
+  document.getElementById('detailBadges').innerHTML = '';
+  document.getElementById('detailInfoRow').innerHTML = '';
+  document.getElementById('detailDesc').textContent = '';
+  document.getElementById('detailPastRibbon').style.display = 'none';
+  document.getElementById('tiketBtnWrap').style.display = 'none';
+  document.body.style.overflow = 'hidden';
+  descExpanded = false;
+
+  try {
+    const res  = await fetch(`${API_URL}?action=detail&id=${id}`);
+    const json = await res.json();
+    if (!json.success) { closeDetailBtn(); showToast('Gagal memuat detail event'); return; }
+
+    const ev = json.event;
+    activeEvent = ev;
+
+    // Hero image — lazy load dengan shimmer banner
+    const col = katColor[ev.kategori] || katColor['Lainnya'];
+    const emo = katEmoji[ev.kategori] || '📅';
+    if (ev.foto_utama) {
+      const heroWrap = document.createElement('div');
+      heroWrap.className = 'detail-hero-wrap';
+      heroWrap.innerHTML = `
+        <div class="detail-hero-ph" style="background:${col.bg}" id="detailHeroPh">${emo}</div>
+        <div class="detail-hero-overlay"></div>`;
+      const img = new Image();
+      img.className = 'detail-hero-img';
+      img.alt = escHtml(ev.nama_event);
+      img.onload = () => {
+        heroWrap.classList.add('loaded');
+        img.classList.add('loaded');
+        const ph = heroWrap.querySelector('#detailHeroPh');
+        if (ph) ph.classList.add('hidden');
+      };
+      img.onerror = () => {
+        heroWrap.classList.add('loaded');
+        const ph = heroWrap.querySelector('#detailHeroPh');
+        if (ph) ph.style.opacity = '1';
+      };
+      img.src = "assets/img/event/" + escHtml(ev.foto_utama);
+      heroWrap.insertBefore(img, heroWrap.firstChild);
+      document.getElementById('detailHero').innerHTML = '';
+      document.getElementById('detailHero').appendChild(heroWrap);
+    } else {
+      document.getElementById('detailHero').innerHTML =
+        `<div class="detail-hero-ph" style="background:${col.bg}">${emo}</div>
+         <div class="detail-hero-overlay"></div>`;
+    }
+
+    // Past ribbon
+    if (!ev.is_upcoming) {
+      document.getElementById('detailPastRibbon').style.display = 'block';
+    }
+
+    // Badges
+    const badges = [];
+    badges.push(`<span class="detail-badge kat" style="background:${col.bg};color:${col.text}">${emo} ${escHtml(ev.kategori)}</span>`);
+    if (ev.jenis_event === 'Gratis') badges.push('<span class="detail-badge gratis">🆓 Gratis</span>');
+    else badges.push(`<span class="detail-badge bayar">💳 ${escHtml(ev.harga_label)}</span>`);
+    if (ev.is_featured) badges.push('<span class="detail-badge feat">⭐ Event Unggulan</span>');
+    document.getElementById('detailBadges').innerHTML = badges.join('');
+
+    // Name
+    document.getElementById('detailName').textContent = ev.nama_event;
+
+    // Date block
+    document.getElementById('detailDateLabel').textContent  = ev.tanggal_panjang || ev.tanggal_label;
+    document.getElementById('detailJamLabel').textContent   = ev.jam_label || 'Sepanjang Hari';
+
+    // Info row
+    const infos = [];
+    if (ev.penyelenggara) infos.push(`<i class="fa fa-user"></i> ${escHtml(ev.penyelenggara)}`);
+    if (ev.jenis_event === 'Berbayar' && ev.harga_label !== 'Gratis') infos.push(`<i class="fa fa-ticket-alt"></i> ${escHtml(ev.harga_label)}`);
+    document.getElementById('detailInfoRow').innerHTML = infos.map(i => `<span class="detail-info-item">${i}</span>`).join('');
+
+    // Description
+    document.getElementById('detailDesc').textContent = ev.deskripsi || '';
+    document.getElementById('detailDesc').classList.add('collapsed');
+    document.getElementById('btnReadMore').style.display = ev.deskripsi && ev.deskripsi.length > 160 ? '' : 'none';
+
+    // Lokasi
+    document.getElementById('detailLokasiText').textContent = ev.lokasi;
+
+    // Stats
+    document.getElementById('detailStats').innerHTML = `
+      <span class="detail-stat-item"><i class="fa fa-eye" style="color:var(--dj-primary)"></i> ${formatNum(ev.stat_view)} views</span>
+      <span class="detail-stat-item"><i class="fa fa-heart" style="color:var(--dj-accent)"></i> ${formatNum(ev.stat_like)} likes</span>
+      ${ev.stat_view > 10000 ? '<span class="detail-stat-item"><i class="fa fa-fire" style="color:var(--dj-accent)"></i> Trending</span>' : ''}`;
+
+    // Beli Tiket button
+    if (ev.link_tiket_valid) {
+      document.getElementById('tiketBtnWrap').style.display = 'block';
+    }
+
+    // Maps button — show only if coords or link_gmaps available
+    document.getElementById('btnMaps').style.display =
+      (ev.link_gmaps_valid || (ev.latitude && ev.longitude)) ? 'flex' : 'none';
+
+  } catch (e) {
+    showToast('Gagal memuat detail event');
+    closeDetailBtn();
+  }
+}
+
+function closeDetail(e) {
+  if (e.target === document.getElementById('detailOverlay')) closeDetailBtn();
+}
+function closeDetailBtn() {
+  document.getElementById('detailOverlay').classList.remove('show');
+  document.getElementById('detailActions').classList.remove('show');
+  document.body.style.overflow = '';
+  activeEvent = null;
+  aiHistory   = [];
+}
+
+function toggleReadMore() {
+  descExpanded = !descExpanded;
+  document.getElementById('detailDesc').classList.toggle('collapsed', !descExpanded);
+  document.getElementById('btnReadMore').textContent = descExpanded ? 'Sembunyikan ▴' : 'Baca selengkapnya ▾';
+}
+
+// ======================================================
+// ACTION BUTTONS
+// ======================================================
+function tambahItinerary() {
+  if (!activeEvent) return;
+  const payload = {
+    type: 'tambah_itinerary',
+    event: {
+      id:        activeEvent.id_event,
+      nama:      activeEvent.nama_event,
+      kategori:  activeEvent.kategori,
+      tanggal:   activeEvent.tanggal_label,
+      jam:       activeEvent.jam_label,
+      lokasi:    activeEvent.lokasi,
+      harga:     activeEvent.harga_label,
+      lat:       activeEvent.latitude,
+      lng:       activeEvent.longitude,
+    }
+  };
+  if (window.parent !== window) window.parent.postMessage(payload, '*');
+  showToast('✅ ' + activeEvent.nama_event + ' ditambahkan ke itinerary!');
+}
+
+function tambahItineraryCard(id, nama) {
+  const payload = { type: 'tambah_itinerary', event: { id, nama } };
+  if (window.parent !== window) window.parent.postMessage(payload, '*');
+  showToast('✅ ' + nama + ' ditambahkan ke itinerary!');
+}
+
+function bukaGmaps() {
+  if (!activeEvent) return;
+  const url = (activeEvent.link_gmaps_valid && activeEvent.link_gmaps)
+    ? activeEvent.link_gmaps
+    : `https://www.google.com/maps?q=${encodeURIComponent(activeEvent.lokasi)}`;
+  window.open(url, '_blank');
+}
+
+function beliTiket() {
+  if (!activeEvent || !activeEvent.link_tiket_valid) return;
+  window.open(activeEvent.link_tiket, '_blank');
+}
+
+function shareWA() {
+  if (!activeEvent) return;
+  const ev   = activeEvent;
+  const text = `🎉 *${ev.nama_event}*\n📅 ${ev.tanggal_panjang || ev.tanggal_label}\n🕐 ${ev.jam_label}\n📍 ${ev.lokasi}\n🎫 Tiket: ${ev.harga_label}\n\n_Dibagikan via DolanJogja_`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ======================================================
+// AI CHAT
+// ======================================================
+function bukaAI() {
+  if (!activeEvent) return;
+  document.getElementById('aiContextName').textContent = activeEvent.nama_event;
+  document.getElementById('aiMessages').innerHTML = `
+    <div class="ai-msg ai">
+      <div class="ai-msg-av">🤖</div>
+      <div class="ai-bubble">Halo! Saya siap bantu kamu tentang <strong>${escHtml(activeEvent.nama_event)}</strong> 🎉 Mau tanya apa?</div>
+    </div>`;
+  aiHistory = [];
+  document.getElementById('aiOverlay').classList.add('show');
+  document.getElementById('aiInput').focus();
+}
+
+function closeAI(e) { if (e.target === document.getElementById('aiOverlay')) closeAIBtn(); }
+function closeAIBtn() { document.getElementById('aiOverlay').classList.remove('show'); }
+
+function quickAsk(text) {
+  document.getElementById('aiInput').value = text;
+  kirimAI();
+}
+
+async function kirimAI() {
+  const input = document.getElementById('aiInput');
+  const text  = input.value.trim();
+  if (!text || isAILoading || !activeEvent) return;
+
+  isAILoading = true;
+  document.getElementById('aiSendBtn').disabled = true;
+  input.value = '';
+  aiAutoResize(input);
+
+  appendAIMsg('user', text);
+  aiHistory.push({ role: 'user', content: text });
+
+  const typingEl = appendAITyping();
+
+  try {
+    const res  = await fetch(AI_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, event: activeEvent, history: aiHistory.slice(0, -1) }),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Gagal mendapat respons AI');
+    aiHistory.push({ role: 'assistant', content: data.reply });
+    typingEl.querySelector('.ai-bubble').textContent = data.reply;
+  } catch (e) {
+    typingEl.querySelector('.ai-bubble').textContent = '❌ ' + e.message;
+  } finally {
+    isAILoading = false;
+    document.getElementById('aiSendBtn').disabled = false;
+    input.focus();
+  }
+}
+
+function appendAIMsg(role, text) {
+  const msgs = document.getElementById('aiMessages');
+  const el   = document.createElement('div');
+  el.className = `ai-msg ${role}`;
+  el.innerHTML = `<div class="ai-msg-av">${role === 'ai' ? '🤖' : '👤'}</div><div class="ai-bubble">${escHtml(text)}</div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+function appendAITyping() {
+  const msgs = document.getElementById('aiMessages');
+  const el   = document.createElement('div');
+  el.className = 'ai-msg ai';
+  el.innerHTML = `<div class="ai-msg-av">🤖</div><div class="ai-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+function aiHandleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kirimAI(); } }
+function aiAutoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
+
+// ======================================================
+// FILTER & SEARCH
+// ======================================================
+function initFilters() {
+  document.getElementById('kategoriChips').addEventListener('click', e => {
+    const btn = e.target.closest('.insp-cat');
+    if (!btn) return;
+
+    // Gratis toggle chip
+    if (btn.dataset.jenis !== undefined) {
+      btn.classList.toggle('active');
+      currentJenis = btn.classList.contains('active') ? 'Gratis' : '';
+      loadGrid(true);
+      return;
+    }
+
+    // Category chips
+    document.querySelectorAll('.insp-cat[data-kat]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentKategori = btn.dataset.kat;
+    loadGrid(true);
+  });
+}
+
+function initSearch() {
+  let debounce;
+  document.getElementById('searchInput').addEventListener('input', e => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      currentSearch = e.target.value.trim();
+      if (currentSearch) {
+        document.getElementById('sectionFeatured').style.display = 'none';
+      } else {
+        document.getElementById('sectionFeatured').style.display = '';
+      }
+      loadGrid(true);
+    }, 400);
+  });
+}
+
+// ======================================================
+// HELPERS
+// ======================================================
+function formatNum(n) {
+  if (n >= 1000) return (n / 1000).toFixed(1).replace('.0','') + 'K';
+  return String(n);
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showToast(msg, duration = 2500) {
+  const t = document.createElement('div');
+  t.className = 'dj-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), duration);
+}
+</script>
+</body>
+</html>

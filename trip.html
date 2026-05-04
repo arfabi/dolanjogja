@@ -8,634 +8,159 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Biker&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════
-       trip_ prefix — Trip Saya Page CSS
-       Design System: Deep Navy #000055
-       ═══════════════════════════════════════ */
     :root {
-      --dj-primary:        #000055;
-      --dj-primary-hover:  #000077;
-      --dj-primary-light:  #E8E8F5;
-      --dj-primary-soft:   #F0F0FA;
-      --dj-secondary:      #C8922A;
-      --dj-secondary-light:#FFF4DC;
-      --dj-accent:         #E84855;
-      --dj-accent-light:   #FFF0F1;
-      --dj-green:          #2D7A4F;
-      --dj-green-light:    #EBF7F0;
-      --dj-dark:           #0D0D2B;
-      --dj-ink:            #1C1C3A;
-      --dj-muted:          #6B6B8A;
-      --dj-border:         #DCDCEC;
-      --dj-bg:             #F4F4FA;
-      --dj-surface:        #FFFFFF;
-      --dj-amber:          #C8922A;
-      --dj-amber-light:    #FFF4DC;
-      --dj-red:            #E84855;
-      --dj-red-light:      #FFF0F1;
-      --dj-purple:         #6B4BC8;
-      --dj-purple-light:   #F0ECFF;
-      --dj-radius:         16px;
-      --dj-radius-sm:      10px;
-      --font-main:         'Plus Jakarta Sans', sans-serif;
-      --font-display:      'Biker', 'Plus Jakarta Sans', sans-serif;
+      --dj-primary:#000055; --dj-primary-hover:#000077; --dj-primary-light:#E8E8F5;
+      --dj-primary-soft:#F0F0FA; --dj-secondary:#C8922A; --dj-secondary-light:#FFF4DC;
+      --dj-accent:#E84855; --dj-accent-light:#FFF0F1; --dj-green:#2D7A4F;
+      --dj-green-light:#EBF7F0; --dj-dark:#0D0D2B; --dj-ink:#1C1C3A;
+      --dj-muted:#6B6B8A; --dj-border:#DCDCEC; --dj-bg:#F4F4FA;
+      --dj-surface:#FFFFFF; --dj-amber:#C8922A; --dj-amber-light:#FFF4DC;
+      --dj-red:#E84855; --dj-red-light:#FFF0F1; --dj-purple:#6B4BC8;
+      --dj-purple-light:#F0ECFF; --dj-radius:16px; --dj-radius-sm:10px;
+      --font-main:'Plus Jakarta Sans',sans-serif; --font-display:'Biker','Plus Jakarta Sans',sans-serif;
     }
-
-    * { box-sizing: border-box; }
-    body {
-      background: var(--dj-bg);
-      font-family: var(--font-main);
-      margin: 0; padding: 0;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
+    *{box-sizing:border-box;}
+    body{background:var(--dj-bg);font-family:var(--font-main);margin:0;padding:0;min-height:100vh;-webkit-font-smoothing:antialiased;}
 
     /* ── Header ── */
-    .trip_header {
-      background: linear-gradient(135deg, #000033 0%, #000055 60%, #00007A 100%);
-      color: #fff;
-      padding: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 20px rgba(0,0,85,.4);
-    }
+    .trip_header{background:linear-gradient(135deg,#000033 0%,#000055 60%,#00007A 100%);color:#fff;padding:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,85,.4);}
+    .trip_header_row{display:flex;align-items:center;justify-content:space-between;}
+    .trip_header_title{font-family:var(--font-display);font-size:20px;font-weight:400;margin:0;display:flex;align-items:center;gap:8px;letter-spacing:.4px;}
+    .trip_header_badge{background:rgba(200,146,42,.25);border:1px solid rgba(200,146,42,.4);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:600;color:#FFD988;}
 
-    .trip_header_row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    /* ── Tabs ── */
+    .trip_tab_wrap{background:var(--dj-surface);padding:10px 16px;border-bottom:1px solid var(--dj-border);position:sticky;top:57px;z-index:99;}
+    .trip_tabs{display:flex;background:var(--dj-primary-soft);border-radius:999px;padding:4px;gap:4px;}
+    .trip_tab{flex:1;padding:8px 6px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:none;color:var(--dj-muted);transition:all .2s;font-family:var(--font-main);}
+    .trip_tab.active{background:var(--dj-primary);color:#fff;box-shadow:0 2px 8px rgba(0,0,85,.3);}
 
-    .trip_header_title {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 400;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: .4px;
-    }
-    .trip_header_title i { font-size: 17px; }
-
-    .trip_header_badge {
-      background: rgba(200,146,42,.25);
-      border: 1px solid rgba(200,146,42,.4);
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #FFD988;
-    }
-
-    /* ── Tab Navigation ── */
-    .trip_tab_wrap {
-      background: var(--dj-surface);
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--dj-border);
-      position: sticky;
-      top: 57px;
-      z-index: 99;
-    }
-
-    .trip_tabs {
-      display: flex;
-      background: var(--dj-primary-soft);
-      border-radius: 999px;
-      padding: 4px;
-      gap: 3px;
-    }
-
-    .trip_tab {
-      flex: 1;
-      text-align: center;
-      padding: 7px 6px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: var(--dj-muted);
-      transition: all .2s;
-      white-space: nowrap;
-      font-family: var(--font-main);
-    }
-
-    .trip_tab.active {
-      background: var(--dj-primary);
-      color: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,85,.35);
-    }
-
-    /* ── Page Body ── */
-    .trip_body { padding: 14px 14px 24px; }
-
-    .trip_pane { display: none; }
-    .trip_pane.active { display: block; }
+    /* ── Body ── */
+    .trip_body{padding:16px;padding-bottom:90px;}
+    .trip_pane{display:none;}
+    .trip_pane.active{display:block;}
 
     /* ── Section Label ── */
-    .trip_section_label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--dj-muted);
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      margin: 16px 0 8px;
-    }
+    .trip_section_label{font-size:12px;font-weight:800;color:var(--dj-ink);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 10px;display:flex;align-items:center;justify-content:space-between;}
 
-    /* ════════════════════════════════════
-       PANE 1: PERJALANANKU
-       ════════════════════════════════════ */
+    /* ── Trip Cards ── */
+    .trip_card{background:var(--dj-surface);border-radius:var(--dj-radius);box-shadow:0 2px 12px rgba(0,0,85,.07);margin-bottom:12px;overflow:hidden;border:1px solid var(--dj-border);transition:box-shadow .2s;}
+    .trip_card:active{transform:scale(.98);box-shadow:0 1px 4px rgba(0,0,85,.04);}
+    .trip_card_header{padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
+    .trip_card_emoji{width:44px;height:44px;border-radius:12px;background:var(--dj-primary-light);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .trip_card_info{flex:1;min-width:0;}
+    .trip_card_title{font-size:14px;font-weight:800;color:var(--dj-ink);margin:0 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .trip_card_meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .trip_card_meta span{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--dj-muted);}
+    .trip_card_status{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;}
+    .status_upcoming{background:#E0F2FE;color:#0369A1;}
+    .status_berlangsung{background:var(--dj-green-light);color:var(--dj-green);}
+    .status_selesai{background:var(--dj-border);color:var(--dj-muted);}
+    .status_draft{background:var(--dj-secondary-light);color:#6B4A00;}
+    .trip_card_body{padding:0 14px 10px;}
+    .trip_card_pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+    .trip_card_pill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--dj-bg);color:var(--dj-muted);border:1px solid var(--dj-border);}
+    .trip_card_footer{padding:10px 14px;border-top:1px solid var(--dj-border);display:flex;gap:7px;}
+    .trip_btn_sm{flex:1;padding:8px 10px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;border:none;font-family:var(--font-main);transition:all .15s;}
+    .trip_btn_primary{background:var(--dj-primary);color:#fff;}
+    .trip_btn_primary:hover{background:var(--dj-primary-hover);}
+    .trip_btn_ghost{background:#EDEDF8;color:var(--dj-ink);}
+    .trip_btn_ghost:hover{background:var(--dj-border);}
+    .trip_btn_danger{background:var(--dj-red-light);color:var(--dj-red);border:none;}
 
-    .trip_empty {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--dj-muted);
-    }
-    .trip_empty i { font-size: 48px; opacity: .2; margin-bottom: 12px; display: block; }
-    .trip_empty p { font-size: 14px; margin: 0 0 16px; }
+    /* ── Empty State ── */
+    .trip_empty{text-align:center;padding:48px 24px;}
+    .trip_empty_icon{font-size:52px;margin-bottom:12px;}
+    .trip_empty_title{font-size:16px;font-weight:800;color:var(--dj-ink);margin-bottom:8px;}
+    .trip_empty_text{font-size:13px;color:var(--dj-muted);line-height:1.6;margin-bottom:20px;}
+    .trip_empty_cta{background:var(--dj-primary);color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-main);}
 
-    /* Trip Card */
-    .trip_card {
-      background: var(--dj-surface);
-      border-radius: var(--dj-radius);
-      box-shadow: 0 1px 12px rgba(0,0,85,.08);
-      margin-bottom: 12px;
-      overflow: hidden;
-      border: 1px solid var(--dj-border);
-      transition: transform .15s, box-shadow .15s;
-    }
-    .trip_card:active { transform: scale(.98); box-shadow: 0 1px 4px rgba(0,0,85,.04); }
+    /* ── Budget mini ── */
+    .trip_budget_mini{background:var(--dj-primary);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+    .trip_budget_mini_label{font-size:10px;color:rgba(255,255,255,.65);margin-bottom:2px;}
+    .trip_budget_mini_val{font-size:14px;font-weight:800;color:#fff;}
 
-    .trip_card_header {
-      background: linear-gradient(90deg, var(--dj-primary-light), var(--dj-surface));
-      padding: 12px 14px 10px;
-      border-bottom: 1px solid var(--dj-border);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-    }
+    /* ── DETAIL MODAL ── */
+    .td_overlay{position:fixed;inset:0;background:rgba(0,0,30,.6);z-index:9000;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(2px);}
+    .td_overlay.show{opacity:1;pointer-events:all;}
+    .td_sheet{width:100%;background:var(--dj-surface);border-radius:24px 24px 0 0;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s cubic-bezier(.34,.01,.23,1);}
+    .td_overlay.show .td_sheet{transform:translateY(0);}
+    .td_handle_row{padding:12px 16px 0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--dj-surface);z-index:10;border-bottom:1px solid var(--dj-border);}
+    .td_handle{width:40px;height:4px;background:var(--dj-border);border-radius:2px;}
+    .td_close{width:32px;height:32px;border-radius:50%;background:var(--dj-bg);border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--dj-muted);}
+    .td_banner{background:linear-gradient(135deg,#000033,#000077);padding:16px;color:#fff;}
+    .td_banner_title{font-size:16px;font-weight:800;margin-bottom:4px;line-height:1.3;}
+    .td_banner_sub{font-size:11px;opacity:.75;margin-bottom:10px;}
+    .td_banner_pills{display:flex;gap:6px;flex-wrap:wrap;}
+    .td_banner_pill{background:rgba(255,255,255,.18);border-radius:999px;padding:3px 10px;font-size:10px;font-weight:600;}
+    .td_budget{background:var(--dj-primary);border-radius:12px;padding:12px;margin:12px 16px;color:#fff;}
+    .td_budget_label{font-size:10px;opacity:.7;margin-bottom:3px;}
+    .td_budget_val{font-size:20px;font-weight:800;}
+    .td_budget_pills{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+    .td_budget_pill{background:rgba(255,255,255,.15);border-radius:999px;padding:2px 9px;font-size:10px;font-weight:600;}
+    .td_content{padding:0 16px 16px;}
+    .td_day_tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:none;margin:0 16px;}
+    .td_day_tabs::-webkit-scrollbar{display:none;}
+    .td_day_tab{flex-shrink:0;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;border:1.5px solid var(--dj-border);color:var(--dj-muted);cursor:pointer;background:var(--dj-surface);transition:all .18s;font-family:var(--font-main);}
+    .td_day_tab.active{background:var(--dj-primary);border-color:var(--dj-primary);color:#fff;}
+    .td_day_header{background:var(--dj-primary-soft);border-radius:12px;padding:10px 12px;margin-bottom:10px;border:1.5px solid var(--dj-primary-light);}
+    .td_day_title{font-size:13px;font-weight:800;color:var(--dj-primary);margin-bottom:2px;}
+    .td_day_date{font-size:11px;font-weight:600;color:var(--dj-secondary);}
+    .td_day_meta{font-size:11px;color:var(--dj-muted);margin-top:3px;}
+    .td_timeline{margin-left:8px;position:relative;}
+    .td_tl_line{position:absolute;left:0;top:8px;bottom:0;width:2px;background:linear-gradient(to bottom,var(--dj-primary),var(--dj-primary-light));}
+    .td_tl_item{display:flex;gap:10px;padding-bottom:14px;padding-left:16px;position:relative;}
+    .td_tl_dot{position:absolute;left:-5px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--dj-primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--dj-primary);flex-shrink:0;}
+    .td_tl_dot.kuliner{background:var(--dj-green);box-shadow:0 0 0 2px var(--dj-green);}
+    .td_tl_dot.transit{background:var(--dj-purple);box-shadow:0 0 0 2px var(--dj-purple);}
+    .td_tl_dot.hotel{background:var(--dj-amber);box-shadow:0 0 0 2px var(--dj-amber);}
+    .td_tl_card{background:var(--dj-surface);border-radius:10px;padding:10px;box-shadow:0 1px 5px rgba(0,0,85,.07);width:100%;border:1px solid var(--dj-border);}
+    .td_tl_time{font-size:10px;font-weight:700;color:var(--dj-primary);margin-bottom:2px;}
+    .td_tl_name{font-size:13px;font-weight:700;color:var(--dj-ink);margin-bottom:3px;}
+    .td_tl_desc{font-size:11px;color:var(--dj-muted);line-height:1.5;}
+    .td_tl_biaya{display:inline-flex;align-items:center;gap:3px;background:var(--dj-green-light);color:var(--dj-green);padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;margin-top:4px;}
+    .td_tips{background:var(--dj-secondary-light);border:1.5px solid #F0D080;border-radius:10px;padding:10px;margin-top:6px;}
+    .td_tips_title{font-size:11px;font-weight:700;color:#6B4A00;margin-bottom:4px;}
+    .td_tips_text{font-size:11px;color:#7A5500;line-height:1.5;margin:0;}
+    .td_actions{position:sticky;bottom:0;background:var(--dj-surface);border-top:1px solid var(--dj-border);padding:10px 16px;display:flex;gap:7px;}
+    .td_action_btn{flex:1;padding:11px;border-radius:12px;font-size:12px;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;font-family:var(--font-main);}
 
-    .trip_card_title {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--dj-ink);
-      margin: 0 0 3px;
-      letter-spacing: .2px;
-    }
+    /* ── Bantuan (reused from original) ── */
+    .trip_emergency_banner{background:linear-gradient(135deg,var(--dj-red) 0%,#B00020 100%);border-radius:var(--dj-radius);padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;color:#fff;}
+    .trip_emergency_banner i{font-size:26px;flex-shrink:0;}
+    .trip_emergency_banner h6{margin:0 0 2px;font-size:14px;font-weight:800;}
+    .trip_emergency_banner p{margin:0;font-size:11px;opacity:.85;}
+    .trip_emergency_call_btn{background:#fff;color:var(--dj-red);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:6px;white-space:nowrap;margin-left:auto;flex-shrink:0;}
+    .trip_locate_row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+    .trip_locate_btn{display:flex;align-items:center;gap:10px;background:var(--dj-surface);border:1.5px solid var(--dj-border);border-radius:var(--dj-radius-sm);padding:12px;text-decoration:none;transition:border-color .15s;}
+    .trip_locate_btn:hover{border-color:var(--dj-primary);}
+    .loc_icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .loc_text .lt{font-size:9px;font-weight:700;color:var(--dj-muted);text-transform:uppercase;}
+    .loc_text .lb{font-size:12px;font-weight:700;color:var(--dj-ink);}
+    .trip_quick_grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+    .trip_quick_btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border:1.5px solid var(--dj-border);border-radius:12px;text-decoration:none;background:var(--dj-surface);transition:transform .15s;}
+    .trip_quick_icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+    .trip_quick_btn .label{font-size:9.5px;font-weight:700;color:var(--dj-ink);text-align:center;}
+    .trip_quick_btn .number{font-size:13px;font-weight:800;}
+    .trip_contact_card{background:var(--dj-surface);border-radius:var(--dj-radius-sm);border:1px solid var(--dj-border);overflow:hidden;margin-bottom:10px;}
+    .trip_contact_card_header{display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:12px;font-weight:700;color:var(--dj-ink);}
+    .trip_contact_item{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-top:1px solid var(--dj-border);}
+    .trip_contact_name{font-size:12px;font-weight:600;color:var(--dj-ink);}
+    .trip_contact_name.bold{font-weight:800;}
+    .trip_contact_num{display:flex;align-items:center;gap:8px;}
+    .trip_contact_num a:first-child{font-size:12px;font-weight:700;color:var(--dj-primary);text-decoration:none;}
+    .trip_dial_icon{width:26px;height:26px;border-radius:50%;background:var(--dj-primary-light);color:var(--dj-primary);display:flex;align-items:center;justify-content:center;text-decoration:none;}
+    .trip_dial_icon.red{background:var(--dj-red-light);color:var(--dj-red);}
+    .trip_dial_icon.green{background:var(--dj-green-light);color:var(--dj-green);}
+    .trip_dial_icon.amber{background:var(--dj-amber-light);color:var(--dj-amber);}
+    .trip_collapse_btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:none;border:none;cursor:pointer;font-size:12px;font-weight:700;color:var(--dj-ink);font-family:var(--font-main);}
+    .trip_collapse_btn .arrow{transition:transform .25s;}
+    .trip_collapse_btn.open .arrow{transform:rotate(180deg);}
+    .trip_collapsible{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+    .trip_collapsible.open{max-height:9999px;}
 
-    .trip_card_meta {
-      font-size: 11px;
-      color: var(--dj-muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .trip_card_meta span { display: flex; align-items: center; gap: 4px; }
-
-    .trip_card_status {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 10.5px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .trip_status_upcoming { background: var(--dj-primary-light); color: var(--dj-primary); }
-    .trip_status_active   { background: var(--dj-green-light);   color: var(--dj-green); }
-    .trip_status_done     { background: #F1F1F8; color: #9898B8; }
-
-    .trip_card_body { padding: 12px 14px; }
-
-    /* Mini Timeline */
-    .trip_mini_tl { display: flex; flex-direction: column; gap: 6px; }
-
-    .trip_mini_item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--dj-ink);
-    }
-
-    .trip_mini_dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--dj-primary);
-      flex-shrink: 0;
-      margin-top: 4px;
-    }
-    .trip_mini_dot.kuliner { background: var(--dj-green); }
-    .trip_mini_dot.transit { background: var(--dj-purple); }
-    .trip_mini_dot.hotel   { background: var(--dj-secondary); }
-
-    .trip_mini_time { color: var(--dj-muted); font-size: 10.5px; white-space: nowrap; flex-shrink: 0; min-width: 50px; }
-
-    .trip_card_footer {
-      padding: 10px 14px;
-      border-top: 1px solid var(--dj-border);
-      background: var(--dj-primary-soft);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Buttons */
-    .trip_btn_sm {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all .15s;
-      font-family: var(--font-main);
-    }
-    .trip_btn_primary  { background: var(--dj-primary); color: #fff; }
-    .trip_btn_primary:hover { background: var(--dj-primary-hover); color: #fff; }
-    .trip_btn_secondary { background: var(--dj-secondary); color: #fff; }
-    .trip_btn_secondary:hover { background: #b07d20; color: #fff; }
-    .trip_btn_outline  { background: var(--dj-surface); color: var(--dj-primary); border: 1.5px solid var(--dj-primary); }
-    .trip_btn_outline:hover { background: var(--dj-primary-light); }
-    .trip_btn_ghost    { background: #EDEDF8; color: var(--dj-ink); }
-    .trip_btn_ghost:hover { background: var(--dj-border); }
-    .trip_btn_danger   { background: var(--dj-red-light); color: var(--dj-red); }
-
-    /* Budget Row */
-    .trip_budget_row {
-      display: flex;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .trip_budget_pill {
-      flex: 1;
-      background: var(--dj-primary-soft);
-      border: 1px solid var(--dj-border);
-      border-radius: var(--dj-radius-sm);
-      padding: 8px 10px;
-      text-align: center;
-    }
-    .trip_budget_pill .label { font-size: 9.5px; color: var(--dj-muted); font-weight: 600; text-transform: uppercase; }
-    .trip_budget_pill .value { font-size: 12.5px; font-weight: 700; color: var(--dj-ink); margin-top: 2px; }
-    .trip_budget_pill .value.green { color: var(--dj-green); }
-    .trip_budget_pill .value.red   { color: var(--dj-red); }
-    .trip_budget_pill .value.amber { color: var(--dj-secondary); }
-
-    /* ════════════════════════════════════
-       PANE 2: E-TICKET
-       ════════════════════════════════════ */
-
-    .trip_ticket_wrap {
-      background: var(--dj-surface);
-      border-radius: var(--dj-radius);
-      box-shadow: 0 1px 10px rgba(0,0,85,.08);
-      margin-bottom: 12px;
-      overflow: hidden;
-      border: 1px solid var(--dj-border);
-    }
-
-    .trip_ticket_header {
-      padding: 12px 14px 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .trip_ticket_icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-    .trip_ticket_icon.navy   { background: var(--dj-primary-light); color: var(--dj-primary); }
-    .trip_ticket_icon.green  { background: var(--dj-green-light);   color: var(--dj-green); }
-    .trip_ticket_icon.amber  { background: var(--dj-amber-light);   color: var(--dj-secondary); }
-    .trip_ticket_icon.purple { background: var(--dj-purple-light);  color: var(--dj-purple); }
-
-    .trip_ticket_info  { flex: 1; min-width: 0; }
-    .trip_ticket_name  { font-family: var(--font-display); font-size: 14px; font-weight: 400; color: var(--dj-ink); margin: 0 0 3px; letter-spacing: .2px; }
-    .trip_ticket_sub   { font-size: 11px; color: var(--dj-muted); margin: 0; }
-
-    .trip_ticket_tag {
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 700;
-    }
-    .trip_tag_valid   { background: var(--dj-green-light);   color: var(--dj-green); }
-    .trip_tag_used    { background: #EDEDF8;                 color: #9898B8; }
-    .trip_tag_exp     { background: var(--dj-red-light);     color: var(--dj-red); }
-    .trip_tag_pending { background: var(--dj-amber-light);   color: var(--dj-secondary); }
-
-    /* Barcode / QR */
-    .trip_ticket_barcode {
-      margin: 0 14px;
-      border: 1.5px dashed var(--dj-border);
-      border-radius: var(--dj-radius-sm);
-      padding: 14px;
-      text-align: center;
-      background: var(--dj-primary-soft);
-    }
-
-    .trip_qr_placeholder {
-      width: 100px; height: 100px;
-      margin: 0 auto 8px;
-      background: var(--dj-primary-light);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-    }
-
-    .trip_ticket_code {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--dj-ink);
-      letter-spacing: 2px;
-      margin: 0;
-      font-family: 'Courier New', monospace;
-    }
-
-    .trip_ticket_detail_row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 14px;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .trip_ticket_detail { flex: 1; min-width: 80px; }
-    .trip_ticket_detail .dl { font-size: 9.5px; color: var(--dj-muted); font-weight: 600; text-transform: uppercase; }
-    .trip_ticket_detail .dv { font-size: 12px; font-weight: 700; color: var(--dj-ink); margin-top: 1px; }
-
-    /* Tear line */
-    .trip_tear {
-      display: flex;
-      align-items: center;
-      margin: 0 -1px;
-      position: relative;
-    }
-    .trip_tear::before, .trip_tear::after {
-      content: '';
-      flex: 0 0 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--dj-bg);
-      border: 1px solid var(--dj-border);
-      flex-shrink: 0;
-    }
-    .trip_tear_line {
-      flex: 1;
-      border-top: 2px dashed var(--dj-border);
-      margin: 0 4px;
-    }
-
-    .trip_ticket_footer {
-      padding: 10px 14px;
-      display: flex;
-      gap: 8px;
-    }
-
-    /* ════════════════════════════════════
-       PANE 3: PUSAT BANTUAN
-       ════════════════════════════════════ */
-
-    .trip_emergency_banner {
-      background: linear-gradient(135deg, #B91C1C, var(--dj-red));
-      border-radius: var(--dj-radius);
-      padding: 16px;
-      color: #fff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .trip_emergency_banner i { font-size: 28px; opacity: .9; flex-shrink: 0; }
-    .trip_emergency_banner h6 { font-family: var(--font-display); font-size: 16px; font-weight: 400; margin: 0 0 2px; letter-spacing: .3px; }
-    .trip_emergency_banner p { font-size: 11px; margin: 0; opacity: .85; }
-    .trip_emergency_call_btn {
-      margin-left: auto;
-      background: #fff;
-      color: var(--dj-red);
-      border: none;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-      cursor: pointer;
-      transition: transform .15s;
-      text-decoration: none;
-    }
-    .trip_emergency_call_btn:active { transform: scale(.96); }
-
-    /* Quick Dial Grid */
-    .trip_quick_grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .trip_quick_btn {
-      background: var(--dj-surface);
-      border: 1px solid var(--dj-border);
-      border-radius: var(--dj-radius-sm);
-      padding: 12px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      transition: all .15s;
-    }
-    .trip_quick_btn:active { transform: scale(.97); }
-
-    .trip_quick_icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .trip_quick_btn .label  { font-size: 11.5px; font-weight: 700; color: var(--dj-ink); }
-    .trip_quick_btn .number { font-size: 13px; font-weight: 800; margin-top: 1px; }
-
-    /* Locate Buttons */
-    .trip_locate_row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .trip_locate_btn {
-      flex: 1;
-      background: var(--dj-surface);
-      border: 1px solid var(--dj-border);
-      border-radius: var(--dj-radius-sm);
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all .15s;
-    }
-    .trip_locate_btn:active { transform: scale(.97); }
-    .trip_locate_btn .loc_icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-    .trip_locate_btn .loc_text .lt { font-size: 10px; color: var(--dj-muted); font-weight: 600; }
-    .trip_locate_btn .loc_text .lb { font-size: 12px; font-weight: 700; color: var(--dj-ink); }
-
-    /* Contact Card */
-    .trip_contact_card {
-      background: var(--dj-surface);
-      border-radius: var(--dj-radius);
-      box-shadow: 0 1px 8px rgba(0,0,85,.06);
-      margin-bottom: 12px;
-      overflow: hidden;
-      border: 1px solid var(--dj-border);
-    }
-
-    .trip_contact_card_header {
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid var(--dj-border);
-    }
-    .trip_contact_card_header i    { font-size: 15px; }
-    .trip_contact_card_header span { font-family: var(--font-display); font-size: 14px; font-weight: 400; color: var(--dj-ink); letter-spacing: .2px; }
-
-    .trip_contact_item {
-      padding: 9px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #F4F4FA;
-      transition: background .1s;
-    }
-    .trip_contact_item:last-child { border-bottom: none; }
-    .trip_contact_item:active { background: var(--dj-primary-soft); }
-
-    .trip_contact_name { font-size: 12px; color: #374151; flex: 1; }
-    .trip_contact_name.bold { font-weight: 700; color: var(--dj-ink); }
-
-    .trip_contact_num {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .trip_contact_num a {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--dj-primary);
-      text-decoration: none;
-    }
-
-    .trip_dial_icon {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: var(--dj-primary-light);
-      color: var(--dj-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: all .15s;
-    }
-    .trip_dial_icon:hover { background: var(--dj-primary); color: #fff; }
-    .trip_dial_icon.red   { background: var(--dj-red-light);   color: var(--dj-red); }
-    .trip_dial_icon.red:hover  { background: var(--dj-red);  color: #fff; }
-    .trip_dial_icon.green { background: var(--dj-green-light); color: var(--dj-green); }
-    .trip_dial_icon.green:hover { background: var(--dj-green); color: #fff; }
-    .trip_dial_icon.amber { background: var(--dj-amber-light); color: var(--dj-secondary); }
-    .trip_dial_icon.amber:hover { background: var(--dj-secondary); color: #fff; }
-
-    /* Collapsible */
-    .trip_collapse_btn {
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--dj-ink);
-      font-family: var(--font-main);
-    }
-    .trip_collapse_btn .arrow { transition: transform .2s; font-size: 11px; color: var(--dj-muted); }
-    .trip_collapse_btn.open .arrow { transform: rotate(180deg); }
-
-    .trip_collapsible { display: none; }
-    .trip_collapsible.open { display: block; }
-
-    /* Toast */
-    #trip_toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--dj-dark);
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      border: 1px solid rgba(200,146,42,.3);
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s;
-      white-space: nowrap;
-      max-width: 90vw;
-      text-align: center;
-    }
-    #trip_toast.show { opacity: 1; }
-
-    /* Animations */
-    @keyframes trip_fadein {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .trip_pane.active { animation: trip_fadein .25s ease; }
-
-    ::-webkit-scrollbar { display: none; }
-    * { -ms-overflow-style: none; scrollbar-width: none; }
+    /* ── Toast ── */
+    #trip_toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#0D0D2B;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none;max-width:90%;text-align:center;}
+    #trip_toast.show{opacity:1;}
   </style>
 </head>
 <body>
@@ -644,21 +169,19 @@
 <div class="trip_header">
   <div class="trip_header_row">
     <h5 class="trip_header_title">
-      <i class="fa-solid fa-suitcase-rolling"></i>
-      Trip Saya
+      <i class="fa-solid fa-suitcase-rolling"></i> Trip Saya
     </h5>
-    <span class="trip_header_badge"><i class="fa-solid fa-location-dot me-1"></i>Jogja</span>
+    <span class="trip_header_badge" id="trip_count_badge">
+      <i class="fa-solid fa-suitcase fa-xs me-1"></i><span id="hdr_count">0</span> Trip
+    </span>
   </div>
 </div>
 
-<!-- ── TAB NAV ── -->
+<!-- ── TABS (hanya 2: Perjalananku + Bantuan) ── -->
 <div class="trip_tab_wrap">
   <div class="trip_tabs">
     <button class="trip_tab active" onclick="switchTripTab('perjalanan', this)">
       <i class="fa-solid fa-route me-1"></i>Perjalananku
-    </button>
-    <button class="trip_tab" onclick="switchTripTab('eticket', this)">
-      <i class="fa-solid fa-ticket me-1"></i>E-Ticket
     </button>
     <button class="trip_tab" onclick="switchTripTab('bantuan', this)">
       <i class="fa-solid fa-circle-info me-1"></i>Bantuan
@@ -669,341 +192,34 @@
 <!-- ═══ BODY ═══ -->
 <div class="trip_body">
 
-  <!-- ════════════ PANE: PERJALANANKU ════════════ -->
+  <!-- ════ PANE: PERJALANANKU ════ -->
   <div id="pane_perjalanan" class="trip_pane active">
-
-    <div class="d-flex align-items-center justify-content-between mb-3">
-      <div class="trip_section_label mb-0" style="margin-top:0">2 Trip Tersimpan</div>
-      <button class="trip_btn_sm trip_btn_primary" onclick="showToast('🗺️ Membuka AI Asisten untuk buat trip baru...')">
-        <i class="fa-solid fa-plus fa-xs"></i> Buat Trip
-      </button>
+    <div class="trip_section_label">
+      <span id="trip_list_label">Tersimpan</span>
+      <button onclick="bersihkanTrip()" style="background:none;border:none;font-size:11px;font-weight:700;color:var(--dj-muted);cursor:pointer;padding:0;">Hapus Semua</button>
     </div>
 
-    <!-- Trip Card 1: Upcoming -->
-    <div class="trip_card">
-      <div class="trip_card_header">
-        <div>
-          <p class="trip_card_title">🏯 Jogja Heritage Weekend</p>
-          <div class="trip_card_meta">
-            <span><i class="fa-regular fa-calendar"></i> 10–12 Jul 2025</span>
-            <span><i class="fa-solid fa-user-group"></i> 2 Orang</span>
-            <span><i class="fa-solid fa-moon"></i> 2 Malam</span>
-          </div>
+    <!-- Trip list rendered by JS -->
+    <div id="trip_list"></div>
+
+    <!-- Empty State -->
+    <div id="trip_empty" style="display:none;">
+      <div class="trip_empty">
+        <div class="trip_empty_icon">🗺️</div>
+        <div class="trip_empty_title">Belum Ada Trip Tersimpan</div>
+        <div class="trip_empty_text">
+          Buat itinerary Jogja-mu dengan AI Asisten, lalu tekan <strong>"Simpan Trip"</strong> agar muncul di sini.
         </div>
-        <span class="trip_card_status trip_status_upcoming">
-          <i class="fa-solid fa-circle-dot fa-2xs"></i> Upcoming
-        </span>
-      </div>
-      <div class="trip_card_body">
-        <div class="trip_mini_tl">
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot hotel"></div>
-            <span class="trip_mini_time">Tiba</span>
-            <span>Check-in Hotel Tentrem Yogyakarta</span>
-          </div>
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot"></div>
-            <span class="trip_mini_time">Hari 1</span>
-            <span>Keraton → Prambanan → Tebing Breksi</span>
-          </div>
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot"></div>
-            <span class="trip_mini_time">Hari 2</span>
-            <span>Borobudur → Malioboro → Ullen Sentalu</span>
-          </div>
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot kuliner"></div>
-            <span class="trip_mini_time">Highlight</span>
-            <span>Sate Klathak Pak Pong • Gudeg Yu Djum</span>
-          </div>
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot transit"></div>
-            <span class="trip_mini_time">Pulang</span>
-            <span>Bandara YIA — Damri 14:00</span>
-          </div>
-        </div>
-        <div class="trip_budget_row">
-          <div class="trip_budget_pill">
-            <div class="label">Est. Budget</div>
-            <div class="value">Rp 2,4 jt</div>
-          </div>
-          <div class="trip_budget_pill">
-            <div class="label">Tiket</div>
-            <div class="value green"><i class="fa-solid fa-check fa-2xs"></i> 4 Siap</div>
-          </div>
-          <div class="trip_budget_pill">
-            <div class="label">Transport</div>
-            <div class="value">Sewa Motor</div>
-          </div>
-        </div>
-      </div>
-      <div class="trip_card_footer">
-        <button class="trip_btn_sm trip_btn_primary" onclick="showToast('📋 Membuka detail itinerary...')">
-          <i class="fa-solid fa-list-check fa-xs"></i> Lihat Detail
-        </button>
-        <button class="trip_btn_sm trip_btn_outline" onclick="showToast('📤 Link trip siap dibagikan!')">
-          <i class="fa-brands fa-whatsapp fa-xs"></i> Bagikan
-        </button>
-        <button class="trip_btn_sm trip_btn_ghost ms-auto" onclick="showToast('✏️ Edit trip...')">
-          <i class="fa-solid fa-pen fa-xs"></i>
-        </button>
-        <button class="trip_btn_sm trip_btn_danger" onclick="confirmDelete()">
-          <i class="fa-solid fa-trash fa-xs"></i>
+        <button class="trip_empty_cta" onclick="goToAsisten()">
+          <i class="fa-solid fa-wand-magic-sparkles me-1"></i> Buat Itinerary Sekarang
         </button>
       </div>
     </div>
-
-    <!-- Trip Card 2: Done -->
-    <div class="trip_card">
-      <div class="trip_card_header">
-        <div>
-          <p class="trip_card_title">🌋 Gunung Merapi Day Trip</p>
-          <div class="trip_card_meta">
-            <span><i class="fa-regular fa-calendar"></i> 15 Mar 2025</span>
-            <span><i class="fa-solid fa-user-group"></i> 4 Orang</span>
-            <span><i class="fa-solid fa-sun"></i> 1 Hari</span>
-          </div>
-        </div>
-        <span class="trip_card_status trip_status_done">
-          <i class="fa-solid fa-circle-check fa-2xs"></i> Selesai
-        </span>
-      </div>
-      <div class="trip_card_body">
-        <div class="trip_mini_tl">
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot"></div>
-            <span class="trip_mini_time">07:00</span>
-            <span>Museum Sisa Hartaku — Lava Tour Jeep</span>
-          </div>
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot"></div>
-            <span class="trip_mini_time">10:00</span>
-            <span>Kaliadem Bunker & Kaliurang</span>
-          </div>
-          <div class="trip_mini_item">
-            <div class="trip_mini_dot kuliner"></div>
-            <span class="trip_mini_time">13:00</span>
-            <span>Makan siang — Soto Kadipiro</span>
-          </div>
-        </div>
-        <div class="trip_budget_row">
-          <div class="trip_budget_pill">
-            <div class="label">Total Habis</div>
-            <div class="value">Rp 680 rb</div>
-          </div>
-          <div class="trip_budget_pill">
-            <div class="label">Rating</div>
-            <div class="value amber">⭐ 4.8 / 5</div>
-          </div>
-          <div class="trip_budget_pill">
-            <div class="label">Foto</div>
-            <div class="value">📸 47 foto</div>
-          </div>
-        </div>
-      </div>
-      <div class="trip_card_footer">
-        <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('📖 Membuka kenangan trip...')">
-          <i class="fa-solid fa-clock-rotate-left fa-xs"></i> Kenangan
-        </button>
-        <button class="trip_btn_sm trip_btn_outline" onclick="showToast('🔄 Menduplikasi trip...')">
-          <i class="fa-solid fa-copy fa-xs"></i> Duplikasi
-        </button>
-      </div>
-    </div>
-
-    <!-- Info tempel -->
-    <div class="d-flex align-items-center gap-2 mt-2 p-3 rounded-3" style="background:var(--dj-primary-light);border:1px solid var(--dj-border);">
-      <i class="fa-solid fa-circle-info" style="color:var(--dj-primary);font-size:14px;flex-shrink:0;"></i>
-      <p class="mb-0" style="font-size:11.5px;color:var(--dj-primary);">Buat itinerary baru lewat menu <strong>Asisten AI</strong>, lalu tekan <strong>"Simpan Trip"</strong> untuk menyimpannya di sini.</p>
-    </div>
-
   </div>
-  <!-- END PANE PERJALANANKU -->
+  <!-- END PANE PERJALANAN -->
 
-
-  <!-- ════════════ PANE: E-TICKET ════════════ -->
-  <div id="pane_eticket" class="trip_pane">
-
-    <div class="d-flex align-items-center justify-content-between mb-3">
-      <div class="trip_section_label mb-0" style="margin-top:0">4 Tiket Tersimpan</div>
-      <button class="trip_btn_sm trip_btn_outline" onclick="showToast('➕ Tambah tiket manual...')">
-        <i class="fa-solid fa-plus fa-xs"></i> Tambah
-      </button>
-    </div>
-
-    <!-- Filter Pills -->
-    <div class="d-flex gap-2 mb-3 overflow-auto pb-1" style="flex-wrap:nowrap;">
-      <button class="trip_btn_sm trip_btn_primary">Semua</button>
-      <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('Filter: Wisata')">Wisata</button>
-      <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('Filter: Transport')">Transport</button>
-      <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('Filter: Hotel')">Hotel</button>
-      <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('Filter: Kuliner')">Kuliner</button>
-    </div>
-
-    <!-- Ticket 1: Valid - Prambanan -->
-    <div class="trip_ticket_wrap">
-      <div class="trip_ticket_header">
-        <div class="trip_ticket_icon green"><i class="fa-solid fa-torii-gate"></i></div>
-        <div class="trip_ticket_info">
-          <p class="trip_ticket_name">Candi Prambanan</p>
-          <p class="trip_ticket_sub"><i class="fa-regular fa-calendar me-1"></i>11 Jul 2025 &nbsp;·&nbsp; <i class="fa-solid fa-users me-1"></i>2 Dewasa</p>
-        </div>
-        <span class="trip_ticket_tag trip_tag_valid"><i class="fa-solid fa-circle-check fa-2xs me-1"></i>Valid</span>
-      </div>
-      <div class="trip_ticket_barcode">
-        <div class="trip_qr_placeholder">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="4" width="28" height="28" rx="3" fill="#000055" opacity=".15"/>
-            <rect x="8" y="8" width="20" height="20" rx="2" fill="#000055" opacity=".3"/>
-            <rect x="12" y="12" width="12" height="12" rx="1" fill="#000055"/>
-            <rect x="40" y="4" width="28" height="28" rx="3" fill="#000055" opacity=".15"/>
-            <rect x="44" y="8" width="20" height="20" rx="2" fill="#000055" opacity=".3"/>
-            <rect x="48" y="12" width="12" height="12" rx="1" fill="#000055"/>
-            <rect x="4" y="40" width="28" height="28" rx="3" fill="#000055" opacity=".15"/>
-            <rect x="8" y="44" width="20" height="20" rx="2" fill="#000055" opacity=".3"/>
-            <rect x="12" y="48" width="12" height="12" rx="1" fill="#000055"/>
-            <rect x="40" y="40" width="8" height="8" rx="1" fill="#000055"/>
-            <rect x="52" y="40" width="8" height="8" rx="1" fill="#000055"/>
-            <rect x="40" y="52" width="8" height="8" rx="1" fill="#000055"/>
-            <rect x="52" y="52" width="8" height="8" rx="1" fill="#000055" opacity=".5"/>
-            <rect x="46" y="46" width="8" height="8" rx="1" fill="#C8922A" opacity=".8"/>
-          </svg>
-        </div>
-        <p class="trip_ticket_code">DJ-PRB-2025-0023</p>
-        <p style="font-size:10px;color:var(--dj-muted);margin:4px 0 0;">Tunjukkan QR ini di pintu masuk</p>
-      </div>
-      <div class="trip_ticket_detail_row">
-        <div class="trip_ticket_detail">
-          <div class="dl">Tanggal</div>
-          <div class="dv">11 Jul 2025</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Kategori</div>
-          <div class="dv">Dewasa × 2</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Total</div>
-          <div class="dv">Rp 100.000</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Berlaku</div>
-          <div class="dv" style="color:var(--dj-green);">11 Jul saja</div>
-        </div>
-      </div>
-      <div class="trip_tear"><div class="trip_tear_line"></div></div>
-      <div class="trip_ticket_footer">
-        <button class="trip_btn_sm trip_btn_primary" style="flex:1;" onclick="showToast('📥 Mengunduh tiket PDF...')">
-          <i class="fa-solid fa-download fa-xs"></i> Unduh PDF
-        </button>
-        <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('📤 Bagikan tiket...')">
-          <i class="fa-solid fa-share fa-xs"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Ticket 2: Valid - Borobudur -->
-    <div class="trip_ticket_wrap">
-      <div class="trip_ticket_header">
-        <div class="trip_ticket_icon navy"><i class="fa-solid fa-dungeon"></i></div>
-        <div class="trip_ticket_info">
-          <p class="trip_ticket_name">Candi Borobudur</p>
-          <p class="trip_ticket_sub"><i class="fa-regular fa-calendar me-1"></i>12 Jul 2025 &nbsp;·&nbsp; <i class="fa-solid fa-users me-1"></i>2 Dewasa</p>
-        </div>
-        <span class="trip_ticket_tag trip_tag_valid"><i class="fa-solid fa-circle-check fa-2xs me-1"></i>Valid</span>
-      </div>
-      <div class="trip_ticket_detail_row">
-        <div class="trip_ticket_detail">
-          <div class="dl">Zona</div>
-          <div class="dv">Zona 1 + Teras</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Jam Masuk</div>
-          <div class="dv">08:00 – 16:00</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Total</div>
-          <div class="dv">Rp 100.000</div>
-        </div>
-      </div>
-      <div class="trip_ticket_barcode" style="margin-bottom:0;">
-        <p class="trip_ticket_code">DJ-BRB-2025-0041</p>
-        <p style="font-size:10px;color:var(--dj-muted);margin:4px 0 0;">Kode akan aktif pada hari kunjungan</p>
-      </div>
-      <div class="trip_tear"><div class="trip_tear_line"></div></div>
-      <div class="trip_ticket_footer">
-        <button class="trip_btn_sm trip_btn_primary" style="flex:1;" onclick="showToast('📥 Mengunduh tiket PDF...')">
-          <i class="fa-solid fa-download fa-xs"></i> Unduh PDF
-        </button>
-        <button class="trip_btn_sm trip_btn_ghost" onclick="showToast('📤 Bagikan tiket...')">
-          <i class="fa-solid fa-share fa-xs"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Ticket 3: Used - Lava Tour -->
-    <div class="trip_ticket_wrap" style="opacity:.72;">
-      <div class="trip_ticket_header">
-        <div class="trip_ticket_icon amber"><i class="fa-solid fa-truck-monster"></i></div>
-        <div class="trip_ticket_info">
-          <p class="trip_ticket_name">Lava Tour Jeep Merapi</p>
-          <p class="trip_ticket_sub"><i class="fa-regular fa-calendar me-1"></i>15 Mar 2025 &nbsp;·&nbsp; <i class="fa-solid fa-users me-1"></i>4 Orang</p>
-        </div>
-        <span class="trip_ticket_tag trip_tag_used"><i class="fa-solid fa-check fa-2xs me-1"></i>Terpakai</span>
-      </div>
-      <div class="trip_ticket_detail_row">
-        <div class="trip_ticket_detail">
-          <div class="dl">Durasi</div>
-          <div class="dv">3 Jam</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Jeep</div>
-          <div class="dv">2 Unit</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Total Bayar</div>
-          <div class="dv">Rp 480.000</div>
-        </div>
-      </div>
-      <div class="trip_ticket_footer">
-        <button class="trip_btn_sm trip_btn_ghost" style="flex:1;" onclick="showToast('⭐ Rating sudah diberikan. Terima kasih!')">
-          <i class="fa-solid fa-star fa-xs"></i> Sudah Dinilai
-        </button>
-      </div>
-    </div>
-
-    <!-- Ticket 4: Pending -->
-    <div class="trip_ticket_wrap">
-      <div class="trip_ticket_header">
-        <div class="trip_ticket_icon purple"><i class="fa-solid fa-ticket-simple"></i></div>
-        <div class="trip_ticket_info">
-          <p class="trip_ticket_name">Museum Ullen Sentalu</p>
-          <p class="trip_ticket_sub"><i class="fa-regular fa-calendar me-1"></i>11 Jul 2025 &nbsp;·&nbsp; <i class="fa-solid fa-users me-1"></i>2 Dewasa</p>
-        </div>
-        <span class="trip_ticket_tag trip_tag_pending"><i class="fa-solid fa-clock fa-2xs me-1"></i>Pending</span>
-      </div>
-      <div class="trip_ticket_detail_row">
-        <div class="trip_ticket_detail">
-          <div class="dl">Status</div>
-          <div class="dv" style="color:var(--dj-secondary);">Menunggu Konfirmasi</div>
-        </div>
-        <div class="trip_ticket_detail">
-          <div class="dl">Total</div>
-          <div class="dv">Rp 100.000</div>
-        </div>
-      </div>
-      <div style="background:var(--dj-amber-light);border-top:1.5px dashed rgba(200,146,42,.4);padding:8px 14px;font-size:11px;color:#7A5500;">
-        <i class="fa-solid fa-circle-info me-1"></i>Pembayaran sedang diverifikasi. E-ticket akan muncul dalam 1×24 jam.
-      </div>
-    </div>
-
-  </div>
-  <!-- END PANE E-TICKET -->
-
-
-  <!-- ════════════ PANE: PUSAT BANTUAN ════════════ -->
+  <!-- ════ PANE: BANTUAN ════ -->
   <div id="pane_bantuan" class="trip_pane">
-
-    <!-- Emergency Banner -->
     <div class="trip_emergency_banner">
       <i class="fa-solid fa-shield-halved"></i>
       <div>
@@ -1014,252 +230,429 @@
         <i class="fa-solid fa-phone-volume"></i> 112
       </a>
     </div>
-
-    <!-- Lokasi Terdekat -->
     <div class="trip_section_label">Temukan Terdekat</div>
     <div class="trip_locate_row">
-      <a href="#" class="trip_locate_btn" onclick="locateNearest(event, 'Kantor Polisi')">
-        <div class="loc_icon" style="background:var(--dj-primary-light);color:var(--dj-primary);">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <div class="loc_text">
-          <div class="lt">Cari via GPS</div>
-          <div class="lb">Kantor Polisi</div>
-        </div>
+      <a href="#" class="trip_locate_btn" onclick="locateNearest(event,'Kantor Polisi')">
+        <div class="loc_icon" style="background:var(--dj-primary-light);color:var(--dj-primary);"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="loc_text"><div class="lt">Cari via GPS</div><div class="lb">Kantor Polisi</div></div>
         <i class="fa-solid fa-location-crosshairs ms-auto" style="color:var(--dj-muted);font-size:13px;"></i>
       </a>
-      <a href="#" class="trip_locate_btn" onclick="locateNearest(event, 'Rumah Sakit')">
-        <div class="loc_icon" style="background:var(--dj-red-light);color:var(--dj-red);">
-          <i class="fa-solid fa-hospital"></i>
-        </div>
-        <div class="loc_text">
-          <div class="lt">Cari via GPS</div>
-          <div class="lb">Rumah Sakit</div>
-        </div>
+      <a href="#" class="trip_locate_btn" onclick="locateNearest(event,'Rumah Sakit')">
+        <div class="loc_icon" style="background:var(--dj-red-light);color:var(--dj-red);"><i class="fa-solid fa-hospital"></i></div>
+        <div class="loc_text"><div class="lt">Cari via GPS</div><div class="lb">Rumah Sakit</div></div>
         <i class="fa-solid fa-location-crosshairs ms-auto" style="color:var(--dj-muted);font-size:13px;"></i>
       </a>
     </div>
-
-    <!-- Nomor Darurat Nasional -->
     <div class="trip_section_label">Nomor Darurat Nasional</div>
     <div class="trip_quick_grid">
-      <a href="tel:112" class="trip_quick_btn" style="border-color:#FFBBBB;">
-        <div class="trip_quick_icon" style="background:var(--dj-red-light);color:var(--dj-red);"><i class="fa-solid fa-phone-volume"></i></div>
-        <span class="label">Darurat Umum</span>
-        <span class="number" style="color:var(--dj-red);">112</span>
-      </a>
-      <a href="tel:118" class="trip_quick_btn" style="border-color:#FFBBBB;">
-        <div class="trip_quick_icon" style="background:#FFF0F1;color:#B00020;"><i class="fa-solid fa-truck-medical"></i></div>
-        <span class="label">Ambulan</span>
-        <span class="number" style="color:#B00020;">118</span>
-      </a>
-      <a href="tel:110" class="trip_quick_btn" style="border-color:var(--dj-border);">
-        <div class="trip_quick_icon" style="background:var(--dj-primary-light);color:var(--dj-primary);"><i class="fa-solid fa-shield-halved"></i></div>
-        <span class="label">Polisi</span>
-        <span class="number" style="color:var(--dj-primary);">110</span>
-      </a>
-      <a href="tel:113" class="trip_quick_btn" style="border-color:#FFDCB0;">
-        <div class="trip_quick_icon" style="background:var(--dj-amber-light);color:var(--dj-secondary);"><i class="fa-solid fa-fire-extinguisher"></i></div>
-        <span class="label">Pemadam</span>
-        <span class="number" style="color:var(--dj-secondary);">113</span>
-      </a>
-      <a href="tel:115" class="trip_quick_btn" style="border-color:#C0E8D0;">
-        <div class="trip_quick_icon" style="background:var(--dj-green-light);color:var(--dj-green);"><i class="fa-solid fa-helicopter"></i></div>
-        <span class="label">SAR Nasional</span>
-        <span class="number" style="color:var(--dj-green);">115</span>
-      </a>
-      <a href="tel:122" class="trip_quick_btn" style="border-color:var(--dj-purple-light);">
-        <div class="trip_quick_icon" style="background:var(--dj-purple-light);color:var(--dj-purple);"><i class="fa-solid fa-tower-broadcast"></i></div>
-        <span class="label">Kewaspadaan Nas.</span>
-        <span class="number" style="color:var(--dj-purple);">122</span>
-      </a>
+      <a href="tel:112" class="trip_quick_btn" style="border-color:#FFBBBB;"><div class="trip_quick_icon" style="background:var(--dj-red-light);color:var(--dj-red);"><i class="fa-solid fa-phone-volume"></i></div><span class="label">Darurat Umum</span><span class="number" style="color:var(--dj-red);">112</span></a>
+      <a href="tel:118" class="trip_quick_btn" style="border-color:#FFBBBB;"><div class="trip_quick_icon" style="background:#FFF0F1;color:#B00020;"><i class="fa-solid fa-truck-medical"></i></div><span class="label">Ambulan</span><span class="number" style="color:#B00020;">118</span></a>
+      <a href="tel:110" class="trip_quick_btn"><div class="trip_quick_icon" style="background:var(--dj-primary-light);color:var(--dj-primary);"><i class="fa-solid fa-shield-halved"></i></div><span class="label">Polisi</span><span class="number" style="color:var(--dj-primary);">110</span></a>
+      <a href="tel:113" class="trip_quick_btn" style="border-color:#FFDCB0;"><div class="trip_quick_icon" style="background:var(--dj-amber-light);color:var(--dj-secondary);"><i class="fa-solid fa-fire-extinguisher"></i></div><span class="label">Pemadam</span><span class="number" style="color:var(--dj-secondary);">113</span></a>
+      <a href="tel:115" class="trip_quick_btn" style="border-color:#C0E8D0;"><div class="trip_quick_icon" style="background:var(--dj-green-light);color:var(--dj-green);"><i class="fa-solid fa-helicopter"></i></div><span class="label">SAR Nasional</span><span class="number" style="color:var(--dj-green);">115</span></a>
+      <a href="tel:122" class="trip_quick_btn" style="border-color:var(--dj-purple-light);"><div class="trip_quick_icon" style="background:var(--dj-purple-light);color:var(--dj-purple);"><i class="fa-solid fa-tower-broadcast"></i></div><span class="label">Kewaspadaan</span><span class="number" style="color:var(--dj-purple);">122</span></a>
     </div>
-
-    <!-- Kontak Darurat Jogja -->
     <div class="trip_section_label">Kontak Darurat Jogja</div>
     <div class="trip_contact_card">
-      <div class="trip_contact_card_header" style="background:var(--dj-green-light);">
-        <i class="fa-solid fa-star-of-life" style="color:var(--dj-green);"></i>
-        <span>Layanan Darurat DIY</span>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">SAR Yogyakarta</span>
-        <div class="trip_contact_num">
-          <a href="tel:0274587559">0274–587 559</a>
-          <a href="tel:0274587559" class="trip_dial_icon green"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">Info Gangguan Telepon</span>
-        <div class="trip_contact_num">
-          <a href="tel:117">117</a>
-          <a href="tel:117" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">Info Layanan PLN</span>
-        <div class="trip_contact_num">
-          <a href="tel:123">123</a>
-          <a href="tel:123" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">Gangguan PAM Jogja</span>
-        <div class="trip_contact_num">
-          <a href="tel:0274515870">0274–515 870</a>
-          <a href="tel:0274515870" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">PMK Yogyakarta</span>
-        <div class="trip_contact_num">
-          <a href="tel:0274587101">0274–587 101</a>
-          <a href="tel:0274587101" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">PMI (Palang Merah)</span>
-        <div class="trip_contact_num">
-          <a href="tel:0274372176">0274–372 176</a>
-          <a href="tel:0274372176" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
-      <div class="trip_contact_item">
-        <span class="trip_contact_name">Info Penyakit Menular (Dinkes DIY)</span>
-        <div class="trip_contact_num">
-          <a href="tel:0274563153">0274–563 153</a>
-          <a href="tel:0274563153" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a>
-        </div>
-      </div>
+      <div class="trip_contact_card_header" style="background:var(--dj-green-light);"><i class="fa-solid fa-star-of-life" style="color:var(--dj-green);"></i><span>Layanan Darurat DIY</span></div>
+      <div class="trip_contact_item"><span class="trip_contact_name">SAR Yogyakarta</span><div class="trip_contact_num"><a href="tel:0274587559">0274–587 559</a><a href="tel:0274587559" class="trip_dial_icon green"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+      <div class="trip_contact_item"><span class="trip_contact_name">PMK Yogyakarta</span><div class="trip_contact_num"><a href="tel:0274587101">0274–587 101</a><a href="tel:0274587101" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+      <div class="trip_contact_item"><span class="trip_contact_name">PMI Palang Merah</span><div class="trip_contact_num"><a href="tel:0274372176">0274–372 176</a><a href="tel:0274372176" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+      <div class="trip_contact_item"><span class="trip_contact_name">BPBD DIY</span><div class="trip_contact_num"><a href="tel:0274562150">0274–562 150</a><a href="tel:0274562150" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
     </div>
-
-    <!-- Rumah Sakit Jogja -->
     <div class="trip_contact_card">
-      <button class="trip_collapse_btn open" onclick="toggleCollapse(this, 'rs_list')">
-        <span><i class="fa-solid fa-hospital me-2" style="color:var(--dj-red);"></i>Rumah Sakit di Yogyakarta</span>
-        <i class="fa-solid fa-chevron-down arrow"></i>
-      </button>
+      <button class="trip_collapse_btn open" onclick="toggleCollapse(this,'rs_list')"><span><i class="fa-solid fa-hospital me-2" style="color:var(--dj-red);"></i>Rumah Sakit Yogyakarta</span><i class="fa-solid fa-chevron-down arrow"></i></button>
       <div id="rs_list" class="trip_collapsible open">
-        <div class="trip_contact_item"><span class="trip_contact_name bold">RSU Dr Sardjito</span><div class="trip_contact_num"><a href="tel:0274587333">(0274) 587333</a><a href="tel:0274587333" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name bold">RSU Panti Rapih</span><div class="trip_contact_num"><a href="tel:0274563333">(0274) 563333</a><a href="tel:0274563333" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+        <div class="trip_contact_item"><span class="trip_contact_name bold">RSU Dr. Sardjito</span><div class="trip_contact_num"><a href="tel:0274587333">(0274) 587333</a><a href="tel:0274587333" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+        <div class="trip_contact_item"><span class="trip_contact_name">RS Bethesda</span><div class="trip_contact_num"><a href="tel:0274586688">(0274) 586688</a><a href="tel:0274586688" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
         <div class="trip_contact_item"><span class="trip_contact_name">RSU PKU Muhammadiyah</span><div class="trip_contact_num"><a href="tel:0274512653">(0274) 512653</a><a href="tel:0274512653" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">RSU Bethesda</span><div class="trip_contact_num"><a href="tel:0274586688">(0274) 586688</a><a href="tel:0274586688" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
         <div class="trip_contact_item"><span class="trip_contact_name">RSUD Kota Yogyakarta</span><div class="trip_contact_num"><a href="tel:0274371195">(0274) 371195</a><a href="tel:0274371195" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
         <div class="trip_contact_item"><span class="trip_contact_name">RSUD Bantul</span><div class="trip_contact_num"><a href="tel:0274367381">(0274) 367381</a><a href="tel:0274367381" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">RSU PKU Muhammadiyah Bantul</span><div class="trip_contact_num"><a href="tel:0274368238">(0274) 368238</a><a href="tel:0274368238" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">RSUD Wonosari (Gunung Kidul)</span><div class="trip_contact_num"><a href="tel:0274391007">(0274) 391007</a><a href="tel:0274391007" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">RSUD Wates (Kulon Progo)</span><div class="trip_contact_num"><a href="tel:0274773169">(0274) 773169</a><a href="tel:0274773169" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">RSUD Sleman</span><div class="trip_contact_num"><a href="tel:0274868437">(0274) 868437</a><a href="tel:0274868437" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name bold">RS JIH</span><div class="trip_contact_num"><a href="tel:02744463535">0274-4463535</a><a href="tel:02744463535" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+        <div class="trip_contact_item"><span class="trip_contact_name">RSUD Wonosari (GK)</span><div class="trip_contact_num"><a href="tel:0274391007">(0274) 391007</a><a href="tel:0274391007" class="trip_dial_icon red"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
       </div>
     </div>
-
-    <!-- Kepolisian Jogja -->
     <div class="trip_contact_card">
-      <button class="trip_collapse_btn" onclick="toggleCollapse(this, 'polisi_list')">
-        <span><i class="fa-solid fa-shield-halved me-2" style="color:var(--dj-primary);"></i>Kepolisian Yogyakarta</span>
-        <i class="fa-solid fa-chevron-down arrow"></i>
-      </button>
+      <button class="trip_collapse_btn" onclick="toggleCollapse(this,'polisi_list')"><span><i class="fa-solid fa-shield-halved me-2" style="color:var(--dj-primary);"></i>Kepolisian Yogyakarta</span><i class="fa-solid fa-chevron-down arrow"></i></button>
       <div id="polisi_list" class="trip_collapsible">
-        <div class="trip_contact_item"><span class="trip_contact_name bold">Polda DIY</span><div class="trip_contact_num"><a href="tel:0274563494">(0274) 563 494</a><a href="tel:0274563494" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Poltabes Yogyakarta</span><div class="trip_contact_num"><a href="tel:0274512940">(0274) 512 940</a><a href="tel:0274512940" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+        <div class="trip_contact_item"><span class="trip_contact_name bold">Polda DIY</span><div class="trip_contact_num"><a href="tel:0274563494">(0274) 563494</a><a href="tel:0274563494" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+        <div class="trip_contact_item"><span class="trip_contact_name">Poltabes Yogyakarta</span><div class="trip_contact_num"><a href="tel:0274512940">(0274) 512940</a><a href="tel:0274512940" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
         <div class="trip_contact_item"><span class="trip_contact_name">Polres Sleman</span><div class="trip_contact_num"><a href="tel:0274868410">(0274) 868410</a><a href="tel:0274868410" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip-contact_name">Polres Bantul</span><div class="trip_contact_num"><a href="tel:0274367410">(0274) 367410</a><a href="tel:0274367410" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Polres Gunung Kidul</span><div class="trip_contact_num"><a href="tel:027491110">(0274) 91110</a><a href="tel:027491110" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Polres Kulon Progo</span><div class="trip_contact_num"><a href="tel:027493110">(0274) 93110</a><a href="tel:027493110" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
+        <div class="trip_contact_item"><span class="trip_contact_name">Polres Bantul</span><div class="trip_contact_num"><a href="tel:0274367410">(0274) 367410</a><a href="tel:0274367410" class="trip_dial_icon"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
       </div>
     </div>
-
-    <!-- Pemerintah Daerah -->
-    <div class="trip_contact_card">
-      <button class="trip_collapse_btn" onclick="toggleCollapse(this, 'pemda_list')">
-        <span><i class="fa-solid fa-building-columns me-2" style="color:var(--dj-secondary);"></i>Pemerintah Daerah DIY</span>
-        <i class="fa-solid fa-chevron-down arrow"></i>
-      </button>
-      <div id="pemda_list" class="trip_collapsible">
-        <div class="trip_contact_item"><span class="trip_contact_name bold">Pemprov DIY</span><div class="trip_contact_num"><a href="tel:0274562811">(0274) 562811</a><a href="tel:0274562811" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Pemkab Gunung Kidul</span><div class="trip_contact_num"><a href="tel:0274391761">(0274) 391761</a><a href="tel:0274391761" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Pemkab Kulon Progo</span><div class="trip_contact_num"><a href="tel:0274773238">(0274) 773238</a><a href="tel:0274773238" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Pemkab Sleman</span><div class="trip_contact_num"><a href="tel:0274868405">(0274) 868405</a><a href="tel:0274868405" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Pemkot Yogyakarta</span><div class="trip_contact_num"><a href="tel:0274515865">(0274) 515865</a><a href="tel:0274515865" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-        <div class="trip_contact_item"><span class="trip_contact_name">Pemkab Bantul</span><div class="trip_contact_num"><a href="tel:0274367509">(0274) 367509</a><a href="tel:0274367509" class="trip_dial_icon amber"><i class="fa-solid fa-phone fa-xs"></i></a></div></div>
-      </div>
-    </div>
-
     <div style="height:16px;"></div>
-
   </div>
   <!-- END PANE BANTUAN -->
 
 </div>
 <!-- END BODY -->
 
-<!-- Toast -->
-<div id="trip_toast"></div>
+<!-- ═══ DETAIL MODAL ═══ -->
+<div class="td_overlay" id="td_overlay" onclick="if(event.target===this)closeTripDetail()">
+  <div class="td_sheet" id="td_sheet">
+    <div class="td_handle_row">
+      <div class="td_handle"></div>
+      <div style="font-size:13px;font-weight:800;color:var(--dj-ink);" id="td_header_label">Detail Trip</div>
+      <button class="td_close" onclick="closeTripDetail()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
 
-<!-- Confirm Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered mx-3">
-    <div class="modal-content rounded-4 border-0 shadow-lg">
-      <div class="modal-body p-4 text-center">
-        <i class="fa-solid fa-triangle-exclamation fa-2x mb-3 d-block" style="color:var(--dj-red);"></i>
-        <h6 class="fw-bold mb-2" style="font-family:var(--font-display);font-size:18px;font-weight:400;">Hapus Trip?</h6>
-        <p class="text-muted small mb-0">Trip dan semua itinerary di dalamnya akan dihapus permanen.</p>
-      </div>
-      <div class="modal-footer border-0 pt-0 d-flex gap-2 px-4 pb-4">
-        <button class="btn btn-light rounded-pill fw-600" data-bs-dismiss="modal" style="flex:1;font-weight:600;">Batal</button>
-        <button class="btn rounded-pill fw-bold" data-bs-dismiss="modal" style="flex:1;background:var(--dj-red);color:#fff;" onclick="showToast('🗑️ Trip berhasil dihapus.')">Ya, Hapus</button>
-      </div>
+    <!-- Banner -->
+    <div class="td_banner">
+      <div class="td_banner_title" id="td_title"></div>
+      <div class="td_banner_sub" id="td_sub"></div>
+      <div class="td_banner_pills" id="td_pills"></div>
+    </div>
+
+    <!-- Budget -->
+    <div class="td_budget" id="td_budget_wrap">
+      <div class="td_budget_label">💰 Estimasi Budget</div>
+      <div class="td_budget_val" id="td_budget_total">—</div>
+      <div class="td_budget_pills" id="td_budget_pills"></div>
+    </div>
+
+    <!-- Day Tabs -->
+    <div class="td_day_tabs" id="td_day_tabs"></div>
+
+    <!-- Day Contents -->
+    <div class="td_content" id="td_day_contents"></div>
+
+    <!-- Sticky Actions -->
+    <div class="td_actions">
+      <button class="td_action_btn" onclick="closeTripDetail()" style="background:var(--dj-bg);color:var(--dj-muted);border:1px solid var(--dj-border);">
+        <i class="fa-solid fa-xmark fa-xs"></i> Tutup
+      </button>
+      <button class="td_action_btn" onclick="hapusTripById()" style="background:var(--dj-red-light);color:var(--dj-red);">
+        <i class="fa-solid fa-trash fa-xs"></i> Hapus Trip
+      </button>
+      <button class="td_action_btn" onclick="bagikanTrip()" style="background:var(--dj-primary);color:#fff;flex:2;">
+        <i class="fa-brands fa-whatsapp fa-xs"></i> Bagikan
+      </button>
     </div>
   </div>
 </div>
 
+<!-- Toast -->
+<div id="trip_toast"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  function switchTripTab(pane, el) {
-    document.querySelectorAll('.trip_tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    document.querySelectorAll('.trip_pane').forEach(p => p.classList.remove('active'));
-    document.getElementById('pane_' + pane).classList.add('active');
-    window.scrollTo(0, 0);
+// ═══════════════════════════════════════════════════
+// LOCALSTORAGE KEY & STATE
+// ═══════════════════════════════════════════════════
+const LS_KEY     = 'dj_saved_trips';
+let   activeTrip = null;   // trip yg sedang ditampilkan di modal
+let   activeTripId = null;
+
+// ═══════════════════════════════════════════════════
+// LOAD & RENDER TRIP LIST
+// ═══════════════════════════════════════════════════
+function loadTrips() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+
+function saveTrips(trips) {
+  localStorage.setItem(LS_KEY, JSON.stringify(trips));
+}
+
+function renderTripList() {
+  const trips = loadTrips();
+  const list  = document.getElementById('trip_list');
+  const empty = document.getElementById('trip_empty');
+  const badge = document.getElementById('hdr_count');
+  const label = document.getElementById('trip_list_label');
+
+  badge.textContent = trips.length;
+  label.textContent = trips.length + ' Trip Tersimpan';
+
+  if (!trips.length) {
+    list.innerHTML  = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // Sort: terbaru dulu
+  const sorted = [...trips].sort((a,b) => (b.savedAt||0) - (a.savedAt||0));
+
+  list.innerHTML = sorted.map(trip => {
+    const it      = trip.itinerary;
+    const input   = trip.input || {};
+    const budget  = it.estimasiBudget || {};
+    const hari    = it.hari || [];
+    const total   = hari.reduce((s,h) => s + (h.items||[]).length, 0);
+    const kuliner = hari.reduce((s,h) => s + (h.items||[]).filter(i=>(i.kategori||'').toLowerCase()==='kuliner').length, 0);
+
+    const status  = getStatus(input.tanggalTiba, input.tanggalPulang);
+    const stClass = {Upcoming:'status_upcoming',Berlangsung:'status_berlangsung',Selesai:'status_selesai',Draft:'status_draft'}[status]||'status_draft';
+
+    const tglLabel = formatTglRange(input.tanggalTiba, input.tanggalPulang);
+    const emoji    = getEmojiForTrip(input.vibe || []);
+
+    return `
+    <div class="trip_card">
+      <div class="trip_card_header">
+        <div class="trip_card_emoji">${emoji}</div>
+        <div class="trip_card_info">
+          <div class="trip_card_title">${escH(it.judul||'Itinerary Jogja')}</div>
+          <div class="trip_card_meta">
+            <span><i class="fa-solid fa-calendar-days fa-xs"></i> ${escH(tglLabel)}</span>
+            <span class="trip_card_status ${stClass}">${status}</span>
+          </div>
+        </div>
+      </div>
+      <div class="trip_card_body">
+        <div class="trip_card_pills">
+          <span class="trip_card_pill">📅 ${hari.length} Hari</span>
+          <span class="trip_card_pill">📍 ${total} Destinasi</span>
+          <span class="trip_card_pill">🍽️ ${kuliner} Kuliner</span>
+          <span class="trip_card_pill">🚗 ${escH(input.transportasi||'—')}</span>
+        </div>
+        <div class="trip_budget_mini">
+          <div><div class="trip_budget_mini_label">Estimasi Budget</div><div class="trip_budget_mini_val">${escH(budget.total||'—')}</div></div>
+          <i class="fa-solid fa-coins" style="color:rgba(255,255,255,.4);font-size:22px;"></i>
+        </div>
+      </div>
+      <div class="trip_card_footer">
+        <button class="trip_btn_sm trip_btn_ghost" onclick="hapusTripByKey('${trip.id}')">
+          <i class="fa-solid fa-trash fa-xs"></i>
+        </button>
+        <button class="trip_btn_sm trip_btn_primary" onclick="bukaDetail('${trip.id}')">
+          <i class="fa-solid fa-eye fa-xs"></i> Lihat Detail
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════
+// OPEN DETAIL MODAL
+// ═══════════════════════════════════════════════════
+function bukaDetail(id) {
+  const trips = loadTrips();
+  const trip  = trips.find(t => t.id === id);
+  if (!trip) { showToast('⚠️ Trip tidak ditemukan.'); return; }
+
+  activeTrip   = trip;
+  activeTripId = id;
+  const it     = trip.itinerary;
+  const input  = trip.input || {};
+  const budget = it.estimasiBudget || {};
+  const hari   = it.hari || [];
+
+  // Banner
+  document.getElementById('td_title').textContent = it.judul || 'Itinerary Jogja';
+  document.getElementById('td_sub').textContent   = it.ringkasan || '';
+  const total   = hari.reduce((s,h) => s + (h.items||[]).length, 0);
+  const kuliner = hari.reduce((s,h) => s + (h.items||[]).filter(i=>(i.kategori||'').toLowerCase()==='kuliner').length, 0);
+  document.getElementById('td_pills').innerHTML = [
+    `<span class="td_banner_pill">📅 ${hari.length} Hari</span>`,
+    `<span class="td_banner_pill">📍 ${total} Destinasi</span>`,
+    `<span class="td_banner_pill">🍽️ ${kuliner} Kuliner</span>`,
+    `<span class="td_banner_pill">🛣️ Anti Zig-zag</span>`,
+  ].join('');
+
+  // Budget
+  document.getElementById('td_budget_total').textContent = budget.total || '—';
+  const budgetPills = [
+    budget.transport ? `🚌 ${budget.transport}` : null,
+    budget.tiket     ? `🎟️ ${budget.tiket}`     : null,
+    budget.kuliner   ? `🍜 ${budget.kuliner}`    : null,
+  ].filter(Boolean);
+  document.getElementById('td_budget_pills').innerHTML = budgetPills
+    .map(p => `<span class="td_budget_pill">${p}</span>`).join('');
+
+  // Day Tabs
+  const HARI_N = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+  const BULAN  = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  function dayLabel(idx) {
+    if (!input.tanggalTiba) return null;
+    try {
+      const d = new Date(input.tanggalTiba + 'T00:00:00');
+      d.setDate(d.getDate() + idx);
+      return `${HARI_N[d.getDay()]}, ${d.getDate()} ${BULAN[d.getMonth()]}`;
+    } catch(e) { return null; }
   }
 
-  function showToast(msg) {
-    const t = document.getElementById('trip_toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2400);
-  }
+  document.getElementById('td_day_tabs').innerHTML = hari.map((h, i) => {
+    const dl = dayLabel(i);
+    return `<button class="td_day_tab ${i===0?'active':''}" onclick="tdSwitchDay(${i},this)">
+      Hari ${h.hari}${dl ? `<br><span style="font-size:9px;opacity:.75;">${dl}</span>` : ''}
+    </button>`;
+  }).join('');
 
-  function toggleCollapse(btn, id) {
-    const content = document.getElementById(id);
-    const isOpen = content.classList.contains('open');
-    btn.classList.toggle('open', !isOpen);
-    content.classList.toggle('open', !isOpen);
-  }
+  // Day Contents
+  document.getElementById('td_day_contents').innerHTML = hari.map((h, i) => {
+    const items = (h.items||[]).map(item => {
+      const kat  = (item.kategori||'wisata').toLowerCase();
+      const dot  = ['kuliner','transit','hotel'].includes(kat) ? kat : '';
+      const catColors = {
+        wisata:['#E8E8F5','#000055'],kuliner:['#EBF7F0','#2D7A4F'],
+        hotel:['#FFF4DC','#6B4A00'],transit:['#F0ECFF','#6B4BC8'],
+        belanja:['#FFE0E2','#B91C1C'],hiburan:['#FEF9C3','#78350F'],
+      };
+      const [cbg,cfg] = catColors[kat]||catColors.wisata;
+      return `
+      <div class="td_tl_item">
+        <div class="td_tl_dot ${dot}"></div>
+        <div class="td_tl_card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:2px;">
+            <p class="td_tl_time" style="margin:0;">${escH(item.waktu||'')}</p>
+            <span style="background:${cbg};color:${cfg};padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;flex-shrink:0;">${escH(item.kategori||'wisata')}</span>
+          </div>
+          <p class="td_tl_name">${escH(item.nama)}</p>
+          <p class="td_tl_desc">${escH(item.deskripsi||'')}</p>
+          ${item.estimasiBiaya ? `<div class="td_tl_biaya"><i class="fa-solid fa-coins fa-xs"></i> ${escH(item.estimasiBiaya)}</div>` : ''}
+          ${item.highlight ? `<div style="background:var(--dj-secondary-light);border-left:3px solid var(--dj-secondary);border-radius:0 7px 7px 0;padding:5px 9px;margin-top:6px;font-size:10px;color:#6B4A00;line-height:1.5;">💡 ${escH(item.highlight)}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
 
-  function confirmDelete() {
-    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    modal.show();
-  }
+    const dl = dayLabel(i);
+    return `
+    <div class="td_day_content" id="td_day_${i}" ${i>0?'style="display:none;"':''}>
+      <div class="td_day_header">
+        <div class="td_day_title">${escH(h.judul||'Hari '+h.hari)}</div>
+        ${dl ? `<div class="td_day_date"><i class="fa-solid fa-calendar-day" style="margin-right:4px;"></i>${dl}</div>` : ''}
+        <div class="td_day_meta"><i class="fa-solid fa-location-dot" style="color:var(--dj-primary);margin-right:4px;"></i>${escH(h.klaster||'—')} · ${(h.items||[]).length} aktivitas</div>
+      </div>
+      <div class="td_timeline">
+        <div class="td_tl_line"></div>
+        ${items}
+      </div>
+      ${h.tips ? `<div class="td_tips"><p class="td_tips_title"><i class="fa-solid fa-lightbulb"></i> Tips Lokal — Hari ${h.hari}</p><p class="td_tips_text">${escH(h.tips)}</p></div>` : ''}
+    </div>`;
+  }).join('');
 
-  function locateNearest(e, type) {
-    e.preventDefault();
-    showToast('📍 Mencari ' + type + ' terdekat via GPS...');
-    setTimeout(() => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const url = `https://www.google.com/maps/search/${encodeURIComponent(type)}/@${pos.coords.latitude},${pos.coords.longitude},14z`;
-            window.open(url, '_blank');
-          },
-          () => showToast('⚠️ Akses lokasi ditolak. Buka maps manual.')
-        );
-      } else {
-        showToast('⚠️ GPS tidak tersedia di perangkat ini.');
-      }
-    }, 500);
+  document.getElementById('td_overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function tdSwitchDay(idx, el) {
+  document.querySelectorAll('.td_day_tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.td_day_content').forEach(d => d.style.display = 'none');
+  const dc = document.getElementById('td_day_' + idx);
+  if (dc) dc.style.display = '';
+}
+
+function closeTripDetail() {
+  document.getElementById('td_overlay').classList.remove('show');
+  document.body.style.overflow = '';
+  activeTrip = null; activeTripId = null;
+}
+
+// ═══════════════════════════════════════════════════
+// CRUD
+// ═══════════════════════════════════════════════════
+function hapusTripByKey(id) {
+  if (!confirm('Hapus trip ini?')) return;
+  const trips = loadTrips().filter(t => t.id !== id);
+  saveTrips(trips);
+  renderTripList();
+  showToast('🗑️ Trip berhasil dihapus.');
+}
+
+function hapusTripById() {
+  if (!activeTripId) return;
+  if (!confirm('Hapus trip ini permanen?')) return;
+  const trips = loadTrips().filter(t => t.id !== activeTripId);
+  saveTrips(trips);
+  closeTripDetail();
+  renderTripList();
+  showToast('🗑️ Trip berhasil dihapus.');
+}
+
+function bersihkanTrip() {
+  if (!confirm('Hapus semua trip tersimpan?')) return;
+  saveTrips([]);
+  renderTripList();
+  showToast('🗑️ Semua trip dihapus.');
+}
+
+function bagikanTrip() {
+  if (!activeTrip) return;
+  const judul = activeTrip.itinerary?.judul || 'Itinerary Jogja';
+  if (navigator.share) {
+    navigator.share({ title: judul, text: 'Cek itinerary Jogja-ku dari DolanJogja! 🗺️', url: window.location.href });
+  } else {
+    showToast('📤 Link disalin ke clipboard!');
   }
+}
+
+// ═══════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════
+function getStatus(tiba, pulang) {
+  if (!tiba || !pulang) return 'Draft';
+  const today = new Date().toISOString().slice(0,10);
+  if (pulang < today)  return 'Selesai';
+  if (tiba <= today)   return 'Berlangsung';
+  return 'Upcoming';
+}
+
+function formatTglRange(tiba, pulang) {
+  if (!tiba) return '—';
+  const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const t = new Date(tiba + 'T00:00:00');
+  const p = pulang ? new Date(pulang + 'T00:00:00') : null;
+  const bT = BULAN[t.getMonth()];
+  if (!p || tiba === pulang) return `${t.getDate()} ${bT} ${t.getFullYear()}`;
+  if (t.getMonth() === p.getMonth()) return `${t.getDate()}–${p.getDate()} ${bT} ${t.getFullYear()}`;
+  return `${t.getDate()} ${bT} – ${p.getDate()} ${BULAN[p.getMonth()]} ${p.getFullYear()}`;
+}
+
+function getEmojiForTrip(vibe) {
+  const v = (Array.isArray(vibe) ? vibe[0] : vibe || '').toLowerCase();
+  const m = {alam:'🌿',budaya:'🏛️',kuliner:'🍜',rekreasi:'🎡',sejarah:'🗿',belanja:'🛍️',pantai:'🏖️',gunung:'🏔️'};
+  return m[v] || '🗺️';
+}
+
+function escH(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function switchTripTab(pane, el) {
+  document.querySelectorAll('.trip_tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.trip_pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('pane_' + pane).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('trip_toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+function toggleCollapse(btn, id) {
+  const content = document.getElementById(id);
+  const isOpen  = content.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  content.classList.toggle('open', !isOpen);
+}
+
+function locateNearest(e, type) {
+  e.preventDefault();
+  showToast('📍 Mencari ' + type + ' terdekat...');
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      window.open(`https://www.google.com/maps/search/${encodeURIComponent(type)}/@${pos.coords.latitude},${pos.coords.longitude},14z`,'_blank');
+    }, () => showToast('⚠️ Akses lokasi ditolak.'));
+  }
+}
+
+function goToAsisten() {
+  if (window.parent !== window) {
+    window.parent.navigateGlobal && window.parent.navigateGlobal('asisten.html');
+  }
+}
+
+// Init
+renderTripList();
 </script>
 </body>
 </html>

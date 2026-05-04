@@ -31,575 +31,856 @@
       --font-main:        'Plus Jakarta Sans', system-ui, sans-serif;
     }
     * { box-sizing: border-box; }
-    body { background: var(--dj-bg); font-family: var(--font-main); margin: 0; padding: 0; }
+    body { background: var(--dj-bg); font-family: var(--font-main); margin: 0; padding: 0; overflow-x: hidden; }
 
-    /* Header */
-    .jelajah_header {
-      background: var(--dj-primary);
-      color: #fff; padding: 16px;
-      position: sticky; top: 0; z-index: 100;
-    }
+    /* ── HEADER ── */
+    .jelajah_header { background: var(--dj-primary); color: #fff; padding: 16px; position: sticky; top: 0; z-index: 100; }
     .jelajah_header_title { font-size: 17px; font-weight: 800; margin: 0; }
     .jelajah_header_sub { font-size: 11px; opacity: .7; margin: 2px 0 0; }
 
-    /* Search Bar */
-    .jelajah_search_wrap {
-      background: var(--dj-surface);
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--dj-border);
-      position: sticky; top: 62px; z-index: 99;
-    }
+    /* ── SEARCH ── */
+    .jelajah_search_wrap { background: var(--dj-surface); padding: 12px 16px; border-bottom: 1px solid var(--dj-border); position: sticky; top: 62px; z-index: 99; }
     .jelajah_search_row { display: flex; gap: 8px; align-items: center; }
     .jelajah_search_inner { position: relative; flex: 1; }
-    .jelajah_search {
-      background: var(--dj-bg);
-      border: 1.5px solid var(--dj-border);
-      border-radius: 12px;
-      padding: 10px 14px 10px 38px;
-      font-size: 13px; width: 100%;
-      outline: none; color: var(--dj-ink);
-      font-family: var(--font-main);
-      transition: border-color .2s;
-    }
+    .jelajah_search { background: var(--dj-bg); border: 1.5px solid var(--dj-border); border-radius: 12px; padding: 10px 14px 10px 38px; font-size: 13px; width: 100%; outline: none; color: var(--dj-ink); font-family: var(--font-main); transition: border-color .2s; }
     .jelajah_search:focus { border-color: var(--dj-primary); }
     .jelajah_search_icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--dj-muted); font-size: 14px; }
 
-    /* Image search button */
-    .jelajah_img_btn {
-      width: 42px; height: 42px; border-radius: 12px;
-      background: var(--dj-primary-light);
-      color: var(--dj-primary);
-      border: 1.5px solid var(--dj-primary);
-      cursor: pointer; display: flex;
-      align-items: center; justify-content: center;
-      font-size: 16px; flex-shrink: 0;
-      transition: all .15s;
-    }
-    .jelajah_img_btn:active { background: var(--dj-primary); color: #fff; }
-
-    /* Main Tabs */
-    .jelajah_main_tabs_wrap {
-      background: var(--dj-surface);
-      padding: 0 16px;
-      border-bottom: 1px solid var(--dj-border);
-      position: sticky; top: 118px; z-index: 98;
-      display: flex;
-    }
-    .jelajah_main_tab {
-      flex: 1; text-align: center; padding: 12px 8px;
-      font-size: 13px; font-weight: 700;
-      color: var(--dj-muted);
-      border: none; background: none;
-      border-bottom: 2px solid transparent;
-      cursor: pointer; transition: all .2s;
-      font-family: var(--font-main);
-    }
+    /* ── FILTER TABS ── */
+    .jelajah_filter_wrap { background: var(--dj-surface); border-bottom: 1px solid var(--dj-border); position: sticky; top: 118px; z-index: 98; }
+    .jelajah_main_tabs_wrap { display: flex; padding: 0 16px; border-bottom: 1px solid var(--dj-border); }
+    .jelajah_main_tab { flex: 1; text-align: center; padding: 12px 8px; font-size: 13px; font-weight: 700; color: var(--dj-muted); border: none; background: none; border-bottom: 2px solid transparent; cursor: pointer; transition: all .2s; font-family: var(--font-main); }
     .jelajah_main_tab.active { color: var(--dj-primary); border-bottom-color: var(--dj-primary); }
-
-    /* Category Scroll */
-    .jelajah_cat_scroll { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; scrollbar-width: none; background: var(--dj-surface); border-bottom: 1px solid var(--dj-bg); }
+    .jelajah_cat_scroll { display: flex; gap: 8px; overflow-x: auto; padding: 10px 16px; scrollbar-width: none; }
     .jelajah_cat_scroll::-webkit-scrollbar { display: none; }
-    .jelajah_cat_chip { flex-shrink: 0; padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--dj-border); font-size: 12px; font-weight: 600; color: var(--dj-muted); cursor: pointer; background: var(--dj-surface); transition: all .18s; white-space: nowrap; font-family: var(--font-main); }
+    .jelajah_cat_chip { flex-shrink: 0; padding: 6px 14px; border-radius: 999px; border: 1.5px solid var(--dj-border); font-size: 12px; font-weight: 600; color: var(--dj-muted); cursor: pointer; background: var(--dj-surface); transition: all .18s; white-space: nowrap; }
     .jelajah_cat_chip.active { background: var(--dj-primary); border-color: var(--dj-primary); color: #fff; }
 
-    /* Body */
+    /* ── BODY ── */
     .jelajah_body { padding: 16px; }
-
-    /* Section Title */
     .jelajah_section_title { font-size: 14px; font-weight: 700; color: var(--dj-ink); margin: 0 0 12px; display: flex; align-items: center; justify-content: space-between; }
-    .jelajah_see_all { font-size: 12px; font-weight: 600; color: var(--dj-primary); text-decoration: none; }
 
-    /* Horizontal Scroll Cards */
+    /* ── HORIZONTAL SCROLL ── */
     .jelajah_hscroll { display: flex; gap: 12px; overflow-x: auto; margin: 0 -16px; padding: 0 16px 4px; scrollbar-width: none; }
     .jelajah_hscroll::-webkit-scrollbar { display: none; }
-
-    /* Destination Card */
     .jelajah_dest_card { flex-shrink: 0; width: 160px; background: var(--dj-surface); border-radius: var(--dj-radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,85,.08); cursor: pointer; transition: transform .15s; border: 1px solid var(--dj-border); }
     .jelajah_dest_card:active { transform: scale(.97); }
-    .jelajah_dest_thumb { width: 100%; height: 110px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .jelajah_dest_thumb { width: 100%; height: 110px; object-fit: cover; display: block; background: var(--dj-bg); }
+    .jelajah_dest_thumb.emoji-thumb { display: flex; align-items: center; justify-content: center; font-size: 40px; }
     .jelajah_dest_body { padding: 10px; }
-    .jelajah_dest_name { font-size: 12px; font-weight: 700; color: var(--dj-ink); margin-bottom: 3px; }
+    .jelajah_dest_name { font-size: 12px; font-weight: 700; color: var(--dj-ink); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .jelajah_dest_loc { font-size: 10px; color: var(--dj-muted); margin-bottom: 5px; display: flex; align-items: center; gap: 3px; }
     .jelajah_dest_meta { display: flex; align-items: center; justify-content: space-between; }
     .jelajah_dest_rating { font-size: 11px; color: var(--dj-amber); font-weight: 600; }
     .jelajah_dest_cat { font-size: 10px; background: var(--dj-primary-light); color: var(--dj-primary); padding: 2px 7px; border-radius: 999px; font-weight: 600; }
 
-    /* Grid Cards */
+    /* ── GRID ── */
     .jelajah_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .jelajah_grid_card { background: var(--dj-surface); border-radius: var(--dj-radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,85,.08); cursor: pointer; border: 1px solid var(--dj-border); }
-    .jelajah_grid_thumb { width: 100%; height: 90px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+    .jelajah_grid_card { background: var(--dj-surface); border-radius: var(--dj-radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,85,.08); cursor: pointer; border: 1px solid var(--dj-border); transition: transform .15s; }
+    .jelajah_grid_card:active { transform: scale(.97); }
+    .jelajah_grid_thumb { width: 100%; height: 100px; object-fit: cover; display: block; background: var(--dj-bg); }
     .jelajah_grid_body { padding: 10px; }
-    .jelajah_grid_name { font-size: 12px; font-weight: 700; color: var(--dj-ink); margin-bottom: 2px; }
+    .jelajah_grid_name { font-size: 12px; font-weight: 700; color: var(--dj-ink); margin-bottom: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .jelajah_grid_sub { font-size: 10px; color: var(--dj-muted); }
     .jelajah_grid_meta { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+    .badge-gem { background: var(--dj-secondary-light); color: #6B4A00; font-size: 9px; padding: 2px 6px; border-radius: 6px; font-weight: 700; }
 
-    /* Event Card */
-    .jelajah_event_card { background: var(--dj-surface); border-radius: var(--dj-radius); padding: 14px; box-shadow: 0 2px 8px rgba(0,0,85,.08); margin-bottom: 12px; display: flex; gap: 12px; cursor: pointer; border: 1px solid var(--dj-border); }
-    .jelajah_event_date { flex-shrink: 0; width: 48px; height: 56px; background: var(--dj-primary); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; }
-    .jelajah_event_day { font-size: 20px; font-weight: 800; line-height: 1; }
-    .jelajah_event_mon { font-size: 10px; font-weight: 600; opacity: .8; }
-    .jelajah_event_info { flex: 1; min-width: 0; }
-    .jelajah_event_name { font-size: 13px; font-weight: 700; color: var(--dj-ink); margin-bottom: 3px; }
-    .jelajah_event_loc { font-size: 11px; color: var(--dj-muted); margin-bottom: 5px; }
-    .jelajah_event_tags { display: flex; gap: 5px; flex-wrap: wrap; }
-    .jelajah_event_tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
-    .jelajah_event_tag.konser { background: var(--dj-secondary-light); color: #6B4A00; }
-    .jelajah_event_tag.tradisi { background: var(--dj-purple-light); color: var(--dj-purple); }
-    .jelajah_event_tag.festival { background: #FCE7F3; color: #9D174D; }
-    .jelajah_event_tag.budaya { background: var(--dj-primary-light); color: var(--dj-primary); }
-    .jelajah_event_tag.free { background: var(--dj-green-light); color: var(--dj-green); }
-    .jelajah_event_tag.berbayar { background: #FEE2E2; color: var(--dj-accent); }
-    .jelajah_add_btn { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--dj-primary-light); color: var(--dj-primary); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; align-self: center; transition: all .15s; }
-    .jelajah_add_btn:active { background: var(--dj-primary); color: #fff; }
+    /* ── LOADING ── */
+    .skeleton { background: linear-gradient(90deg, #e8e8f5 25%, #f4f4fa 50%, #e8e8f5 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 10px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-card { width: 160px; height: 180px; flex-shrink: 0; }
+    .skeleton-grid { height: 180px; }
 
-    /* Pane */
-    .jelajah_pane { display: none; }
-    .jelajah_pane.active { display: block; }
+    /* ══════════════════════════════════════════════════
+       MODAL DETAIL WISATA
+    ══════════════════════════════════════════════════ */
+    .detail-overlay { position: fixed; inset: 0; background: rgba(0,0,30,.55); z-index: 300; display: none; align-items: flex-end; }
+    .detail-overlay.show { display: flex; }
+    .detail-sheet { width: 100%; max-height: 92vh; background: var(--dj-surface); border-radius: 24px 24px 0 0; overflow-y: auto; animation: slideUp .3s ease; position: relative; }
+    @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    /* Background thumbs */
-    .bg_alam { background: linear-gradient(135deg, #A7F3D0, #34D399); }
-    .bg_sejarah { background: linear-gradient(135deg, #FDE68A, #F59E0B); }
-    .bg_rekreasi { background: linear-gradient(135deg, #BFDBFE, #60A5FA); }
-    .bg_museum { background: linear-gradient(135deg, #DDD6FE, #A78BFA); }
-    .bg_budaya { background: linear-gradient(135deg, #FED7AA, #FB923C); }
-    .bg_belanja { background: linear-gradient(135deg, #FBCFE8, #F472B6); }
+    /* Gallery */
+    .detail-gallery { position: relative; }
+    .gallery-scroll { display: flex; overflow-x: auto; gap: 0; scrollbar-width: none; }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-img { width: 100%; height: 230px; object-fit: cover; flex-shrink: 0; }
+    .gallery-count { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+    .gallery-dots { display: flex; gap: 5px; justify-content: center; padding: 8px 0 0; }
+    .gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--dj-border); transition: background .2s; }
+    .gallery-dot.active { background: var(--dj-primary); width: 18px; border-radius: 3px; }
 
-    /* ── Modal: Image AI Scan ── */
-    .dj_modal_overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,30,.55);
-      z-index: 9000;
-      display: flex; align-items: flex-end;
-      backdrop-filter: blur(2px);
-      opacity: 0; pointer-events: none;
-      transition: opacity .25s;
-    }
-    .dj_modal_overlay.show { opacity: 1; pointer-events: all; }
-    .dj_modal_sheet {
-      width: 100%; background: var(--dj-surface);
-      border-radius: 24px 24px 0 0;
-      padding: 20px;
-      transform: translateY(100%);
-      transition: transform .3s cubic-bezier(.34,.01,.23,1);
-      max-height: 85vh; overflow-y: auto;
-      position: relative;
-    }
-    .dj_modal_overlay.show .dj_modal_sheet { transform: translateY(0); }
-    .dj_modal_handle { width: 40px; height: 4px; background: var(--dj-border); border-radius: 2px; margin: 0 auto 16px; }
-    .dj_modal_title { font-size: 16px; font-weight: 800; color: var(--dj-ink); margin-bottom: 8px; }
-    .dj_modal_close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--dj-bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--dj-muted); font-size: 14px; }
+    /* Close btn */
+    .detail-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,.45); color: #fff; border: none; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; }
 
-    /* Upload area */
-    .jelajah_upload_area {
-      border: 2px dashed var(--dj-border);
-      border-radius: 16px;
-      padding: 32px 20px;
-      text-align: center;
-      background: var(--dj-bg);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .jelajah_upload_area:hover, .jelajah_upload_area.drag { border-color: var(--dj-primary); background: var(--dj-primary-light); }
-    .jelajah_upload_icon { font-size: 40px; color: var(--dj-primary); margin-bottom: 10px; }
-    .jelajah_upload_title { font-size: 14px; font-weight: 700; color: var(--dj-ink); margin-bottom: 4px; }
-    .jelajah_upload_sub { font-size: 12px; color: var(--dj-muted); }
-    .jelajah_upload_divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
-    .jelajah_upload_divider::before, .jelajah_upload_divider::after { content: ''; flex: 1; height: 1px; background: var(--dj-border); }
-    .jelajah_upload_divider span { font-size: 11px; color: var(--dj-muted); font-weight: 600; }
-    .jelajah_cam_btn { width: 100%; padding: 12px; background: var(--dj-primary); color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-main); }
+    /* Detail content */
+    .detail-content { padding: 20px 16px 120px; }
+    .detail-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .detail-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+    .detail-badge.kategori { background: var(--dj-primary-light); color: var(--dj-primary); }
+    .detail-badge.klaster { background: var(--dj-purple-light); color: var(--dj-purple); }
+    .detail-badge.gem { background: var(--dj-secondary-light); color: #6B4A00; }
+    .detail-badge.anak { background: var(--dj-green-light); color: var(--dj-green); }
+    .detail-name { font-size: 20px; font-weight: 800; color: var(--dj-ink); margin: 0 0 4px; }
+    .detail-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .detail-stars { color: var(--dj-amber); font-size: 14px; }
+    .detail-rating-num { font-size: 14px; font-weight: 700; color: var(--dj-ink); }
+    .detail-rating-sub { font-size: 12px; color: var(--dj-muted); }
 
-    /* AI result in image modal */
-    .jelajah_ai_result_card { background: var(--dj-primary-light); border-radius: 16px; padding: 16px; margin-top: 16px; border: 1.5px solid rgba(0,0,85,.1); }
-    .jelajah_ai_result_title { font-size: 13px; font-weight: 700; color: var(--dj-primary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .jelajah_ai_result_body { font-size: 12px; color: var(--dj-ink); line-height: 1.6; }
+    .detail-info-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .detail-info-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dj-ink); background: var(--dj-bg); padding: 7px 12px; border-radius: 10px; }
+    .detail-info-item i { color: var(--dj-primary); font-size: 13px; }
 
-    /* Scan loading */
-    .jelajah_scan_loading { display: none; text-align: center; padding: 24px 0; }
-    .jelajah_scan_loading.show { display: block; }
-    .jelajah_scan_dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 10px; }
-    .jelajah_scan_dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dj-primary); animation: djbounce .8s infinite ease-in-out; }
-    .jelajah_scan_dot:nth-child(2){animation-delay:.2s}
-    .jelajah_scan_dot:nth-child(3){animation-delay:.4s}
-    @keyframes djbounce { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)} }
+    .detail-section-label { font-size: 13px; font-weight: 700; color: var(--dj-ink); margin: 16px 0 8px; }
+    .detail-desc { font-size: 13px; color: var(--dj-muted); line-height: 1.65; }
+    .detail-desc.collapsed { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .detail-readmore { font-size: 12px; font-weight: 700; color: var(--dj-primary); background: none; border: none; padding: 4px 0; cursor: pointer; display: block; margin-top: 4px; }
 
-    /* Preview image */
-    .jelajah_preview_img { width: 100%; height: 180px; border-radius: 12px; object-fit: cover; margin-bottom: 12px; display: none; }
+    .detail-fasilitas { display: flex; flex-wrap: wrap; gap: 7px; }
+    .detail-fasilitas-item { font-size: 11px; font-weight: 600; padding: 5px 11px; background: var(--dj-bg); border: 1px solid var(--dj-border); border-radius: 8px; color: var(--dj-ink); }
+
+    .detail-lokasi { display: flex; align-items: flex-start; gap: 8px; background: var(--dj-bg); border-radius: 12px; padding: 12px; }
+    .detail-lokasi i { color: var(--dj-accent); font-size: 16px; margin-top: 1px; }
+    .detail-lokasi-text { font-size: 12px; color: var(--dj-muted); line-height: 1.5; flex: 1; }
+
+    /* ── ACTION BUTTONS (fixed bottom) ── */
+    .detail-actions { position: fixed; bottom: 0; left: 0; right: 0; background: var(--dj-surface); border-top: 1px solid var(--dj-border); padding: 12px 16px; display: none; gap: 8px; z-index: 400; }
+    .detail-actions.show { display: flex; }
+    .btn-action-maps { flex: 1; background: var(--dj-primary-light); color: var(--dj-primary); border: 1.5px solid var(--dj-primary); border-radius: 12px; padding: 11px 8px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-main); }
+    .btn-action-add { flex: 1; background: var(--dj-primary); color: #fff; border: none; border-radius: 12px; padding: 11px 8px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-main); }
+    .btn-action-wa { width: 46px; height: 46px; background: #25D366; color: #fff; border: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; flex-shrink: 0; }
+    .btn-action-ai { width: 46px; height: 46px; background: linear-gradient(135deg, #6B4BC8, #000055); color: #fff; border: none; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; flex-shrink: 0; position: relative; }
+    .btn-action-ai::after { content: 'AI'; position: absolute; bottom: 5px; font-size: 8px; font-weight: 800; letter-spacing: .02em; }
+
+    /* ══════════════════════════════════════════════════
+       MODAL AI CHAT
+    ══════════════════════════════════════════════════ */
+    .ai-overlay { position: fixed; inset: 0; background: rgba(0,0,30,.6); z-index: 500; display: none; align-items: flex-end; }
+    .ai-overlay.show { display: flex; }
+    .ai-sheet { width: 100%; height: 75vh; background: var(--dj-surface); border-radius: 24px 24px 0 0; display: flex; flex-direction: column; animation: slideUp .3s ease; }
+    .ai-header { display: flex; align-items: center; gap: 10px; padding: 16px 16px 12px; border-bottom: 1px solid var(--dj-border); }
+    .ai-header-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #6B4BC8, #000055); display: flex; align-items: center; justify-content: center; font-size: 16px; color: #fff; flex-shrink: 0; }
+    .ai-header-info h4 { font-size: 14px; font-weight: 800; color: var(--dj-ink); margin: 0; }
+    .ai-header-info p { font-size: 11px; color: var(--dj-muted); margin: 0; }
+    .ai-close { margin-left: auto; width: 32px; height: 32px; border-radius: 50%; background: var(--dj-bg); border: none; color: var(--dj-muted); font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .ai-context-chip { margin: 8px 16px; background: var(--dj-primary-soft); border-radius: 10px; padding: 8px 12px; font-size: 11px; color: var(--dj-primary); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .ai-messages { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 12px; }
+    .ai-messages::-webkit-scrollbar { width: 3px; }
+    .ai-messages::-webkit-scrollbar-thumb { background: var(--dj-border); border-radius: 3px; }
+    .ai-msg { display: flex; gap: 8px; align-items: flex-start; animation: fadeUp .25s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .ai-msg.user { flex-direction: row-reverse; }
+    .ai-msg-av { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+    .ai-msg.ai .ai-msg-av { background: linear-gradient(135deg, #6B4BC8, #000055); color: #fff; }
+    .ai-msg.user .ai-msg-av { background: var(--dj-bg); border: 1px solid var(--dj-border); }
+    .ai-bubble { max-width: 80%; padding: 10px 13px; border-radius: 14px; font-size: 13px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
+    .ai-msg.ai .ai-bubble { background: var(--dj-bg); border: 1px solid var(--dj-border); border-top-left-radius: 4px; color: var(--dj-ink); }
+    .ai-msg.user .ai-bubble { background: var(--dj-primary); color: #fff; border-top-right-radius: 4px; }
+    .ai-typing { display: flex; gap: 4px; align-items: center; padding: 2px 0; }
+    .ai-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--dj-muted); animation: dot 1.2s infinite ease-in-out; opacity: .4; }
+    .ai-typing span:nth-child(2) { animation-delay: .2s; }
+    .ai-typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes dot { 0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.3);opacity:1} }
+    .ai-quick { display: flex; gap: 6px; overflow-x: auto; padding: 0 16px 8px; scrollbar-width: none; }
+    .ai-quick::-webkit-scrollbar { display: none; }
+    .ai-quick-btn { flex-shrink: 0; font-size: 11px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--dj-bg); border: 1px solid var(--dj-border); color: var(--dj-ink); cursor: pointer; white-space: nowrap; font-family: var(--font-main); }
+    .ai-input-row { display: flex; gap: 8px; padding: 10px 16px 16px; border-top: 1px solid var(--dj-border); }
+    .ai-input { flex: 1; background: var(--dj-bg); border: 1.5px solid var(--dj-border); border-radius: 12px; padding: 10px 12px; font-size: 13px; font-family: var(--font-main); outline: none; color: var(--dj-ink); resize: none; max-height: 80px; }
+    .ai-input:focus { border-color: var(--dj-primary); }
+    .ai-send { width: 42px; height: 42px; border-radius: 12px; background: var(--dj-primary); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .ai-send:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* ── TOAST ── */
+    .dj-toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--dj-dark); color: #fff; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 999; animation: fadeUp .3s ease; white-space: nowrap; }
   </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- ══ HEADER ══ -->
 <div class="jelajah_header">
-  <div class="d-flex align-items-center gap-2">
-    <i class="fa-solid fa-map-location-dot fa-lg"></i>
+  <div class="d-flex align-items-center justify-content-between">
     <div>
-      <p class="jelajah_header_title">Jelajah Jogja</p>
-      <p class="jelajah_header_sub">Temukan wisata & event terbaik</p>
+      <p class="jelajah_header_title">🗺️ Jelajah Destinasi</p>
+      <p class="jelajah_header_sub">Temukan wisata terbaik Yogyakarta</p>
     </div>
+    <div id="totalCount" style="font-size:11px;opacity:.7"></div>
   </div>
 </div>
 
-<!-- Search Row -->
+<!-- ══ SEARCH ══ -->
 <div class="jelajah_search_wrap">
   <div class="jelajah_search_row">
     <div class="jelajah_search_inner">
-      <i class="fa-solid fa-magnifying-glass jelajah_search_icon"></i>
-      <input class="jelajah_search" type="text" placeholder="Cari destinasi atau event...">
+      <i class="fa fa-search jelajah_search_icon"></i>
+      <input type="text" class="jelajah_search" id="searchInput" placeholder="Cari destinasi wisata...">
     </div>
-    <button class="jelajah_img_btn" onclick="openImageScan()" title="Cari dengan foto">
-      <i class="fa-solid fa-camera"></i>
-    </button>
   </div>
 </div>
 
-<!-- Main Tabs -->
-<div class="jelajah_main_tabs_wrap">
-  <button class="jelajah_main_tab active" onclick="switchMainTab('wisata', this)">
-    <i class="fa-solid fa-mountain-sun me-1"></i> Wisata
+<!-- ══ FILTER TABS ══ -->
+<div class="jelajah_filter_wrap">
+  <div class="jelajah_main_tabs_wrap" id="klasterTabs">
+    <button class="jelajah_main_tab active" data-klaster="">Semua</button>
+    <button class="jelajah_main_tab" data-klaster="Pusat">Pusat</button>
+    <button class="jelajah_main_tab" data-klaster="Utara">Utara</button>
+    <button class="jelajah_main_tab" data-klaster="Selatan">Selatan</button>
+    <button class="jelajah_main_tab" data-klaster="Timur">Timur</button>
+    <button class="jelajah_main_tab" data-klaster="Barat">Barat</button>
+  </div>
+  <div class="jelajah_cat_scroll" id="kategoriChips">
+    <button class="jelajah_cat_chip active" data-kategori="">Semua</button>
+    <button class="jelajah_cat_chip" data-kategori="Alam">🌿 Alam</button>
+    <button class="jelajah_cat_chip" data-kategori="Sejarah">🏛️ Sejarah</button>
+    <button class="jelajah_cat_chip" data-kategori="Budaya">🎭 Budaya</button>
+    <button class="jelajah_cat_chip" data-kategori="Rekreasi">🎡 Rekreasi</button>
+    <button class="jelajah_cat_chip" data-kategori="Belanja">🛍️ Belanja</button>
+    <button class="jelajah_cat_chip" data-kategori="Museum">🏛 Museum</button>
+    <button class="jelajah_cat_chip" data-kategori="Kuliner">🍜 Kuliner</button>
+  </div>
+</div>
+
+<!-- ══ BODY ══ -->
+<div class="jelajah_body">
+
+  <!-- Hidden Gems Section -->
+  <div id="sectionHiddenGem" style="margin-bottom:24px">
+    <div class="jelajah_section_title">
+      <span>💎 Hidden Gems</span>
+    </div>
+    <div class="jelajah_hscroll" id="listHiddenGem">
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    </div>
+  </div>
+
+  <!-- All Wisata Grid -->
+  <div>
+    <div class="jelajah_section_title">
+      <span id="sectionGridTitle">Semua Destinasi</span>
+    </div>
+    <div class="jelajah_grid" id="gridWisata">
+      <div class="skeleton skeleton-grid"></div>
+      <div class="skeleton skeleton-grid"></div>
+      <div class="skeleton skeleton-grid"></div>
+      <div class="skeleton skeleton-grid"></div>
+    </div>
+    <div id="loadMoreWrap" style="text-align:center;margin-top:16px;display:none">
+      <button id="btnLoadMore" onclick="loadMore()" style="background:var(--dj-primary-light);color:var(--dj-primary);border:1.5px solid var(--dj-primary);border-radius:12px;padding:10px 28px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-main);">
+        Muat Lebih Banyak
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL DETAIL WISATA
+══════════════════════════════════════ -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-sheet" id="detailSheet">
+    <button class="detail-close" onclick="closeDetailBtn()"><i class="fa fa-times"></i></button>
+
+    <!-- Gallery -->
+    <div class="detail-gallery" id="detailGallery">
+      <div class="gallery-scroll" id="galleryScroll"></div>
+      <div class="gallery-count" id="galleryCount">1 / 1</div>
+    </div>
+    <div class="gallery-dots" id="galleryDots"></div>
+
+    <!-- Content -->
+    <div class="detail-content">
+      <div class="detail-badges" id="detailBadges"></div>
+      <h2 class="detail-name" id="detailName">—</h2>
+
+      <div class="detail-rating">
+        <div class="detail-stars" id="detailStars"></div>
+        <span class="detail-rating-num" id="detailRatingNum"></span>
+        <span class="detail-rating-sub" id="detailRatingSub"></span>
+      </div>
+
+      <!-- Info Row -->
+      <div class="detail-info-row" id="detailInfoRow"></div>
+
+      <!-- Deskripsi -->
+      <div class="detail-section-label">Tentang Tempat Ini</div>
+      <div class="detail-desc collapsed" id="detailDesc"></div>
+      <button class="detail-readmore" id="btnReadMore" onclick="toggleReadMore()">Baca selengkapnya ▾</button>
+
+      <!-- Fasilitas -->
+      <div class="detail-section-label">Fasilitas</div>
+      <div class="detail-fasilitas" id="detailFasilitas"></div>
+
+      <!-- Lokasi -->
+      <div class="detail-section-label">Lokasi</div>
+      <div class="detail-lokasi" id="detailLokasi">
+        <i class="fa fa-map-marker-alt"></i>
+        <span class="detail-lokasi-text" id="detailLokasiText"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Action Buttons (fixed bottom) -->
+<div class="detail-actions" id="detailActions">
+  <button class="btn-action-maps" id="btnMaps" onclick="bukaGmaps()">
+    <i class="fa fa-map-marker-alt"></i> Lihat di Maps
   </button>
-  <button class="jelajah_main_tab" onclick="switchMainTab('event', this)">
-    <i class="fa-solid fa-calendar-star me-1"></i> Event
+  <button class="btn-action-add" id="btnAddItinerary" onclick="tambahItinerary()">
+    <i class="fa fa-plus"></i> Tambah Itinerary
+  </button>
+  <button class="btn-action-wa" onclick="shareWA()" title="Share ke WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </button>
+  <button class="btn-action-ai" onclick="bukaAI()" title="Tanya AI">
+    <i class="fa fa-robot" style="margin-bottom:10px"></i>
   </button>
 </div>
 
-<!-- ═══ WISATA PANE ═══ -->
-<div class="jelajah_pane active" id="pane_wisata">
-  <div class="jelajah_cat_scroll">
-    <button class="jelajah_cat_chip active" onclick="filterWisata('semua', this)">🗺️ Semua</button>
-    <button class="jelajah_cat_chip" onclick="filterWisata('alam', this)">🌿 Alam</button>
-    <button class="jelajah_cat_chip" onclick="filterWisata('belanja', this)">🛍️ Belanja</button>
-    <button class="jelajah_cat_chip" onclick="filterWisata('rekreasi', this)">🎡 Rekreasi</button>
-    <button class="jelajah_cat_chip" onclick="filterWisata('museum', this)">🏛️ Museum</button>
-    <button class="jelajah_cat_chip" onclick="filterWisata('budaya', this)">🎭 Budaya</button>
-  </div>
-
-  <div class="jelajah_body">
-    <div class="jelajah_section_title">
-      <span><i class="fa-solid fa-location-dot me-1" style="color:var(--dj-primary)"></i>Dekat Kamu</span>
-      <a href="#" class="jelajah_see_all">Lihat semua</a>
+<!-- ══════════════════════════════════════
+     MODAL AI CHAT
+══════════════════════════════════════ -->
+<div class="ai-overlay" id="aiOverlay" onclick="closeAI(event)">
+  <div class="ai-sheet" onclick="event.stopPropagation()">
+    <div class="ai-header">
+      <div class="ai-header-avatar">🤖</div>
+      <div class="ai-header-info">
+        <h4>DolanJogja AI</h4>
+        <p>Tanya apa saja tentang destinasi ini</p>
+      </div>
+      <button class="ai-close" onclick="closeAIBtn()"><i class="fa fa-times"></i></button>
     </div>
-    <div class="jelajah_hscroll" style="margin-bottom:20px;">
-      <div class="jelajah_dest_card" onclick="addToItinerary('Keraton Yogyakarta')">
-        <div class="jelajah_dest_thumb bg_sejarah">🏰</div>
-        <div class="jelajah_dest_body">
-          <div class="jelajah_dest_name">Keraton Yogyakarta</div>
-          <div class="jelajah_dest_loc"><i class="fa-solid fa-location-dot fa-2xs"></i> Kota, 1.2 km</div>
-          <div class="jelajah_dest_meta"><span class="jelajah_dest_rating">⭐ 4.8</span><span class="jelajah_dest_cat">Sejarah</span></div>
-        </div>
-      </div>
-      <div class="jelajah_dest_card" onclick="addToItinerary('Malioboro')">
-        <div class="jelajah_dest_thumb bg_belanja">🛍️</div>
-        <div class="jelajah_dest_body">
-          <div class="jelajah_dest_name">Malioboro</div>
-          <div class="jelajah_dest_loc"><i class="fa-solid fa-location-dot fa-2xs"></i> Kota, 0.8 km</div>
-          <div class="jelajah_dest_meta"><span class="jelajah_dest_rating">⭐ 4.7</span><span class="jelajah_dest_cat">Belanja</span></div>
-        </div>
-      </div>
-      <div class="jelajah_dest_card" onclick="addToItinerary('Taman Sari')">
-        <div class="jelajah_dest_thumb bg_budaya">🏯</div>
-        <div class="jelajah_dest_body">
-          <div class="jelajah_dest_name">Taman Sari</div>
-          <div class="jelajah_dest_loc"><i class="fa-solid fa-location-dot fa-2xs"></i> Kota, 1.5 km</div>
-          <div class="jelajah_dest_meta"><span class="jelajah_dest_rating">⭐ 4.6</span><span class="jelajah_dest_cat">Budaya</span></div>
-        </div>
-      </div>
-      <div class="jelajah_dest_card" onclick="addToItinerary('Benteng Vredeburg')">
-        <div class="jelajah_dest_thumb bg_museum">🏛️</div>
-        <div class="jelajah_dest_body">
-          <div class="jelajah_dest_name">Benteng Vredeburg</div>
-          <div class="jelajah_dest_loc"><i class="fa-solid fa-location-dot fa-2xs"></i> Kota, 0.6 km</div>
-          <div class="jelajah_dest_meta"><span class="jelajah_dest_rating">⭐ 4.5</span><span class="jelajah_dest_cat">Museum</span></div>
-        </div>
+
+    <div class="ai-context-chip" id="aiContextChip">
+      <i class="fa fa-map-pin"></i>
+      <span id="aiContextName">—</span>
+    </div>
+
+    <div class="ai-messages" id="aiMessages">
+      <div class="ai-msg ai">
+        <div class="ai-msg-av">🤖</div>
+        <div class="ai-bubble" id="aiWelcomeMsg">Halo! Saya DolanJogja AI 👋 Mau tanya apa tentang tempat ini?</div>
       </div>
     </div>
 
-    <div class="jelajah_section_title">
-      <span>💎 Hidden Gems Jogja</span>
-      <a href="#" class="jelajah_see_all">Lihat semua</a>
-    </div>
-    <div class="jelajah_grid" style="margin-bottom:20px;">
-      <div class="jelajah_grid_card" onclick="addToItinerary('On The Rock')">
-        <div class="jelajah_grid_thumb bg_alam">🌄</div>
-        <div class="jelajah_grid_body">
-          <div class="jelajah_grid_name">On The Rock</div>
-          <div class="jelajah_grid_sub">Gunungkidul · Alam</div>
-          <div class="jelajah_grid_meta"><span style="font-size:11px;color:var(--dj-amber);font-weight:600;">⭐ 4.7</span><span style="font-size:10px;background:var(--dj-green-light);color:var(--dj-green);padding:2px 7px;border-radius:999px;font-weight:600;">Sepi</span></div>
-        </div>
-      </div>
-      <div class="jelajah_grid_card" onclick="addToItinerary('Obelix Sea View')">
-        <div class="jelajah_grid_thumb" style="background:linear-gradient(135deg,#BAE6FD,#0EA5E9)">🌊</div>
-        <div class="jelajah_grid_body">
-          <div class="jelajah_grid_name">Obelix Sea View</div>
-          <div class="jelajah_grid_sub">Gunungkidul · Alam</div>
-          <div class="jelajah_grid_meta"><span style="font-size:11px;color:var(--dj-amber);font-weight:600;">⭐ 4.8</span><span style="font-size:10px;background:var(--dj-green-light);color:var(--dj-green);padding:2px 7px;border-radius:999px;font-weight:600;">Sepi</span></div>
-        </div>
-      </div>
-      <div class="jelajah_grid_card" onclick="addToItinerary('Museum Ullen Sentalu')">
-        <div class="jelajah_grid_thumb bg_museum">🏛️</div>
-        <div class="jelajah_grid_body">
-          <div class="jelajah_grid_name">Museum Ullen Sentalu</div>
-          <div class="jelajah_grid_sub">Sleman · Museum</div>
-          <div class="jelajah_grid_meta"><span style="font-size:11px;color:var(--dj-amber);font-weight:600;">⭐ 4.9</span><span style="font-size:10px;background:var(--dj-secondary-light);color:#6B4A00;padding:2px 7px;border-radius:999px;font-weight:600;">Ramai</span></div>
-        </div>
-      </div>
-      <div class="jelajah_grid_card" onclick="addToItinerary('Tebing Breksi')">
-        <div class="jelajah_grid_thumb" style="background:linear-gradient(135deg,#D1FAE5,#34D399)">⛰️</div>
-        <div class="jelajah_grid_body">
-          <div class="jelajah_grid_name">Tebing Breksi</div>
-          <div class="jelajah_grid_sub">Sleman · Alam</div>
-          <div class="jelajah_grid_meta"><span style="font-size:11px;color:var(--dj-amber);font-weight:600;">⭐ 4.5</span><span style="font-size:10px;background:var(--dj-green-light);color:var(--dj-green);padding:2px 7px;border-radius:999px;font-weight:600;">Sepi</span></div>
-        </div>
-      </div>
-      <div class="jelajah_grid_card" onclick="addToItinerary('Candi Prambanan')">
-        <div class="jelajah_grid_thumb bg_sejarah">🕌</div>
-        <div class="jelajah_grid_body">
-          <div class="jelajah_grid_name">Candi Prambanan</div>
-          <div class="jelajah_grid_sub">Sleman · Sejarah</div>
-          <div class="jelajah_grid_meta"><span style="font-size:11px;color:var(--dj-amber);font-weight:600;">⭐ 4.8</span><span style="font-size:10px;background:#FEE2E2;color:var(--dj-accent);padding:2px 7px;border-radius:999px;font-weight:600;">Padat</span></div>
-        </div>
-      </div>
-      <div class="jelajah_grid_card" onclick="addToItinerary('Jungwok Blue Ocean')">
-        <div class="jelajah_grid_thumb" style="background:linear-gradient(135deg,#99F6E4,#14B8A6)">🐠</div>
-        <div class="jelajah_grid_body">
-          <div class="jelajah_grid_name">Jungwok Blue Ocean</div>
-          <div class="jelajah_grid_sub">Gunungkidul · Alam</div>
-          <div class="jelajah_grid_meta"><span style="font-size:11px;color:var(--dj-amber);font-weight:600;">⭐ 4.6</span><span style="font-size:10px;background:var(--dj-green-light);color:var(--dj-green);padding:2px 7px;border-radius:999px;font-weight:600;">Sepi</span></div>
-        </div>
-      </div>
+    <div class="ai-quick" id="aiQuickBtns">
+      <button class="ai-quick-btn" onclick="quickAsk('Berapa estimasi total biaya ke sini?')">💰 Estimasi biaya</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Bagaimana cara menuju ke sini dari Malioboro?')">🚗 Cara menuju</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Jam terbaik untuk berkunjung kapan?')">⏰ Waktu terbaik</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Ada kuliner enak di sekitar sini?')">🍜 Kuliner sekitar</button>
+      <button class="ai-quick-btn" onclick="quickAsk('Rekomendasikan tempat serupa lainnya')">📍 Tempat serupa</button>
     </div>
 
-    <div class="jelajah_section_title">
-      <span><i class="fa-solid fa-compass me-1" style="color:var(--dj-primary)"></i>Semua Destinasi</span>
-    </div>
-    <div style="background:var(--dj-surface);border-radius:var(--dj-radius);box-shadow:0 2px 8px rgba(0,0,85,.07);overflow:hidden;margin-bottom:20px;border:1px solid var(--dj-border);">
-      <div id="wisata_list"></div>
+    <div class="ai-input-row">
+      <textarea class="ai-input" id="aiInput" placeholder="Ketik pertanyaan..." rows="1"
+        onkeydown="aiHandleKey(event)" oninput="aiAutoResize(this)"></textarea>
+      <button class="ai-send" id="aiSendBtn" onclick="kirimAI()">
+        <i class="fa fa-paper-plane"></i>
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ═══ EVENT PANE ═══ -->
-<div class="jelajah_pane" id="pane_event">
-  <div class="jelajah_cat_scroll">
-    <button class="jelajah_cat_chip active" onclick="filterEvent('semua', this)">📅 Semua</button>
-    <button class="jelajah_cat_chip" onclick="filterEvent('konser', this)">🎵 Konser</button>
-    <button class="jelajah_cat_chip" onclick="filterEvent('budaya', this)">🎭 Budaya</button>
-    <button class="jelajah_cat_chip" onclick="filterEvent('festival', this)">🎪 Festival</button>
-  </div>
-  <div class="jelajah_body">
-    <div class="jelajah_section_title"><span>Event Bulan Ini</span></div>
-    <div class="jelajah_event_card">
-      <div class="jelajah_event_date"><div class="jelajah_event_day">12</div><div class="jelajah_event_mon">MEI</div></div>
-      <div class="jelajah_event_info">
-        <div class="jelajah_event_name">Jazz Mben Senen</div>
-        <div class="jelajah_event_loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Benteng Vredeburg, Kota</div>
-        <div class="jelajah_event_tags"><span class="jelajah_event_tag konser">Konser</span><span class="jelajah_event_tag free">Gratis</span></div>
-      </div>
-      <button class="jelajah_add_btn" onclick="addEventToItinerary('Jazz Mben Senen')"><i class="fa-solid fa-plus fa-xs"></i></button>
-    </div>
-    <div class="jelajah_event_card">
-      <div class="jelajah_event_date" style="background:var(--dj-purple);"><div class="jelajah_event_day">15</div><div class="jelajah_event_mon">MEI</div></div>
-      <div class="jelajah_event_info">
-        <div class="jelajah_event_name">Sekaten 2026</div>
-        <div class="jelajah_event_loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Alun-Alun Utara, Kota</div>
-        <div class="jelajah_event_tags"><span class="jelajah_event_tag tradisi">Tradisi</span><span class="jelajah_event_tag budaya">Budaya</span><span class="jelajah_event_tag free">Gratis</span></div>
-      </div>
-      <button class="jelajah_add_btn" onclick="addEventToItinerary('Sekaten 2026')"><i class="fa-solid fa-plus fa-xs"></i></button>
-    </div>
-    <div class="jelajah_event_card">
-      <div class="jelajah_event_date" style="background:var(--dj-amber);"><div class="jelajah_event_day">20</div><div class="jelajah_event_mon">MEI</div></div>
-      <div class="jelajah_event_info">
-        <div class="jelajah_event_name">Ramayana Ballet Prambanan</div>
-        <div class="jelajah_event_loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Candi Prambanan, Sleman</div>
-        <div class="jelajah_event_tags"><span class="jelajah_event_tag tradisi">Tradisi</span><span class="jelajah_event_tag berbayar">Rp 150.000</span></div>
-      </div>
-      <button class="jelajah_add_btn" onclick="addEventToItinerary('Ramayana Ballet')"><i class="fa-solid fa-plus fa-xs"></i></button>
-    </div>
-    <div class="jelajah_event_card">
-      <div class="jelajah_event_date" style="background:#DB2777;"><div class="jelajah_event_day">1</div><div class="jelajah_event_mon">JUN</div></div>
-      <div class="jelajah_event_info">
-        <div class="jelajah_event_name">Festival Kebudayaan Yogyakarta</div>
-        <div class="jelajah_event_loc"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>Berbagai lokasi, DIY</div>
-        <div class="jelajah_event_tags"><span class="jelajah_event_tag festival">Festival</span><span class="jelajah_event_tag budaya">Budaya</span><span class="jelajah_event_tag free">Gratis</span></div>
-      </div>
-      <button class="jelajah_add_btn" onclick="addEventToItinerary('Festival Kebudayaan Yogyakarta')"><i class="fa-solid fa-plus fa-xs"></i></button>
-    </div>
-    <div style="height:20px;"></div>
-  </div>
-</div>
-
-<!-- ═══ MODAL: Image AI Scan ═══ -->
-<div class="dj_modal_overlay" id="modal_imgscan" onclick="closeImgModal()">
-  <div class="dj_modal_sheet" onclick="event.stopPropagation()">
-    <div class="dj_modal_handle"></div>
-    <button class="dj_modal_close" onclick="closeImgModal()"><i class="fa-solid fa-xmark"></i></button>
-    <div style="font-size:24px;margin-bottom:6px;">🔍</div>
-    <div class="dj_modal_title">Kenali Destinasi dari Foto</div>
-    <div style="font-size:12px;color:var(--dj-muted);margin-bottom:16px;">Upload atau ambil foto destinasi wisata, AI kami akan mengenali lokasinya dan memberikan informasi lengkap!</div>
-
-    <img id="img_preview" class="jelajah_preview_img" alt="Preview">
-
-    <div class="jelajah_upload_area" id="upload_area" onclick="document.getElementById('file_input').click()">
-      <div class="jelajah_upload_icon"><i class="fa-solid fa-image"></i></div>
-      <div class="jelajah_upload_title">Pilih dari Galeri</div>
-      <div class="jelajah_upload_sub">Tap untuk memilih foto dari perangkatmu</div>
-    </div>
-    <input type="file" id="file_input" accept="image/*" style="display:none;" onchange="handleFileSelect(event)">
-
-    <div class="jelajah_upload_divider"><span>atau</span></div>
-
-    <button class="jelajah_cam_btn" onclick="document.getElementById('cam_input').click()">
-      <i class="fa-solid fa-camera"></i> Ambil Foto Sekarang
-    </button>
-    <input type="file" id="cam_input" accept="image/*" capture="environment" style="display:none;" onchange="handleFileSelect(event)">
-
-    <!-- Loading -->
-    <div class="jelajah_scan_loading" id="scan_loading">
-      <div class="jelajah_scan_dots">
-        <div class="jelajah_scan_dot"></div>
-        <div class="jelajah_scan_dot"></div>
-        <div class="jelajah_scan_dot"></div>
-      </div>
-      <div style="font-size:13px;font-weight:600;color:var(--dj-muted);">AI sedang menganalisis foto...</div>
-      <div style="font-size:11px;color:#9999BB;margin-top:4px;" id="scan_step">Mengidentifikasi landmark...</div>
-    </div>
-
-    <!-- AI Result -->
-    <div class="jelajah_ai_result_card" id="scan_result" style="display:none;">
-      <div class="jelajah_ai_result_title">
-        <i class="fa-solid fa-wand-magic-sparkles"></i>
-        Hasil Identifikasi AI
-      </div>
-      <div class="jelajah_ai_result_body" id="scan_result_text"></div>
-      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;" id="scan_result_btns"></div>
-    </div>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ══ SCRIPTS ══ -->
 <script>
-  function switchMainTab(tab, el) {
-    document.querySelectorAll('.jelajah_main_tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    document.querySelectorAll('.jelajah_pane').forEach(p => p.classList.remove('active'));
-    document.getElementById('pane_' + tab).classList.add('active');
-  }
+// ======================================================
+// STATE
+// ======================================================
+let currentKlaster  = '';
+let currentKategori = '';
+let currentSearch   = '';
+let currentOffset   = 0;
+const LIMIT         = 20;
+let totalWisata     = 0;
+let activeWisata    = null;   // data wisata yang sedang dibuka
+let aiHistory       = [];
+let isAILoading     = false;
+let descExpanded    = false;
+let galeriData      = [];
+let galeriIndex     = 0;
 
-  function filterWisata(cat, el) {
-    document.querySelectorAll('#pane_wisata .jelajah_cat_chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    showToast('Filter: ' + cat.charAt(0).toUpperCase() + cat.slice(1));
-  }
+const API_URL    = 'api_wisata.php';
+const AI_URL     = 'ai_wisata.php';
 
-  function filterEvent(cat, el) {
-    document.querySelectorAll('#pane_event .jelajah_cat_chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    showToast('Filter: ' + cat.charAt(0).toUpperCase() + cat.slice(1));
-  }
+// ======================================================
+// INIT
+// ======================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadHiddenGems();
+  loadGrid(true);
+  initSearch();
+  initFilters();
+});
 
-  function addToItinerary(name) { showToast('✅ ' + name + ' ditambahkan ke itinerary!'); }
-  function addEventToItinerary(name) { showToast('🎉 ' + name + ' ditambahkan ke itinerary!'); }
-
-  // Wisata list
-  const wisataData = [
-    { nama: 'Pantai Parangtritis', lokasi: 'Bantul', kat: 'Alam', emoji: '🌅', rating: '4.5', status: 'Ramai', statusColor: 'var(--dj-accent)', statusBg: '#FEE2E2' },
-    { nama: 'Kebun Teh Nglinggo', lokasi: 'Kulon Progo', kat: 'Alam', emoji: '🌿', rating: '4.6', status: 'Sepi', statusColor: 'var(--dj-green)', statusBg: 'var(--dj-green-light)' },
-    { nama: 'Museum Sonobudoyo', lokasi: 'Kota', kat: 'Museum', emoji: '🏺', rating: '4.4', status: 'Normal', statusColor: 'var(--dj-primary)', statusBg: 'var(--dj-primary-light)' },
-    { nama: 'Gembira Loka Zoo', lokasi: 'Kota', kat: 'Rekreasi', emoji: '🦁', rating: '4.3', status: 'Ramai', statusColor: 'var(--dj-accent)', statusBg: '#FEE2E2' },
-    { nama: 'Pasar Beringharjo', lokasi: 'Kota', kat: 'Belanja', emoji: '🛒', rating: '4.4', status: 'Ramai', statusColor: 'var(--dj-accent)', statusBg: '#FEE2E2' },
-    { nama: 'Hutan Pinus Mangunan', lokasi: 'Bantul', kat: 'Alam', emoji: '🌲', rating: '4.5', status: 'Normal', statusColor: 'var(--dj-primary)', statusBg: 'var(--dj-primary-light)' },
-  ];
-
-  function renderWisataList() {
-    const container = document.getElementById('wisata_list');
-    container.innerHTML = wisataData.map((w, i) => `
-      <div onclick="addToItinerary('${w.nama}')" style="display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;${i < wisataData.length-1 ? 'border-bottom:1px solid var(--dj-bg);' : ''}">
-        <div style="width:44px;height:44px;border-radius:12px;background:var(--dj-bg);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">${w.emoji}</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:13px;font-weight:700;color:var(--dj-ink);">${w.nama}</div>
-          <div style="font-size:11px;color:var(--dj-muted);"><i class="fa-solid fa-location-dot fa-2xs me-1"></i>${w.lokasi} · ${w.kat}</div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;">
-          <span style="font-size:11px;font-weight:600;color:var(--dj-amber);">⭐ ${w.rating}</span>
-          <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px;background:${w.statusBg};color:${w.statusColor};">${w.status}</span>
-        </div>
-      </div>
-    `).join('');
-  }
-  renderWisataList();
-
-  // ── Image Scan Modal ──
-  function openImgModal() {
-    document.getElementById('modal_imgscan').classList.add('show');
-    document.getElementById('scan_result').style.display = 'none';
-    document.getElementById('scan_loading').classList.remove('show');
-    document.getElementById('img_preview').style.display = 'none';
-    document.getElementById('upload_area').style.display = 'block';
-  }
-  function openImageScan() { openImgModal(); }
-  function closeImgModal() { document.getElementById('modal_imgscan').classList.remove('show'); }
-
-  const scanSteps = ['Mengidentifikasi landmark...', 'Mencocokkan database wisata Jogja...', 'Menyiapkan informasi detail...'];
-  const aiResults = [
-    { nama: 'Candi Prambanan', desc: 'Candi Hindu terbesar di Indonesia, berlokasi di Sleman. Dibangun abad ke-9, ditetapkan sebagai Situs Warisan Dunia UNESCO. Jam buka 06.00–17.30, tiket Rp 50.000.', emoji: '🕌' },
-    { nama: 'Keraton Yogyakarta', desc: 'Istana Sultan Yogyakarta yang berdiri sejak 1755. Pusat kebudayaan Jawa yang masih aktif. Jam buka 09.00–14.00 (Senin tutup), tiket Rp 15.000.', emoji: '🏰' },
-    { nama: 'Malioboro', desc: 'Jalan ikonik Yogyakarta yang terkenal dengan pedagang batik dan oleh-oleh. Aktif 24 jam, wisata gratis. Ramai terutama sore hingga malam hari.', emoji: '🛍️' },
-  ];
-  let scanResultIdx = 0;
-
-  function handleFileSelect(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const preview = document.getElementById('img_preview');
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      preview.src = e.target.result;
-      preview.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-    document.getElementById('upload_area').style.display = 'none';
-
-    // Show loading
-    const loading = document.getElementById('scan_loading');
-    loading.classList.add('show');
-    document.getElementById('scan_result').style.display = 'none';
-
-    let step = 0;
-    const stepEl = document.getElementById('scan_step');
-    const interval = setInterval(() => {
-      if (step < scanSteps.length) { stepEl.textContent = scanSteps[step++]; }
-      else {
-        clearInterval(interval);
-        loading.classList.remove('show');
-        const result = aiResults[scanResultIdx % aiResults.length]; scanResultIdx++;
-        document.getElementById('scan_result_text').innerHTML = `
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <span style="font-size:24px;">${result.emoji}</span>
-            <strong style="font-size:14px;color:var(--dj-ink);">${result.nama}</strong>
-          </div>
-          <p style="margin:0;">${result.desc}</p>
-        `;
-        document.getElementById('scan_result_btns').innerHTML = `
-          <button onclick="addToItinerary('${result.nama}');closeImgModal();" style="flex:1;padding:10px;background:var(--dj-primary);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-main);">+ Tambah ke Itinerary</button>
-          <button onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(result.nama + ' Yogyakarta')}','_blank')" style="padding:10px 14px;background:var(--dj-green-light);color:var(--dj-green);border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font-main);">🗺️ Maps</button>
-        `;
-        document.getElementById('scan_result').style.display = 'block';
-      }
-    }, 700);
-  }
-
-  function showToast(msg) {
-    let t = document.getElementById('local-toast');
-    if (!t) {
-      t = document.createElement('div');
-      t.id = 'local-toast';
-      t.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0D0D2B;color:#fff;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:500;z-index:9999;opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none;max-width:90%;text-align:center;';
-      document.body.appendChild(t);
+// ======================================================
+// LOAD HIDDEN GEMS (horizontal scroll)
+// ======================================================
+async function loadHiddenGems() {
+  const container = document.getElementById('listHiddenGem');
+  try {
+    const res  = await fetch(`${API_URL}?action=list&hidden=1&limit=10`);
+    const json = await res.json();
+    if (!json.success || !json.data.length) {
+      document.getElementById('sectionHiddenGem').style.display = 'none';
+      return;
     }
-    t.textContent = msg;
-    t.style.opacity = '1';
-    setTimeout(() => t.style.opacity = '0', 2200);
+    container.innerHTML = json.data.map(w => renderHScrollCard(w)).join('');
+  } catch (e) {
+    document.getElementById('sectionHiddenGem').style.display = 'none';
   }
+}
+
+function renderHScrollCard(w) {
+  const stars = renderStars(w.stat_stars);
+  const foto  = w.foto_utama
+    ? `<img class="jelajah_dest_thumb" src="${escHtml(w.foto_utama)}" alt="${escHtml(w.nama_tempat)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'jelajah_dest_thumb emoji-thumb\\'>${jenisEmoji(w.jenis_wisata)}</div>'">`
+    : `<div class="jelajah_dest_thumb emoji-thumb">${jenisEmoji(w.jenis_wisata)}</div>`;
+  return `
+  <div class="jelajah_dest_card" onclick="bukaDetail(${w.id_wisata})">
+    ${foto}
+    <div class="jelajah_dest_body">
+      <div class="jelajah_dest_name">${escHtml(w.nama_tempat)}</div>
+      <div class="jelajah_dest_loc"><i class="fa fa-map-pin" style="font-size:9px"></i>${escHtml(w.klaster)}</div>
+      <div class="jelajah_dest_meta">
+        <span class="jelajah_dest_rating">★ ${w.stat_stars.toFixed(1)}</span>
+        <span class="jelajah_dest_cat">${escHtml(w.jenis_wisata)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ======================================================
+// LOAD GRID WISATA
+// ======================================================
+async function loadGrid(reset = false) {
+  if (reset) {
+    currentOffset = 0;
+    document.getElementById('gridWisata').innerHTML = '<div class="skeleton skeleton-grid"></div><div class="skeleton skeleton-grid"></div><div class="skeleton skeleton-grid"></div><div class="skeleton skeleton-grid"></div>';
+    document.getElementById('loadMoreWrap').style.display = 'none';
+  }
+
+  const params = new URLSearchParams({
+    action: 'list',
+    limit:  LIMIT,
+    offset: currentOffset,
+  });
+  if (currentKlaster)  params.append('klaster',  currentKlaster);
+  if (currentKategori) params.append('kategori', currentKategori);
+  if (currentSearch)   params.append('search',   currentSearch);
+
+  try {
+    const res  = await fetch(`${API_URL}?${params}`);
+    const json = await res.json();
+    if (!json.success) return;
+
+    totalWisata = json.total;
+    document.getElementById('totalCount').textContent = totalWisata + ' destinasi';
+    document.getElementById('sectionGridTitle').textContent =
+      currentSearch ? `Hasil: "${currentSearch}"` :
+      (currentKategori || currentKlaster) ? 'Destinasi Tersaring' : 'Semua Destinasi';
+
+    if (reset) {
+      document.getElementById('gridWisata').innerHTML = json.data.length
+        ? json.data.map(w => renderGridCard(w)).join('')
+        : '<p style="color:var(--dj-muted);font-size:13px;grid-column:1/-1;text-align:center;padding:24px 0">Tidak ada destinasi ditemukan</p>';
+    } else {
+      document.getElementById('gridWisata').insertAdjacentHTML('beforeend', json.data.map(w => renderGridCard(w)).join(''));
+    }
+
+    currentOffset += json.data.length;
+    document.getElementById('loadMoreWrap').style.display =
+      currentOffset < totalWisata ? 'block' : 'none';
+
+  } catch (e) {
+    document.getElementById('gridWisata').innerHTML = '<p style="color:var(--dj-muted);font-size:13px;grid-column:1/-1;text-align:center;padding:24px 0">Gagal memuat data</p>';
+  }
+}
+
+function loadMore() {
+  loadGrid(false);
+}
+
+function renderGridCard(w) {
+  const foto = w.foto_utama
+    ? `<img class="jelajah_grid_thumb" src="${escHtml(w.foto_utama)}" alt="${escHtml(w.nama_tempat)}" loading="lazy" onerror="this.src='';this.style.display='none'">`
+    : `<div class="jelajah_grid_thumb emoji-thumb" style="display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--dj-bg)">${jenisEmoji(w.jenis_wisata)}</div>`;
+  const gemBadge = w.is_hidden_gem ? '<span class="badge-gem">💎 Hidden Gem</span>' : '';
+  return `
+  <div class="jelajah_grid_card" onclick="bukaDetail(${w.id_wisata})">
+    ${foto}
+    <div class="jelajah_grid_body">
+      <div class="jelajah_grid_name">${escHtml(w.nama_tempat)}</div>
+      <div class="jelajah_grid_sub">${escHtml(w.klaster)} · ${escHtml(w.kabupaten)}</div>
+      <div class="jelajah_grid_meta">
+        <span style="font-size:11px;color:var(--dj-amber);font-weight:600">★ ${w.stat_stars.toFixed(1)}</span>
+        ${gemBadge}
+        <span style="font-size:10px;color:var(--dj-muted)">${escHtml(w.harga_label)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ======================================================
+// BUKA DETAIL WISATA
+// ======================================================
+async function bukaDetail(id) {
+  // Show skeleton loading
+  document.getElementById('detailOverlay').classList.add('show');
+  document.getElementById('detailActions').classList.add('show');
+  document.getElementById('detailName').textContent = 'Memuat...';
+  document.getElementById('detailDesc').textContent = '';
+  document.getElementById('galleryScroll').innerHTML = '<div style="width:100%;height:230px;background:var(--dj-bg);display:flex;align-items:center;justify-content:center;color:var(--dj-muted);font-size:13px">Memuat galeri...</div>';
+  document.getElementById('detailBadges').innerHTML   = '';
+  document.getElementById('detailInfoRow').innerHTML  = '';
+  document.getElementById('detailFasilitas').innerHTML= '';
+  document.body.style.overflow = 'hidden';
+  descExpanded = false;
+
+  try {
+    const res  = await fetch(`${API_URL}?action=detail&id=${id}`);
+    const json = await res.json();
+    if (!json.success) { closeDetailBtn(); showToast('Gagal memuat detail'); return; }
+
+    const w = json.wisata;
+    galeriData = json.galeri || [];
+    activeWisata = { ...w, fasilitas: w.fasilitas, galeri: galeriData };
+
+    // Nama & badges
+    document.getElementById('detailName').textContent = w.nama_tempat;
+
+    const badges = [];
+    badges.push(`<span class="detail-badge kategori">${jenisEmoji(w.jenis_wisata)} ${w.jenis_wisata}</span>`);
+    badges.push(`<span class="detail-badge klaster">${w.klaster} · ${w.kabupaten}</span>`);
+    if (w.is_hidden_gem) badges.push('<span class="detail-badge gem">💎 Hidden Gem</span>');
+    if (w.is_ramah_anak) badges.push('<span class="detail-badge anak">👧 Ramah Anak</span>');
+    document.getElementById('detailBadges').innerHTML = badges.join('');
+
+    // Rating
+    document.getElementById('detailStars').innerHTML = renderStars(w.stat_stars);
+    document.getElementById('detailRatingNum').textContent = w.stat_stars.toFixed(1);
+    document.getElementById('detailRatingSub').textContent = `(${w.stat_ulasan} ulasan)`;
+
+    // Info row
+    const infos = [
+      `<i class="fa fa-clock"></i> ${w.jam_label}`,
+      `<i class="fa fa-ticket-alt"></i> ${w.harga_label}`,
+      `<i class="fa fa-users"></i> ${w.tingkat_kepadatan || 'Sedang'}`,
+    ];
+    if (w.zona_tiket) infos.push(`<i class="fa fa-layer-group"></i> ${w.zona_tiket}`);
+    document.getElementById('detailInfoRow').innerHTML = infos.map(i => `<span class="detail-info-item">${i}</span>`).join('');
+
+    // Deskripsi
+    document.getElementById('detailDesc').textContent = w.deskripsi || w.deskripsi_ai || '';
+    document.getElementById('detailDesc').classList.add('collapsed');
+    document.getElementById('btnReadMore').style.display = '';
+
+    // Fasilitas (hardcode dari API)
+    const fasilitas = w.fasilitas || [];
+    document.getElementById('detailFasilitas').innerHTML = fasilitas
+      .map(f => `<span class="detail-fasilitas-item">✓ ${escHtml(f)}</span>`).join('');
+
+      if (w.tips) {
+      const tipsHtml = `
+      <div class="detail-section-label">Tips Lokal</div>
+      <div style="background:#FFF8EC;border-radius:12px;padding:12px;font-size:12px;color:#6B4A00;line-height:1.6">
+      💡 ${escHtml(w.tips)}
+      </div>`;
+
+      let tipsEl = document.getElementById('detailTips');
+      if (tipsEl) {
+      // Sudah ada → ganti isinya
+      tipsEl.innerHTML = tipsHtml;
+      } else {
+      // Belum ada → buat dan sisipkan setelah detailFasilitas
+      tipsEl = document.createElement('div');
+      tipsEl.id = 'detailTips';
+      tipsEl.innerHTML = tipsHtml;
+      document.getElementById('detailFasilitas').insertAdjacentElement('afterend', tipsEl);
+      }
+      } else {
+      // Kalau tidak ada tips, hapus elemennya kalau masih ada
+      const tipsEl = document.getElementById('detailTips');
+      if (tipsEl) tipsEl.remove();
+      }
+      // Lokasi
+    document.getElementById('detailLokasiText').textContent = w.lokasi;
+
+    // Gallery
+    renderGallery(galeriData, w.foto_utama, w.nama_tempat);
+
+  } catch (e) {
+    showToast('Gagal memuat detail wisata');
+    closeDetailBtn();
+  }
+}
+
+function renderGallery(galeri, fotoUtama, nama) {
+  const scroll = document.getElementById('galleryScroll');
+  const dots   = document.getElementById('galleryDots');
+  const count  = document.getElementById('galleryCount');
+
+  let imgs = galeri.length
+    ? galeri.map(g => ({ src: g.link_foto, caption: g.caption }))
+    : [{ src: fotoUtama, caption: nama }];
+
+  if (!imgs[0].src) {
+    imgs = [{ src: null, caption: nama }];
+  }
+
+  scroll.innerHTML = imgs.map((img, i) => img.src
+    ? `<img class="gallery-img" src="${escHtml(img.src)}" alt="${escHtml(img.caption || nama)}" data-idx="${i}">`
+    : `<div class="gallery-img" style="display:flex;align-items:center;justify-content:center;font-size:60px;background:var(--dj-bg)">🗺️</div>`
+  ).join('');
+
+  dots.innerHTML = imgs.length > 1
+    ? imgs.map((_, i) => `<div class="gallery-dot${i===0?' active':''}" id="dot${i}"></div>`).join('')
+    : '';
+
+  count.textContent = `1 / ${imgs.length}`;
+  galeriIndex = 0;
+
+  if (imgs.length > 1) {
+    scroll.addEventListener('scroll', () => {
+      const idx = Math.round(scroll.scrollLeft / scroll.clientWidth);
+      if (idx !== galeriIndex) {
+        galeriIndex = idx;
+        count.textContent = `${idx + 1} / ${imgs.length}`;
+        document.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }
+}
+
+function closeDetail(e) {
+  if (e.target === document.getElementById('detailOverlay')) closeDetailBtn();
+}
+function closeDetailBtn() {
+  document.getElementById('detailOverlay').classList.remove('show');
+  document.getElementById('detailActions').classList.remove('show');
+  document.body.style.overflow = '';
+  activeWisata = null;
+  aiHistory = [];
+}
+
+function toggleReadMore() {
+  descExpanded = !descExpanded;
+  const desc = document.getElementById('detailDesc');
+  const btn  = document.getElementById('btnReadMore');
+  desc.classList.toggle('collapsed', !descExpanded);
+  btn.textContent = descExpanded ? 'Sembunyikan ▴' : 'Baca selengkapnya ▾';
+}
+
+// ======================================================
+// ACTION BUTTONS
+// ======================================================
+function bukaGmaps() {
+  if (!activeWisata) return;
+  const url = activeWisata.link_gmaps ||
+    `https://www.google.com/maps?q=${activeWisata.latitude},${activeWisata.longitude}`;
+  window.open(url, '_blank');
+}
+
+function tambahItinerary() {
+  if (!activeWisata) return;
+  // Kirim data ke parent (jika dalam iframe/webview dari halaman itinerary)
+  const payload = {
+    type: 'tambah_itinerary',
+    wisata: {
+      id:       activeWisata.id_wisata,
+      nama:     activeWisata.nama_tempat,
+      kategori: activeWisata.jenis_wisata,
+      wilayah:  activeWisata.klaster,
+      lokasi:   activeWisata.lokasi,
+      harga:    activeWisata.harga_label,
+      jam:      activeWisata.jam_label,
+      lat:      activeWisata.latitude,
+      lng:      activeWisata.longitude,
+    }
+  };
+  if (window.parent !== window) {
+    window.parent.postMessage(payload, '*');
+  }
+  showToast('✅ ' + activeWisata.nama_tempat + ' ditambahkan ke itinerary!');
+}
+
+function shareWA() {
+  if (!activeWisata) return;
+  const nama  = activeWisata.nama_tempat;
+  const lokasi = activeWisata.lokasi;
+  const harga  = activeWisata.harga_label;
+  const maps   = activeWisata.link_gmaps || '';
+  const text   = `🗺️ *${nama}*\n📍 ${lokasi}\n🎫 Tiket: ${harga}\n\n📲 Lokasi: ${maps}\n\n_Dibagikan via DolanJogja_`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// ======================================================
+// AI CHAT
+// ======================================================
+function bukaAI() {
+  if (!activeWisata) return;
+  document.getElementById('aiContextName').textContent = activeWisata.nama_tempat;
+  document.getElementById('aiMessages').innerHTML = `
+    <div class="ai-msg ai">
+      <div class="ai-msg-av">🤖</div>
+      <div class="ai-bubble">Halo! Saya siap bantu kamu tentang <strong>${escHtml(activeWisata.nama_tempat)}</strong> 😊 Mau tanya apa?</div>
+    </div>`;
+  aiHistory = [];
+  document.getElementById('aiOverlay').classList.add('show');
+  document.getElementById('aiInput').focus();
+}
+
+function closeAI(e) {
+  if (e.target === document.getElementById('aiOverlay')) closeAIBtn();
+}
+function closeAIBtn() {
+  document.getElementById('aiOverlay').classList.remove('show');
+}
+
+function quickAsk(text) {
+  document.getElementById('aiInput').value = text;
+  kirimAI();
+}
+
+async function kirimAI() {
+  const input = document.getElementById('aiInput');
+  const text  = input.value.trim();
+  if (!text || isAILoading || !activeWisata) return;
+
+  isAILoading = true;
+  document.getElementById('aiSendBtn').disabled = true;
+  input.value = '';
+  aiAutoResize(input);
+
+  appendAIMsg('user', text);
+  aiHistory.push({ role: 'user', content: text });
+
+  const typingEl = appendAITyping();
+
+  try {
+    const res  = await fetch(AI_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
+        message: text,
+        wisata:  activeWisata,
+        history: aiHistory.slice(0, -1),
+      }),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Gagal mendapat respons AI');
+
+    aiHistory.push({ role: 'assistant', content: data.reply });
+    typingEl.querySelector('.ai-bubble').textContent = data.reply;
+
+  } catch (e) {
+    typingEl.querySelector('.ai-bubble').textContent = '❌ ' + e.message;
+  } finally {
+    isAILoading = false;
+    document.getElementById('aiSendBtn').disabled = false;
+    input.focus();
+  }
+}
+
+function appendAIMsg(role, text) {
+  const msgs = document.getElementById('aiMessages');
+  const el   = document.createElement('div');
+  el.className = `ai-msg ${role}`;
+  el.innerHTML = `
+    <div class="ai-msg-av">${role === 'ai' ? '🤖' : '👤'}</div>
+    <div class="ai-bubble">${escHtml(text)}</div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+function appendAITyping() {
+  const msgs = document.getElementById('aiMessages');
+  const el   = document.createElement('div');
+  el.className = 'ai-msg ai';
+  el.innerHTML = `
+    <div class="ai-msg-av">🤖</div>
+    <div class="ai-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+function aiHandleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kirimAI(); }
+}
+function aiAutoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+}
+
+// ======================================================
+// FILTER & SEARCH
+// ======================================================
+function initFilters() {
+  // Klaster tabs
+  document.getElementById('klasterTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.jelajah_main_tab');
+    if (!btn) return;
+    document.querySelectorAll('.jelajah_main_tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentKlaster = btn.dataset.klaster;
+    loadGrid(true);
+  });
+
+  // Kategori chips
+  document.getElementById('kategoriChips').addEventListener('click', e => {
+    const btn = e.target.closest('.jelajah_cat_chip');
+    if (!btn) return;
+    document.querySelectorAll('.jelajah_cat_chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentKategori = btn.dataset.kategori;
+    loadGrid(true);
+  });
+}
+
+function initSearch() {
+  let debounce;
+  document.getElementById('searchInput').addEventListener('input', e => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => {
+      currentSearch = e.target.value.trim();
+      // Sembunyikan hidden gems saat search aktif
+      document.getElementById('sectionHiddenGem').style.display = currentSearch ? 'none' : '';
+      loadGrid(true);
+    }, 400);
+  });
+}
+
+// ======================================================
+// HELPERS
+// ======================================================
+function renderStars(rating) {
+  const full  = Math.floor(rating);
+  const half  = (rating % 1) >= 0.5;
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    if (i < full) html += '<i class="fa fa-star"></i>';
+    else if (i === full && half) html += '<i class="fa fa-star-half-alt"></i>';
+    else html += '<i class="far fa-star"></i>';
+  }
+  return html;
+}
+
+function jenisEmoji(jenis) {
+  const map = { Alam:'🌿', Sejarah:'🏛️', Budaya:'🎭', Rekreasi:'🎡', Belanja:'🛍️', Museum:'🏺', Kuliner:'🍜' };
+  return map[jenis] || '📍';
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showToast(msg, duration = 2500) {
+  const t = document.createElement('div');
+  t.className = 'dj-toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), duration);
+}
 </script>
 </body>
 </html>
