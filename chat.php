@@ -4,9 +4,11 @@
 // Azure OpenAI Backend — Itinerary Generator
 // =====================================================
 
-$AZURE_RESOURCE  = "dolanjogja-ai";
-$AZURE_API_KEY   = "DTqMatHvTIyXbq8Tcn5CNJJJejHVGyzEJzy5loDEIFhOO4k79nxrJQQJ99CEACYeBjFXJ3w3AAABACOGnFO4";
-$API_VERSION     = "2024-08-01-preview";
+require_once __DIR__ . '/env.php';
+
+$AZURE_RESOURCE  = env('AZURE_RESOURCE');
+$AZURE_API_KEY   = env('AZURE_API_KEY');
+$API_VERSION     = env('AZURE_API_VERSION', '2024-08-01-preview');
 
 // Parse mode early so we can pick the right model before reading full body
 $rawBody  = file_get_contents("php://input");
@@ -15,12 +17,15 @@ $modePeek = $bodyPeek["mode"] ?? "itinerary";
 
 // Itinerary generator  → GPT-4o   (reasoning kuat, output JSON kompleks)
 // Tanya AI chat        → GPT-4o mini (hemat ~97% biaya, cukup untuk percakapan)
-$DEPLOYMENT_NAME = ($modePeek === "itinerary") ? "gpt-4o" : "gpt-4o-mini";
+$DEPLOYMENT_NAME = ($modePeek === "itinerary")
+    ? env('AZURE_DEPLOYMENT_GPT4O', 'gpt-4o')
+    : env('AZURE_DEPLOYMENT_GPT4O_MINI', 'gpt-4o-mini');
 
 $AZURE_ENDPOINT = "https://{$AZURE_RESOURCE}.openai.azure.com/openai/deployments/{$DEPLOYMENT_NAME}/chat/completions?api-version={$API_VERSION}";
 
+$corsOrigin = env('CORS_ALLOW_ORIGIN', '*');
 header("Content-Type: application/json; charset=utf-8");
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: {$corsOrigin}");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
@@ -299,7 +304,7 @@ echo json_encode([
     "success"   => true,
     "itinerary" => $itinerary,
     "usage"     => $result["usage"] ?? null,
-        "model" => $DEPLOYMENT_NAME,
+    "model"     => $DEPLOYMENT_NAME,
 ]);
 
 // =====================================================

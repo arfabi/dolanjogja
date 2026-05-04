@@ -5,8 +5,11 @@
 //   { "message": "...", "event": {...}, "history": [...] }
 // =====================================================
 
+require_once __DIR__ . '/env.php';
+
+$corsOrigin = env('CORS_ALLOW_ORIGIN', '*');
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Origin: {$corsOrigin}");
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
@@ -18,12 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // =====================================================
-// KONFIGURASI AZURE OPENAI
+// KONFIGURASI AZURE OPENAI — dari .env
 // =====================================================
-$AZURE_RESOURCE  = "dolanjogja-ai";
-$AZURE_API_KEY   = "DTqMatHvTIyXbq8Tcn5CNJJJejHVGyzEJzy5loDEIFhOO4k79nxrJQQJ99CEACYeBjFXJ3w3AAABACOGnFO4";
-$DEPLOYMENT_NAME = "gpt-4o";
-$API_VERSION     = "2024-08-01-preview";
+$AZURE_RESOURCE  = env('AZURE_RESOURCE');
+$AZURE_API_KEY   = env('AZURE_API_KEY');
+$DEPLOYMENT_NAME = env('AZURE_DEPLOYMENT_GPT4O', 'gpt-4o');
+$API_VERSION     = env('AZURE_API_VERSION', '2024-08-01-preview');
 $AZURE_ENDPOINT  = "https://{$AZURE_RESOURCE}.openai.azure.com/openai/deployments/{$DEPLOYMENT_NAME}/chat/completions?api-version={$API_VERSION}";
 
 // =====================================================
