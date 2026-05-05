@@ -10,8 +10,8 @@
 // =====================================================
 define('SEARCH_ENDPOINT', 'https://YOUR_SEARCH_SERVICE.search.windows.net');
 define('SEARCH_QUERY_KEY', 'YOUR_SEARCH_QUERY_KEY');  // Query key (bukan admin key)
-define('SEARCH_INDEX',     'dolanjogja-destinasi');
-define('SEARCH_API_VER',   '2024-07-01');
+define('SEARCH_INDEX',     '#');
+define('SEARCH_API_VER',   '#');
 
 /**
  * Cari destinasi berdasarkan teks bebas (keyword, mood, nama tempat, dll.)
