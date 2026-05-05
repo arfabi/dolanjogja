@@ -9,9 +9,9 @@ require_once __DIR__ . '/search.php';
 // =====================================================
 // KONFIGURASI AZURE OPENAI
 // =====================================================
-define('AZURE_ENDPOINT',  'https://dolanjogja-ai.openai.azure.com/openai/v1');
-define('AZURE_API_KEY',   'DTqMatHvTIyXbq8Tcn5CNJJJejHVGyzEJzy5loDEIFhOO4k79nxrJQQJ99CEACYeBjFXJ3w3AAABACOGnFO4');
-define('DEPLOYMENT_NAME', 'gpt-4o');
+define('AZURE_ENDPOINT',  '#');
+define('AZURE_API_KEY',   '#');
+define('DEPLOYMENT_NAME', '#');
 
 // =====================================================
 // HEADERS
